@@ -16,15 +16,17 @@ def socket_connect(sockConnect):
 		try:
 			print "Connecting"
 			sockConnect.connect((IPADRESS,PORT))
-			print "Sacesfully connected to IP {ipAdress} and port {port}".format(ipAdress = IPADRESS,port = PORT)
 			i = 10
 		except socket.error as e:
 			print "connection error"
-			time.sleep(2)
+			time.sleep(1)
 			i = i+1
-	if i == 9: 
+	if i == 9:
+		print "Could not connect to IP {ipAdress} and port {port}".format(ipAdress = IPADRESS,port = PORT)
 		return 0
 	if i == 10:
+		print "Sacesfully connected to IP {ipAdress} and port {port}".format(ipAdress = IPADRESS,port = PORT)
+		print ""
 		return 1
 
 					
