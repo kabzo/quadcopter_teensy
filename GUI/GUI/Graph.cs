@@ -90,9 +90,6 @@ namespace GUI
    
 
         private void checkCurves(Hashtable hash){
-            
-
-
             bool found = false;
             bool delete = false;
             LineItem curveToDelete = null;
@@ -107,10 +104,9 @@ namespace GUI
                 }
                 if (!found)
                 {
-                    Console.WriteLine(zedGraphControl1.GraphPane.CurveList.IndexOf(q));
+                    //Console.WriteLine(zedGraphControl1.GraphPane.CurveList.IndexOf(q));
                     delete = true;
-                    curveToDelete = q; 
-                    
+                    curveToDelete = q;                 
                 }
                 found = false;
              }
