@@ -179,7 +179,7 @@
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 40;
+            this.timer1.Interval = 20;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // lb_connectionStatus
@@ -448,7 +448,7 @@
             // 
             this.trackBar_throttle.Location = new System.Drawing.Point(1165, 91);
             this.trackBar_throttle.Maximum = 1500;
-            this.trackBar_throttle.Minimum = 900;
+            this.trackBar_throttle.Minimum = 1050;
             this.trackBar_throttle.Name = "trackBar_throttle";
             this.trackBar_throttle.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar_throttle.Size = new System.Drawing.Size(45, 641);

@@ -114,7 +114,7 @@ namespace GUI
                 line = serialPort1.ReadLine();
                 this.BeginInvoke(new LineReceivedEvent(LineReceived), line);
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show("Serialport readline: " + ex.Message); }
         }
 
         private delegate void LineReceivedEvent(string line);
@@ -131,7 +131,7 @@ namespace GUI
                     progressBar_fr.Value = Convert.ToInt32(hashtable["fr"]);
                 }
             }
-            catch (Exception e) { MessageBox.Show(e.Message); }
+            catch (Exception e) { MessageBox.Show("Progressbar"+e.Message); }
 
 
             textBox_br.Text = hashtable["br"].ToString();
@@ -180,10 +180,18 @@ namespace GUI
 
             if (!line.Contains("?") && line != "\r" && line != "" && !line.Contains(","))
             {
-                if (serialPort1.IsOpen) { 
+                if (serialPort1.IsOpen )
+                { 
                 textBox_serialRead.AppendText(line.ToString());
                 textBox_serialRead.AppendText(Environment.NewLine);
                 }
+                if(listenThread!= null)
+                    if (listenThread.IsAlive)
+                    {
+                        textBox_socketRead.AppendText(line.ToString());
+                        textBox_socketRead.AppendText(Environment.NewLine);
+                    }
+
             }
             else
             {
@@ -204,7 +212,7 @@ namespace GUI
                             valDouble = double.Parse(number, System.Globalization.CultureInfo.InvariantCulture);
                             hashtable[dataSplitedValues[0]] = valDouble;
                         }
-                        catch (Exception e) { MessageBox.Show(e.Message); }
+                        catch (Exception e) { MessageBox.Show("Splitter: "+e.Message); }
 
                     }
                 }
@@ -348,27 +356,29 @@ namespace GUI
                 // Console.WriteLine(encoder.GetString(message, 0, bytesRead));
                 try
                 {
+                    string line = encoder.GetString(message, 0, bytesRead);
                     if (InvokeRequired)
                     {
-                        this.Invoke(new Action(() => LineReceived(encoder.GetString(message, 0, bytesRead))));
+                        this.Invoke(new Action(() => LineReceived(line)));
 
                     }
-                    if (textBox_socketRead.InvokeRequired)
-                        textBox_socketRead.Invoke((MethodInvoker)delegate
-                        {
-                            textBox_socketRead.AppendText(encoder.GetString(message, 0, bytesRead));
-                            textBox_socketRead.AppendText(Environment.NewLine);
-                        });
-                    else
-                    {
-                        textBox_socketRead.AppendText(encoder.GetString(message, 0, bytesRead));
-                        textBox_socketRead.AppendText(Environment.NewLine);
-                    }
+                    //if (textBox_socketRead.InvokeRequired)
+                    //    textBox_socketRead.Invoke((MethodInvoker)delegate
+                    //    {
+                    //        textBox_socketRead.AppendText(encoder.GetString(message, 0, bytesRead));
+                    //        textBox_socketRead.AppendText(Environment.NewLine);
+                    //    });
+                    //else
+                    //{
+                    //    textBox_socketRead.AppendText(encoder.GetString(message, 0, bytesRead));
+                    //    textBox_socketRead.AppendText(Environment.NewLine);
+                    //}
+                    //LineReceived(line)
                 }
                 catch (Exception e)
                 {
 
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show("Socket line received:"+e.Message);
                 }
             }
 
