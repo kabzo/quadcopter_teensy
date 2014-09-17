@@ -23,20 +23,20 @@ uint8_t MPU6050::dmpInitialize() {
 	setMemoryStartAddress(0x06);
 	DEBUG_PRINTLN(F("Checking hardware revision..."));
 	uint8_t hwRevision = readMemoryByte();
-	DEBUG_PRINT(F("Revision @ user[16][6] = ")); DEBUG_PRINTLNF(hwRevision, HEX); DEBUG_PRINTLN(F("Resetting memory bank selection to 0..."));
+	DEBUG_PRINT(F("Revision @ user[16][6] = "));DEBUG_PRINTLNF(hwRevision, HEX);DEBUG_PRINTLN(F("Resetting memory bank selection to 0..."));
 	setMemoryBank(0, false, false);
 
 	// check OTP bank valid
 	DEBUG_PRINTLN(F("Reading OTP bank valid flag..."));
 	uint8_t otpValid = getOTPBankValid();
-	DEBUG_PRINT(F("OTP bank is ")); DEBUG_PRINTLN(otpValid ? F("valid!") : F("invalid!"));
+	DEBUG_PRINT(F("OTP bank is "));DEBUG_PRINTLN(otpValid ? F("valid!") : F("invalid!"));
 
 	// get X/Y/Z gyro offsets
 	DEBUG_PRINTLN(F("Reading gyro offset TC values..."));
 	int8_t xgOffsetTC = getXGyroOffsetTC();
 	int8_t ygOffsetTC = getYGyroOffsetTC();
 	int8_t zgOffsetTC = getZGyroOffsetTC();
-	DEBUG_PRINT(F("X gyro offset = ")); DEBUG_PRINTLN(xgOffset); DEBUG_PRINT(F("Y gyro offset = ")); DEBUG_PRINTLN(ygOffset); DEBUG_PRINT(F("Z gyro offset = ")); DEBUG_PRINTLN(zgOffset);
+	DEBUG_PRINT(F("X gyro offset = "));DEBUG_PRINTLN(xgOffset);DEBUG_PRINT(F("Y gyro offset = "));DEBUG_PRINTLN(ygOffset);DEBUG_PRINT(F("Z gyro offset = "));DEBUG_PRINTLN(zgOffset);
 
 	// setup weird slave stuff (?)
 	DEBUG_PRINTLN(F("Setting slave 0 address to 0x7F..."));
@@ -50,12 +50,12 @@ uint8_t MPU6050::dmpInitialize() {
 	delay(20);
 
 	// load DMP code into memory banks
-	DEBUG_PRINT(F("Writing DMP code to MPU memory banks (")); DEBUG_PRINT(MPU6050_DMP_CODE_SIZE); DEBUG_PRINTLN(F(" bytes)"));
+	DEBUG_PRINT(F("Writing DMP code to MPU memory banks ("));DEBUG_PRINT(MPU6050_DMP_CODE_SIZE);DEBUG_PRINTLN(F(" bytes)"));
 	if (writeProgMemoryBlock(dmpMemory, MPU6050_DMP_CODE_SIZE)) {
 		DEBUG_PRINTLN(F("Success! DMP code written and verified."));
 
 		// write DMP configuration
-		DEBUG_PRINT(F("Writing DMP configuration to MPU memory banks (")); DEBUG_PRINT(MPU6050_DMP_CONFIG_SIZE); DEBUG_PRINTLN(F(" bytes in config def)"));
+		DEBUG_PRINT(F("Writing DMP configuration to MPU memory banks ("));DEBUG_PRINT(MPU6050_DMP_CONFIG_SIZE);DEBUG_PRINTLN(F(" bytes in config def)"));
 		if (writeProgDMPConfigurationSet(dmpConfig, MPU6050_DMP_CONFIG_SIZE)) {
 			DEBUG_PRINTLN(F("Success! DMP configuration written and verified."));
 
@@ -113,7 +113,7 @@ uint8_t MPU6050::dmpInitialize() {
 			uint16_t fifoCount = getFIFOCount();
 			uint8_t fifoBuffer[128];
 
-			DEBUG_PRINT(F("Current FIFO count=")); DEBUG_PRINTLN(fifoCount);
+			DEBUG_PRINT(F("Current FIFO count="));DEBUG_PRINTLN(fifoCount);
 			getFIFOBytes(fifoBuffer, fifoCount);
 
 			DEBUG_PRINTLN(F("Setting motion detection threshold to 2..."));
@@ -159,13 +159,13 @@ uint8_t MPU6050::dmpInitialize() {
 			while ((fifoCount = getFIFOCount()) < 3)
 				;
 
-			DEBUG_PRINT(F("Current FIFO count=")); DEBUG_PRINTLN(fifoCount); DEBUG_PRINTLN(F("Reading FIFO data..."));
+			DEBUG_PRINT(F("Current FIFO count="));DEBUG_PRINTLN(fifoCount);DEBUG_PRINTLN(F("Reading FIFO data..."));
 			getFIFOBytes(fifoBuffer, fifoCount);
 
 			DEBUG_PRINTLN(F("Reading interrupt status..."));
 			uint8_t mpuIntStatus = getIntStatus();
 
-			DEBUG_PRINT(F("Current interrupt status=")); DEBUG_PRINTLNF(mpuIntStatus, HEX);
+			DEBUG_PRINT(F("Current interrupt status="));DEBUG_PRINTLNF(mpuIntStatus, HEX);
 
 			DEBUG_PRINTLN(F("Reading final memory update 6/7 (function unknown)..."));
 			for (j = 0; j < 4 || j < dmpUpdate[2] + 3; j++, pos++)
@@ -176,7 +176,7 @@ uint8_t MPU6050::dmpInitialize() {
 			while ((fifoCount = getFIFOCount()) < 3)
 				;
 
-			DEBUG_PRINT(F("Current FIFO count=")); DEBUG_PRINTLN(fifoCount);
+			DEBUG_PRINT(F("Current FIFO count="));DEBUG_PRINTLN(fifoCount);
 
 			DEBUG_PRINTLN(F("Reading FIFO data..."));
 			getFIFOBytes(fifoBuffer, fifoCount);
@@ -184,7 +184,7 @@ uint8_t MPU6050::dmpInitialize() {
 			DEBUG_PRINTLN(F("Reading interrupt status..."));
 			mpuIntStatus = getIntStatus();
 
-			DEBUG_PRINT(F("Current interrupt status=")); DEBUG_PRINTLNF(mpuIntStatus, HEX);
+			DEBUG_PRINT(F("Current interrupt status="));DEBUG_PRINTLNF(mpuIntStatus, HEX);
 
 			DEBUG_PRINTLN(F("Writing final memory update 7/7 (function unknown)..."));
 			for (j = 0; j < 4 || j < dmpUpdate[2] + 3; j++, pos++)
@@ -357,18 +357,18 @@ uint8_t MPU6050::dmpGetGravity(VectorFloat *v, Quaternion *q) {
 // uint8_t MPU6050::dmpGetEIS(long *data, const uint8_t* packet);
 
 uint8_t MPU6050::dmpGetEuler(float *data, Quaternion *q) {
-	data[0] = atan2(2 * q->x * q->y - 2 * q->w * q->z, 2 * q->w * q->w + 2 * q->x * q->x - 1);   // psi
-	data[1] = -asin(2 * q->x * q->z + 2 * q->w * q->y);                              // theta
-	data[2] = atan2(2 * q->y * q->z - 2 * q->w * q->x, 2 * q->w * q->w + 2 * q->z * q->z - 1);   // phi
+	data[0] = atan2(2 * q->x * q->y - 2 * q->w * q->z, 2 * q->w * q->w + 2 * q->x * q->x - 1);  // psi
+	data[1] = -asin(2 * q->x * q->z - 2 * q->w * q->y);                              						// theta
+	data[2] = atan2(2 * q->y * q->z - 2 * q->w * q->x, 2 * q->w * q->w + 2 * q->z * q->z - 1);  // phi
 	return 0;
 }
 uint8_t MPU6050::dmpGetYawPitchRoll(float *data, Quaternion *q, VectorFloat *gravity) {
 	// yaw: (about Z axis)
 	data[0] = atan2(2 * q->x * q->y - 2 * q->w * q->z, 2 * q->w * q->w + 2 * q->x * q->x - 1);
 	// pitch: (nose up/down, about Y axis)
-	data[1] = atan(gravity->x / sqrt(gravity->y * gravity->y + gravity->z * gravity->z));
+	data[1] = atan2(gravity->x / sqrt(gravity->y * gravity->y + gravity->z * gravity->z), 1);
 	// roll: (tilt left/right, about X axis)
-	data[2] = atan(gravity->y / sqrt(gravity->x * gravity->x + gravity->z * gravity->z));
+	data[2] = atan2(gravity->y / sqrt(gravity->x * gravity->x + gravity->z * gravity->z), 1);
 	return 0;
 }
 

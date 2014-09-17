@@ -10,7 +10,8 @@
  *    The parameters specified here are those for for which we can't set up 
  *    reliable defaults, so we need to have the user set them.
  ***************************************************************************/
-PID::PID(double* Input, double* Output, double* Setpoint, double Kp, double Ki, double Kd, int ControllerDirection) {
+PID::PID(double* Input, double* Output, double* Setpoint, double Kp, double Ki, double Kd, int ControllerDirection) :
+		ITerm(0) {
 
 	myOutput = Output;
 	myInput = Input;
@@ -20,7 +21,7 @@ PID::PID(double* Input, double* Output, double* Setpoint, double Kp, double Ki, 
 	PID::SetOutputLimits(MIN_PID, MAX_PID);				//default output limit corresponds to
 	//the arduino pwm limits
 
-	SampleTime = 10;
+	SampleTime = 20;
 
 	PID::SetControllerDirection(ControllerDirection);
 	PID::SetTunings(Kp, Ki, Kd);
@@ -44,7 +45,9 @@ bool PID::Compute() {
 		/*Compute all the working error variables*/
 		double input = *myInput;
 		error = *mySetpoint - input;
+
 		ITerm += (ki * error);
+
 		if (ITerm > outMax)
 			ITerm = outMax;
 		else if (ITerm < outMin)
@@ -53,7 +56,6 @@ bool PID::Compute() {
 
 		/*Compute PID Output*/
 		double output = kp * error + ITerm - kd * dInput;
-
 		if (output > outMax)
 			output = outMax;
 		else if (output < outMin)
@@ -63,6 +65,7 @@ bool PID::Compute() {
 		/*Remember some variables for next time*/
 		lastInput = input;
 		lastTime = now;
+
 		return true;
 	} else
 		return false;

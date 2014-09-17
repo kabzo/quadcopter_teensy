@@ -2,27 +2,43 @@
 #define IMU_H_
 
 #ifndef Arduino_h
-	#include "Arduino.h"
+#include "Arduino.h"
 #endif
 
 //MPU6050
 #include "MPU6050_6Axis_MotionApps20.h"
 
-#define MPUINTERRUPTPIN 54
+//#define OLDMPU6050
 
-#define OFFSETACCX -1885
-#define OFFSETACCY -1583
-#define OFFSETACCZ 1255
+#ifdef OLDMPU6050
 
-#define OFFSETGYROX 40
-#define OFFSETGYROY -35
-#define OFFSETGYROZ -16
+#define OFFSETACCX -3983
+#define OFFSETACCY -403
+#define OFFSETACCZ 1625
+
+#define OFFSETGYROX 56
+#define OFFSETGYROY 10
+#define OFFSETGYROZ -19
+
+#else
+
+#define OFFSETACCX -1928
+#define OFFSETACCY -1625
+#define OFFSETACCZ 1254
+
+#define OFFSETGYROX 35
+#define OFFSETGYROY -28
+#define OFFSETGYROZ -7
+
+#endif
+
+#define RESETPIN 42
 
 /////////////////////////Initialize DMP/////////////////////////
 class IMU {
 	public:
-		IMU(double * yaw,double * pitch, double * roll) :
-				fifoCount_(0), status_(true), yaw_(yaw), pitch_(pitch), roll_(roll),packetSize_(0){
+		IMU(double * yaw, double * pitch, double * roll) :
+				status_(true), packetSize_(0), fifoCount_(0), yaw_(yaw), pitch_(pitch), roll_(roll) {
 		}
 
 		void setDMP();
@@ -32,6 +48,7 @@ class IMU {
 //		static volatile bool mpuInterrupt;  // indicates whether MPU interrupt pin has gone high
 
 	private:
+		/////////////////////////MPU6050/////////////////////////
 		MPU6050 mpu_;
 		bool status_;
 		uint16_t packetSize_;    // expected DMP packet size (default is 42 bytes)
@@ -46,7 +63,6 @@ class IMU {
 		double * yaw_;
 		double * pitch_;
 		double * roll_;
-
 		/////////////////////////MPU6050/////////////////////////
 };
 

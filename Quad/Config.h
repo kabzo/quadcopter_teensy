@@ -2,20 +2,15 @@
 #define CONFIG_H_
 #define TRUE 1
 #define FALSE 0
-//***********************BOARD***********************//
-#define ARDUINODUE
-//#define ARDUINONANO
-//***********************BOARD***********************//
-
 
 //***********************PID***********************//
 #define MAX_PID 50
 #define MIN_PID -MAX_PID
-#define PIDTIME 20
+#define PIDTIME 10
 //***********************PID***********************//
 
 
-#define TIMESENDDATA 40
+#define TIMESENDDATA 20
 
 //***********************MotorESC.h***********************//
 #define MAX_SIGNAL 2000
@@ -26,8 +21,7 @@
 #define MPINFL 7
 
 #define THROTTLE_MIN 1000
-#define CALIBRATEESC FALSE
-
+#define CALIBRATEESC 0	//0 = initialize, 1 = calibrate, 2 = reset
 //***********************MotorESC.h***********************//
 
 

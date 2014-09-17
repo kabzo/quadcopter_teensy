@@ -10,10 +10,24 @@
 
 class MotorESC {
 	public:
-		MotorESC(int pin) :
-				 max_signal_(MAX_SIGNAL), min_signal_(MIN_SIGNAL), speed_(THROTTLE_MIN) {
+		MotorESC(int pin, String name) :
+				speed_(THROTTLE_MIN), max_signal_(MAX_SIGNAL), min_signal_(MIN_SIGNAL), name_(name) {
 			pin_ = pin;
 			motor_.attach(pin);
+		}
+
+		void resetESC() {
+			Serial.println(F("Reseting ESC"));
+			Serial.print(F("Sending:"));
+			Serial.println(max_signal_);
+			motor_.writeMicroseconds(2100);
+			delay(62500);
+			Serial.print(F("Sending:"));
+			Serial.println(min_signal_);
+			motor_.writeMicroseconds(MIN_SIGNAL);
+			Serial.println(F("Waiting for ESC 6 seconds"));
+			delay(6000);
+			Serial.println(F("DONE"));
 		}
 
 		void calibrate() {
@@ -36,16 +50,19 @@ class MotorESC {
 		}
 
 		void initialize() {
-			if (CALIBRATEESC) {
+			motor_.attach(pin_);
+			if (CALIBRATEESC == 1) {
 				Serial.println(F("Calibrating ESCs"));
 				calibrate();
-			} else {
+			} else if (CALIBRATEESC == 0) {
 				initializeMinSignal();
+			} else if (CALIBRATEESC == 2) {
+				resetESC();
 			}
 		}
 
 		void setMotorSpeed(double speed) {
-			speed_ = speed;
+			speed_ = constrain(speed, min_signal_, max_signal_);
 			motor_.writeMicroseconds(constrain(speed_, min_signal_, max_signal_));
 		}
 
@@ -55,6 +72,7 @@ class MotorESC {
 		unsigned int max_signal_;
 		unsigned int min_signal_;
 		unsigned int pin_;
+		String name_;
 
 };
 

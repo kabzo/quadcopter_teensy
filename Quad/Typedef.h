@@ -12,11 +12,6 @@ struct controlAngle {
 };
 
 // I2C device class (I2Cdev) demonstration Arduino sketch for MPU6050 class, 3D math helper
-// 6/5/2012 by Jeff Rowberg <jeff@rowberg.net>
-// Updates should (hopefully) always be available at https://github.com/jrowberg/i2cdevlib
-//
-// Changelog:
-//     2012-06-05 - add 3D math helper file to DMP6 example sketch
 
 class Quaternion {
 	public:
