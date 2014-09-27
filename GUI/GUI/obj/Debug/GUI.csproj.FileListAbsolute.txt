@@ -81,7 +81,7 @@ C:\Users\Juraj\Workspace\VisualStudio_C#\Projects\GUI\GUI\bin\Debug\GUI.exe
 C:\Users\Juraj\Workspace\VisualStudio_C#\Projects\GUI\GUI\bin\Debug\GUI.pdb
 C:\Users\Juraj\Workspace\VisualStudio_C#\Projects\GUI\GUI\obj\Debug\GUI.csprojResolveAssemblyReference.cache
 C:\Users\Juraj\Workspace\VisualStudio_C#\Projects\GUI\GUI\obj\Debug\GUI.AvionicsInstrumentsControls.AvionicsInstrumentsControlsRessources.resources
-C:\Users\Juraj\Workspace\VisualStudio_C#\Projects\GUI\GUI\obj\Debug\GUI.GUI.resources
 C:\Users\Juraj\Workspace\VisualStudio_C#\Projects\GUI\GUI\obj\Debug\GUI.Properties.Resources.resources
 C:\Users\Juraj\Workspace\VisualStudio_C#\Projects\GUI\GUI\obj\Debug\GUI.csproj.GenerateResource.Cache
 C:\Users\Juraj\Workspace\VisualStudio_C#\Projects\GUI\GUI\obj\Debug\GUI.pdb
+C:\Users\Juraj\Workspace\VisualStudio_C#\Projects\GUI\GUI\obj\Debug\GUI.GUI.resources

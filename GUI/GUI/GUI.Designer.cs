@@ -38,6 +38,11 @@
             this.btn_disconnect = new System.Windows.Forms.Button();
             this.btn_connect = new System.Windows.Forms.Button();
             this.Settings = new System.Windows.Forms.TabPage();
+            this.label_ = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.textBox_calcRoll = new System.Windows.Forms.TextBox();
+            this.textBox_calcPitch = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.textBox_setpointPitch = new System.Windows.Forms.TextBox();
@@ -45,11 +50,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.textBox_sendingStream1 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.numericUpDown_stearingRatio = new System.Windows.Forms.NumericUpDown();
-            this.btn_right = new System.Windows.Forms.Button();
-            this.btn_down = new System.Windows.Forms.Button();
-            this.btn_left = new System.Windows.Forms.Button();
-            this.btn_up = new System.Windows.Forms.Button();
+            this.numericUpDown_stearingLimits = new System.Windows.Forms.NumericUpDown();
             this.headingIndicatorInstrumentControl2 = new AvionicsInstrumentControlDemo.HeadingIndicatorInstrumentControl();
             this.attitudeIndicatorInstrumentControl2 = new AvionicsInstrumentControlDemo.AttitudeIndicatorInstrumentControl();
             this.label7 = new System.Windows.Forms.Label();
@@ -132,7 +133,7 @@
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.status = new System.Windows.Forms.Label();
             this.Settings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_stearingRatio)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_stearingLimits)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_throttle)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.tabControl_pid.SuspendLayout();
@@ -233,6 +234,11 @@
             // Settings
             // 
             this.Settings.BackColor = System.Drawing.Color.DimGray;
+            this.Settings.Controls.Add(this.label_);
+            this.Settings.Controls.Add(this.label19);
+            this.Settings.Controls.Add(this.textBox_calcRoll);
+            this.Settings.Controls.Add(this.textBox_calcPitch);
+            this.Settings.Controls.Add(this.panel1);
             this.Settings.Controls.Add(this.label18);
             this.Settings.Controls.Add(this.label17);
             this.Settings.Controls.Add(this.textBox_setpointPitch);
@@ -240,11 +246,7 @@
             this.Settings.Controls.Add(this.label15);
             this.Settings.Controls.Add(this.textBox_sendingStream1);
             this.Settings.Controls.Add(this.label11);
-            this.Settings.Controls.Add(this.numericUpDown_stearingRatio);
-            this.Settings.Controls.Add(this.btn_right);
-            this.Settings.Controls.Add(this.btn_down);
-            this.Settings.Controls.Add(this.btn_left);
-            this.Settings.Controls.Add(this.btn_up);
+            this.Settings.Controls.Add(this.numericUpDown_stearingLimits);
             this.Settings.Controls.Add(this.headingIndicatorInstrumentControl2);
             this.Settings.Controls.Add(this.attitudeIndicatorInstrumentControl2);
             this.Settings.Controls.Add(this.label7);
@@ -270,11 +272,55 @@
             this.Settings.TabIndex = 3;
             this.Settings.Text = "Settings";
             // 
+            // label_
+            // 
+            this.label_.AutoSize = true;
+            this.label_.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label_.Location = new System.Drawing.Point(979, 106);
+            this.label_.Name = "label_";
+            this.label_.Size = new System.Drawing.Size(62, 17);
+            this.label_.TabIndex = 60;
+            this.label_.Text = "Pitch:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label19.Location = new System.Drawing.Point(756, 106);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(53, 17);
+            this.label19.TabIndex = 59;
+            this.label19.Text = "Roll:";
+            // 
+            // textBox_calcRoll
+            // 
+            this.textBox_calcRoll.Location = new System.Drawing.Point(815, 103);
+            this.textBox_calcRoll.Name = "textBox_calcRoll";
+            this.textBox_calcRoll.Size = new System.Drawing.Size(112, 25);
+            this.textBox_calcRoll.TabIndex = 58;
+            // 
+            // textBox_calcPitch
+            // 
+            this.textBox_calcPitch.Location = new System.Drawing.Point(1047, 103);
+            this.textBox_calcPitch.Name = "textBox_calcPitch";
+            this.textBox_calcPitch.Size = new System.Drawing.Size(112, 25);
+            this.textBox_calcPitch.TabIndex = 57;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Location = new System.Drawing.Point(759, 134);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(400, 400);
+            this.panel1.TabIndex = 56;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            // 
             // label18
             // 
             this.label18.AutoSize = true;
             this.label18.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label18.Location = new System.Drawing.Point(862, 173);
+            this.label18.Location = new System.Drawing.Point(868, 631);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(134, 17);
             this.label18.TabIndex = 55;
@@ -284,7 +330,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label17.Location = new System.Drawing.Point(772, 244);
+            this.label17.Location = new System.Drawing.Point(859, 588);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(143, 17);
             this.label17.TabIndex = 54;
@@ -292,14 +338,14 @@
             // 
             // textBox_setpointPitch
             // 
-            this.textBox_setpointPitch.Location = new System.Drawing.Point(803, 264);
+            this.textBox_setpointPitch.Location = new System.Drawing.Point(1008, 585);
             this.textBox_setpointPitch.Name = "textBox_setpointPitch";
             this.textBox_setpointPitch.Size = new System.Drawing.Size(112, 25);
             this.textBox_setpointPitch.TabIndex = 53;
             // 
             // textBox_setpointRoll
             // 
-            this.textBox_setpointRoll.Location = new System.Drawing.Point(884, 193);
+            this.textBox_setpointRoll.Location = new System.Drawing.Point(1008, 628);
             this.textBox_setpointRoll.Name = "textBox_setpointRoll";
             this.textBox_setpointRoll.Size = new System.Drawing.Size(112, 25);
             this.textBox_setpointRoll.TabIndex = 52;
@@ -308,11 +354,11 @@
             // 
             this.label15.AutoSize = true;
             this.label15.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label15.Location = new System.Drawing.Point(918, 295);
+            this.label15.Location = new System.Drawing.Point(850, 542);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(89, 17);
+            this.label15.Size = new System.Drawing.Size(152, 17);
             this.label15.TabIndex = 51;
-            this.label15.Text = "Stearing:";
+            this.label15.Text = "Stearing limits:";
             // 
             // textBox_sendingStream1
             // 
@@ -331,57 +377,17 @@
             this.label11.TabIndex = 50;
             this.label11.Text = "Sending:";
             // 
-            // numericUpDown_stearingRatio
+            // numericUpDown_stearingLimits
             // 
-            this.numericUpDown_stearingRatio.Location = new System.Drawing.Point(1013, 291);
-            this.numericUpDown_stearingRatio.Name = "numericUpDown_stearingRatio";
-            this.numericUpDown_stearingRatio.Size = new System.Drawing.Size(151, 25);
-            this.numericUpDown_stearingRatio.TabIndex = 49;
-            this.numericUpDown_stearingRatio.Value = new decimal(new int[] {
-            5,
+            this.numericUpDown_stearingLimits.Location = new System.Drawing.Point(1008, 540);
+            this.numericUpDown_stearingLimits.Name = "numericUpDown_stearingLimits";
+            this.numericUpDown_stearingLimits.Size = new System.Drawing.Size(151, 25);
+            this.numericUpDown_stearingLimits.TabIndex = 49;
+            this.numericUpDown_stearingLimits.Value = new decimal(new int[] {
+            90,
             0,
             0,
             0});
-            // 
-            // btn_right
-            // 
-            this.btn_right.Location = new System.Drawing.Point(1084, 224);
-            this.btn_right.Name = "btn_right";
-            this.btn_right.Size = new System.Drawing.Size(80, 65);
-            this.btn_right.TabIndex = 48;
-            this.btn_right.Text = "RIGHT";
-            this.btn_right.UseVisualStyleBackColor = true;
-            this.btn_right.Click += new System.EventHandler(this.btn_right_Click);
-            // 
-            // btn_down
-            // 
-            this.btn_down.Location = new System.Drawing.Point(1002, 224);
-            this.btn_down.Name = "btn_down";
-            this.btn_down.Size = new System.Drawing.Size(80, 65);
-            this.btn_down.TabIndex = 47;
-            this.btn_down.Text = "DOWN";
-            this.btn_down.UseVisualStyleBackColor = true;
-            this.btn_down.Click += new System.EventHandler(this.brn_down_Click);
-            // 
-            // btn_left
-            // 
-            this.btn_left.Location = new System.Drawing.Point(921, 224);
-            this.btn_left.Name = "btn_left";
-            this.btn_left.Size = new System.Drawing.Size(80, 65);
-            this.btn_left.TabIndex = 46;
-            this.btn_left.Text = "LEFT";
-            this.btn_left.UseVisualStyleBackColor = true;
-            this.btn_left.Click += new System.EventHandler(this.btn_left_Click);
-            // 
-            // btn_up
-            // 
-            this.btn_up.Location = new System.Drawing.Point(1002, 157);
-            this.btn_up.Name = "btn_up";
-            this.btn_up.Size = new System.Drawing.Size(80, 65);
-            this.btn_up.TabIndex = 45;
-            this.btn_up.Text = "UP";
-            this.btn_up.UseVisualStyleBackColor = true;
-            this.btn_up.Click += new System.EventHandler(this.btn_up_Click);
             // 
             // headingIndicatorInstrumentControl2
             // 
@@ -403,7 +409,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label7.Location = new System.Drawing.Point(952, 106);
+            this.label7.Location = new System.Drawing.Point(913, 672);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(89, 17);
             this.label7.TabIndex = 42;
@@ -439,7 +445,7 @@
             // 
             // textBox_throttle
             // 
-            this.textBox_throttle.Location = new System.Drawing.Point(1047, 103);
+            this.textBox_throttle.Location = new System.Drawing.Point(1008, 669);
             this.textBox_throttle.Name = "textBox_throttle";
             this.textBox_throttle.Size = new System.Drawing.Size(112, 25);
             this.textBox_throttle.TabIndex = 37;
@@ -448,7 +454,7 @@
             // 
             this.trackBar_throttle.Location = new System.Drawing.Point(1165, 91);
             this.trackBar_throttle.Maximum = 1500;
-            this.trackBar_throttle.Minimum = 1050;
+            this.trackBar_throttle.Minimum = 1000;
             this.trackBar_throttle.Name = "trackBar_throttle";
             this.trackBar_throttle.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar_throttle.Size = new System.Drawing.Size(45, 641);
@@ -1431,7 +1437,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Settings.ResumeLayout(false);
             this.Settings.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_stearingRatio)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_stearingLimits)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_throttle)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
@@ -1544,11 +1550,7 @@
         private System.Windows.Forms.Label label7;
         private AvionicsInstrumentControlDemo.AttitudeIndicatorInstrumentControl attitudeIndicatorInstrumentControl2;
         private AvionicsInstrumentControlDemo.HeadingIndicatorInstrumentControl headingIndicatorInstrumentControl2;
-        private System.Windows.Forms.NumericUpDown numericUpDown_stearingRatio;
-        private System.Windows.Forms.Button btn_right;
-        private System.Windows.Forms.Button btn_down;
-        private System.Windows.Forms.Button btn_left;
-        private System.Windows.Forms.Button btn_up;
+        private System.Windows.Forms.NumericUpDown numericUpDown_stearingLimits;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.NumericUpDown numericUpDown_rollPid_time;
@@ -1575,6 +1577,11 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox textBox_setpointPitch;
         private System.Windows.Forms.TextBox textBox_setpointRoll;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label_;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox textBox_calcRoll;
+        private System.Windows.Forms.TextBox textBox_calcPitch;
     }
 }
 
