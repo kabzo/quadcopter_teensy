@@ -7,24 +7,25 @@ import threading
 #ser = serial.Serial('/dev/ttyUSB0',115200)
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-IPADRESS = "192.168.1.142"
+IPADRESS = "192.168.1.4"
 PORT = 6000
 
 def socket_connect(sockConnect):
 	i = 0
-	while i <10:
+	number= 1000
+	while i < number:
 		try:
 			print "Connecting"
 			sockConnect.connect((IPADRESS,PORT))
-			i = 10
+			i = number
 		except socket.error as e:
 			print "connection error"
 			time.sleep(1)
 			i = i+1
-	if i == 9:
+	if i == number-1:
 		print "Could not connect to IP {ipAdress} and port {port}".format(ipAdress = IPADRESS,port = PORT)
 		return 0
-	if i == 10:
+	if i == number:
 		print "Sacesfully connected to IP {ipAdress} and port {port}".format(ipAdress = IPADRESS,port = PORT)
 		print ""
 		return 1
@@ -32,11 +33,11 @@ def socket_connect(sockConnect):
 					
 def socket_send():
 	while True:
-		time.sleep(0.04);
+		# time.sleep(0.04);
 		try:
 			sock.send("1234567890")
 		except socket.error as e:
-			print "Connection broken on sending"
+			print "Connection broken while sending"
 			break
 
 def socket_receive():
@@ -46,10 +47,12 @@ def socket_receive():
         	if not data:
         		raise RuntimeError("socket connection broken")
         	else:
-        		print data[0]
-        		print data[1:]
+        		if data[0] == 'C':
+        			print "Controll SEQUENZ:" + data
+        		else:
+        			print data
         except socket.error as e:
-        	print "Connection broken in receieving"
+        	print "Connection broken while receiving"
         	break
 
 if __name__ == '__main__':

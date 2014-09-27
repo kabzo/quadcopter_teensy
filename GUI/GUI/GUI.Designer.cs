@@ -38,6 +38,8 @@
             this.btn_disconnect = new System.Windows.Forms.Button();
             this.btn_connect = new System.Windows.Forms.Button();
             this.Settings = new System.Windows.Forms.TabPage();
+            this.label20 = new System.Windows.Forms.Label();
+            this.numericUpDown_throttleRating = new System.Windows.Forms.NumericUpDown();
             this.label_ = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.textBox_calcRoll = new System.Windows.Forms.TextBox();
@@ -132,7 +134,9 @@
             this.tabControl_mainControl = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.status = new System.Windows.Forms.Label();
+            this.checkBox_stearingOn = new System.Windows.Forms.CheckBox();
             this.Settings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_throttleRating)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_stearingLimits)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_throttle)).BeginInit();
             this.groupBox4.SuspendLayout();
@@ -234,6 +238,9 @@
             // Settings
             // 
             this.Settings.BackColor = System.Drawing.Color.DimGray;
+            this.Settings.Controls.Add(this.checkBox_stearingOn);
+            this.Settings.Controls.Add(this.label20);
+            this.Settings.Controls.Add(this.numericUpDown_throttleRating);
             this.Settings.Controls.Add(this.label_);
             this.Settings.Controls.Add(this.label19);
             this.Settings.Controls.Add(this.textBox_calcRoll);
@@ -271,6 +278,38 @@
             this.Settings.Size = new System.Drawing.Size(1213, 740);
             this.Settings.TabIndex = 3;
             this.Settings.Text = "Settings";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label20.Location = new System.Drawing.Point(850, 582);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(152, 17);
+            this.label20.TabIndex = 62;
+            this.label20.Text = "Throttle rating:";
+            // 
+            // numericUpDown_throttleRating
+            // 
+            this.numericUpDown_throttleRating.Increment = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDown_throttleRating.Location = new System.Drawing.Point(1008, 580);
+            this.numericUpDown_throttleRating.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.numericUpDown_throttleRating.Name = "numericUpDown_throttleRating";
+            this.numericUpDown_throttleRating.Size = new System.Drawing.Size(151, 25);
+            this.numericUpDown_throttleRating.TabIndex = 61;
+            this.numericUpDown_throttleRating.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             // 
             // label_
             // 
@@ -320,7 +359,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label18.Location = new System.Drawing.Point(868, 631);
+            this.label18.Location = new System.Drawing.Point(868, 671);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(134, 17);
             this.label18.TabIndex = 55;
@@ -330,7 +369,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label17.Location = new System.Drawing.Point(859, 588);
+            this.label17.Location = new System.Drawing.Point(859, 628);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(143, 17);
             this.label17.TabIndex = 54;
@@ -338,14 +377,14 @@
             // 
             // textBox_setpointPitch
             // 
-            this.textBox_setpointPitch.Location = new System.Drawing.Point(1008, 585);
+            this.textBox_setpointPitch.Location = new System.Drawing.Point(1008, 625);
             this.textBox_setpointPitch.Name = "textBox_setpointPitch";
             this.textBox_setpointPitch.Size = new System.Drawing.Size(112, 25);
             this.textBox_setpointPitch.TabIndex = 53;
             // 
             // textBox_setpointRoll
             // 
-            this.textBox_setpointRoll.Location = new System.Drawing.Point(1008, 628);
+            this.textBox_setpointRoll.Location = new System.Drawing.Point(1008, 668);
             this.textBox_setpointRoll.Name = "textBox_setpointRoll";
             this.textBox_setpointRoll.Size = new System.Drawing.Size(112, 25);
             this.textBox_setpointRoll.TabIndex = 52;
@@ -409,7 +448,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label7.Location = new System.Drawing.Point(913, 672);
+            this.label7.Location = new System.Drawing.Point(913, 712);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(89, 17);
             this.label7.TabIndex = 42;
@@ -417,35 +456,35 @@
             // 
             // textBox_bl
             // 
-            this.textBox_bl.Location = new System.Drawing.Point(711, 60);
+            this.textBox_bl.Location = new System.Drawing.Point(579, 57);
             this.textBox_bl.Name = "textBox_bl";
             this.textBox_bl.Size = new System.Drawing.Size(112, 25);
             this.textBox_bl.TabIndex = 41;
             // 
             // textBox_br
             // 
-            this.textBox_br.Location = new System.Drawing.Point(1068, 60);
+            this.textBox_br.Location = new System.Drawing.Point(943, 60);
             this.textBox_br.Name = "textBox_br";
             this.textBox_br.Size = new System.Drawing.Size(112, 25);
             this.textBox_br.TabIndex = 40;
             // 
             // textBox_fl
             // 
-            this.textBox_fl.Location = new System.Drawing.Point(711, 29);
+            this.textBox_fl.Location = new System.Drawing.Point(579, 26);
             this.textBox_fl.Name = "textBox_fl";
             this.textBox_fl.Size = new System.Drawing.Size(112, 25);
             this.textBox_fl.TabIndex = 39;
             // 
             // textBox_fr
             // 
-            this.textBox_fr.Location = new System.Drawing.Point(1068, 29);
+            this.textBox_fr.Location = new System.Drawing.Point(943, 29);
             this.textBox_fr.Name = "textBox_fr";
             this.textBox_fr.Size = new System.Drawing.Size(112, 25);
             this.textBox_fr.TabIndex = 38;
             // 
             // textBox_throttle
             // 
-            this.textBox_throttle.Location = new System.Drawing.Point(1008, 669);
+            this.textBox_throttle.Location = new System.Drawing.Point(1008, 709);
             this.textBox_throttle.Name = "textBox_throttle";
             this.textBox_throttle.Size = new System.Drawing.Size(112, 25);
             this.textBox_throttle.TabIndex = 37;
@@ -467,7 +506,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label6.Location = new System.Drawing.Point(839, 63);
+            this.label6.Location = new System.Drawing.Point(714, 63);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 17);
             this.label6.TabIndex = 35;
@@ -477,7 +516,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label5.Location = new System.Drawing.Point(489, 34);
+            this.label5.Location = new System.Drawing.Point(357, 31);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 17);
             this.label5.TabIndex = 34;
@@ -487,7 +526,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Location = new System.Drawing.Point(839, 34);
+            this.label2.Location = new System.Drawing.Point(714, 34);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 17);
             this.label2.TabIndex = 33;
@@ -497,7 +536,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(489, 63);
+            this.label1.Location = new System.Drawing.Point(357, 60);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 17);
             this.label1.TabIndex = 22;
@@ -505,7 +544,7 @@
             // 
             // progressBar_br
             // 
-            this.progressBar_br.Location = new System.Drawing.Point(880, 60);
+            this.progressBar_br.Location = new System.Drawing.Point(755, 60);
             this.progressBar_br.Maximum = 2000;
             this.progressBar_br.Minimum = 900;
             this.progressBar_br.Name = "progressBar_br";
@@ -516,7 +555,7 @@
             // 
             // progressBar_fl
             // 
-            this.progressBar_fl.Location = new System.Drawing.Point(530, 31);
+            this.progressBar_fl.Location = new System.Drawing.Point(398, 28);
             this.progressBar_fl.Maximum = 2000;
             this.progressBar_fl.Minimum = 900;
             this.progressBar_fl.Name = "progressBar_fl";
@@ -527,7 +566,7 @@
             // 
             // progressBar_fr
             // 
-            this.progressBar_fr.Location = new System.Drawing.Point(880, 31);
+            this.progressBar_fr.Location = new System.Drawing.Point(755, 31);
             this.progressBar_fr.Maximum = 2000;
             this.progressBar_fr.Minimum = 900;
             this.progressBar_fr.Name = "progressBar_fr";
@@ -538,7 +577,7 @@
             // 
             // progressBar_bl
             // 
-            this.progressBar_bl.Location = new System.Drawing.Point(530, 60);
+            this.progressBar_bl.Location = new System.Drawing.Point(398, 57);
             this.progressBar_bl.Maximum = 2000;
             this.progressBar_bl.Minimum = 900;
             this.progressBar_bl.Name = "progressBar_bl";
@@ -750,10 +789,10 @@
             this.numericUpDown_rollPid_kp.DecimalPlaces = 2;
             this.numericUpDown_rollPid_kp.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.numericUpDown_rollPid_kp.Increment = new decimal(new int[] {
-            5,
+            1,
             0,
             0,
-            65536});
+            131072});
             this.numericUpDown_rollPid_kp.Location = new System.Drawing.Point(83, 27);
             this.numericUpDown_rollPid_kp.Maximum = new decimal(new int[] {
             300,
@@ -775,10 +814,10 @@
             this.numericUpDown_rollPid_ki.DecimalPlaces = 2;
             this.numericUpDown_rollPid_ki.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.numericUpDown_rollPid_ki.Increment = new decimal(new int[] {
-            5,
+            1,
             0,
             0,
-            65536});
+            131072});
             this.numericUpDown_rollPid_ki.Location = new System.Drawing.Point(83, 55);
             this.numericUpDown_rollPid_ki.Maximum = new decimal(new int[] {
             300,
@@ -800,10 +839,10 @@
             this.numericUpDown_rollPid_kd.DecimalPlaces = 2;
             this.numericUpDown_rollPid_kd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.numericUpDown_rollPid_kd.Increment = new decimal(new int[] {
-            5,
+            1,
             0,
             0,
-            65536});
+            131072});
             this.numericUpDown_rollPid_kd.Location = new System.Drawing.Point(83, 84);
             this.numericUpDown_rollPid_kd.Maximum = new decimal(new int[] {
             300,
@@ -1416,6 +1455,16 @@
             this.status.TabIndex = 12;
             this.status.Text = "Status:";
             // 
+            // checkBox_stearingOn
+            // 
+            this.checkBox_stearingOn.AutoSize = true;
+            this.checkBox_stearingOn.Location = new System.Drawing.Point(637, 488);
+            this.checkBox_stearingOn.Name = "checkBox_stearingOn";
+            this.checkBox_stearingOn.Size = new System.Drawing.Size(99, 21);
+            this.checkBox_stearingOn.TabIndex = 63;
+            this.checkBox_stearingOn.Text = "Stearing";
+            this.checkBox_stearingOn.UseVisualStyleBackColor = true;
+            // 
             // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1437,6 +1486,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Settings.ResumeLayout(false);
             this.Settings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_throttleRating)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_stearingLimits)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_throttle)).EndInit();
             this.groupBox4.ResumeLayout(false);
@@ -1582,6 +1632,9 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox textBox_calcRoll;
         private System.Windows.Forms.TextBox textBox_calcPitch;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.NumericUpDown numericUpDown_throttleRating;
+        private System.Windows.Forms.CheckBox checkBox_stearingOn;
     }
 }
 
