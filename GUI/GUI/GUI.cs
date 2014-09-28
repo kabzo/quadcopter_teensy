@@ -290,7 +290,6 @@ namespace GUI {
       if (listenThread != null) {
         if (listenThread.IsAlive) {
           isAbortThreadRequest = true;
-          this.tcpListener = null;
           btn_connect.Enabled = true;
           btn_disconnect.Enabled = false;
           lb_connectionStatus.Text = "Disconnected";
@@ -318,8 +317,11 @@ namespace GUI {
       int bytesRead;
 
       while (true) {
-        if (isAbortThreadRequest) break;
-
+        if (isAbortThreadRequest) {
+          tcpClient.Close();
+          this.clientStream.Close();
+          break;
+        }
         bytesRead = 0;
 
         try {
@@ -384,7 +386,12 @@ namespace GUI {
         //with connected client
         Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
         clientThread.Start(client);
-        if (isAbortThreadRequest) break;
+        if (isAbortThreadRequest) {
+          this.tcpListener.Stop();
+          clientThread.Abort();
+          client.Close();
+          break;
+        }        
       }
     }
 

@@ -11,21 +11,17 @@ IPADRESS = "192.168.1.4"
 PORT = 6000
 
 def socket_connect(sockConnect):
-	i = 0
-	number= 1000
-	while i < number:
+	check = False
+	while not check:
 		try:
 			print "Connecting"
 			sockConnect.connect((IPADRESS,PORT))
-			i = number
+			check = True
 		except socket.error as e:
-			print "connection error"
+			print "Connection error:" + "Could not connect to IP {ipAdress} and port {port}".format(ipAdress = IPADRESS,port = PORT)
 			time.sleep(1)
-			i = i+1
-	if i == number-1:
-		print "Could not connect to IP {ipAdress} and port {port}".format(ipAdress = IPADRESS,port = PORT)
-		return 0
-	if i == number:
+	
+	if check:
 		print "Sacesfully connected to IP {ipAdress} and port {port}".format(ipAdress = IPADRESS,port = PORT)
 		print ""
 		return 1
