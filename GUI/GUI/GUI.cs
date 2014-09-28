@@ -119,15 +119,15 @@ namespace GUI {
     private delegate void LineReceivedEvent(string line);
 
     private void addValuesTextBox() {
-      try {
-        if (Convert.ToInt32(hashtable["bl"]) != 0) {
-          progressBar_bl.Value = Convert.ToInt32(hashtable["bl"]);
-          progressBar_br.Value = Convert.ToInt32(hashtable["br"]);
-          progressBar_fl.Value = Convert.ToInt32(hashtable["fl"]);
-          progressBar_fr.Value = Convert.ToInt32(hashtable["fr"]);
-        }
-      } catch (Exception e) { MessageBox.Show("Progressbar" + e.Message); }
 
+      if (Convert.ToInt32(hashtable["bl"]) >= progressBar_bl.Minimum && Convert.ToInt32(hashtable["bl"]) <= progressBar_bl.Maximum)
+        progressBar_bl.Value = Convert.ToInt32(hashtable["bl"]);
+      if (Convert.ToInt32(hashtable["br"]) >= progressBar_br.Minimum && Convert.ToInt32(hashtable["br"]) <= progressBar_br.Maximum)
+        progressBar_br.Value = Convert.ToInt32(hashtable["br"]);
+      if (Convert.ToInt32(hashtable["fl"]) >= progressBar_fl.Minimum && Convert.ToInt32(hashtable["fl"]) <= progressBar_fl.Maximum)
+        progressBar_fl.Value = Convert.ToInt32(hashtable["fl"]);
+      if (Convert.ToInt32(hashtable["fr"]) >= progressBar_fr.Minimum && Convert.ToInt32(hashtable["fr"]) <= progressBar_fr.Maximum)
+        progressBar_fr.Value = Convert.ToInt32(hashtable["fr"]);
 
       textBox_br.Text = hashtable["br"].ToString();
       textBox_bl.Text = hashtable["bl"].ToString();
@@ -164,7 +164,6 @@ namespace GUI {
         numericUpDown_rollPid_limits.Value = Convert.ToDecimal(hashtable["limR"]);
         numericUpDown_rollPid_time.Value = Convert.ToDecimal(hashtable["timeR"]);
         firstTimeSet++;
-
       }
 
     }
@@ -172,15 +171,17 @@ namespace GUI {
     private void LineReceived(string line) {
 
       if (!line.Contains("?") && line != "\r" && line != "" && !line.Contains(",")) {
-        if (serialPort1.IsOpen) {
-          textBox_serialRead.AppendText(line.ToString());
-          textBox_serialRead.AppendText(Environment.NewLine);
-        }
-        if (listenThread != null)
-          if (listenThread.IsAlive) {
-            textBox_socketRead.AppendText(line.ToString());
-            textBox_socketRead.AppendText(Environment.NewLine);
+        if (tabControl_mainControl.SelectedIndex == 1) {
+          if (serialPort1.IsOpen) {
+            textBox_serialRead.AppendText(line.ToString());
+            textBox_serialRead.AppendText(Environment.NewLine);
           }
+          if (listenThread != null)
+            if (listenThread.IsAlive) {
+              textBox_socketRead.AppendText(line.ToString());
+              textBox_socketRead.AppendText(Environment.NewLine);
+            }
+        }
 
       } else {
         string[] dataSplitedGroups = null;
@@ -230,24 +231,29 @@ namespace GUI {
     }
 
     private void actualizate_Parameters() {
-      Hashtable hashTableGraph1 = new Hashtable();
-      Hashtable hashTableGraph2 = new Hashtable();
 
-      foreach (object s in checkedListBox_graph1.CheckedItems)
-        hashTableGraph1.Add(s.ToString(), hashtable[s.ToString()]);
-      foreach (object s in checkedListBox_graph2.CheckedItems)
-        hashTableGraph2.Add(s.ToString(), hashtable[s.ToString()]);
+      if (tabControl_mainControl.SelectedIndex == 2) {
+        Hashtable hashTableGraph1 = new Hashtable();
+        Hashtable hashTableGraph2 = new Hashtable();
 
-      graph1.drawGraph(hashTableGraph1);
-      graph2.drawGraph(hashTableGraph2);
+        foreach (object s in checkedListBox_graph1.CheckedItems)
+          hashTableGraph1.Add(s.ToString(), hashtable[s.ToString()]);
+        foreach (object s in checkedListBox_graph2.CheckedItems)
+          hashTableGraph2.Add(s.ToString(), hashtable[s.ToString()]);
 
+        graph1.drawGraph(hashTableGraph1);
+        graph2.drawGraph(hashTableGraph2);
+      }
+      if (tabControl_mainControl.SelectedIndex == 0) {
+        attitudeIndicatorInstrumentControl2.SetAttitudeIndicatorParameters(Convert.ToDouble(hashtable["roll"]), Convert.ToDouble(hashtable["pitch"]));
+        headingIndicatorInstrumentControl2.SetHeadingIndicatorParameters(Convert.ToInt32(hashtable["yaw"]) + 180);
+      }
 
+      if (tabControl_mainControl.SelectedIndex == 3) {
+        // attitudeIndicatorInstrumentControl1.SetAttitudeIndicatorParameters(Convert.ToDouble(hashtable["pitch"]), Convert.ToDouble(hashtable["roll"]));
+        // headingIndicatorInstrumentControl1.SetHeadingIndicatorParameters(Convert.ToInt32(hashtable["yaw"]) + 180);
+      }
 
-      // attitudeIndicatorInstrumentControl1.SetAttitudeIndicatorParameters(Convert.ToDouble(hashtable["pitch"]), Convert.ToDouble(hashtable["roll"]));
-      attitudeIndicatorInstrumentControl2.SetAttitudeIndicatorParameters(Convert.ToDouble(hashtable["roll"]), Convert.ToDouble(hashtable["pitch"]));
-
-      // headingIndicatorInstrumentControl1.SetHeadingIndicatorParameters(Convert.ToInt32(hashtable["yaw"]) + 180);
-      headingIndicatorInstrumentControl2.SetHeadingIndicatorParameters(Convert.ToInt32(hashtable["yaw"]) + 180);
     }
 
     private void btn_connect_Click(object sender, EventArgs e) {
@@ -312,10 +318,8 @@ namespace GUI {
     private void HandleClientComm(object client) {
       TcpClient tcpClient = (TcpClient)client;
       this.clientStream = tcpClient.GetStream();
-
       byte[] message = new byte[4096];
       int bytesRead;
-
       while (true) {
         if (isAbortThreadRequest) {
           tcpClient.Close();
@@ -323,7 +327,6 @@ namespace GUI {
           break;
         }
         bytesRead = 0;
-
         try {
           //blocks until a client sends a message
           bytesRead = clientStream.Read(message, 0, 4096);
@@ -331,12 +334,10 @@ namespace GUI {
           //a socket error has occured
           break;
         }
-
         if (bytesRead == 0) {
           //the client has disconnected from the server
           break;
         }
-
         //message has successfully been received
         ASCIIEncoding encoder = new ASCIIEncoding();
         // Console.WriteLine(encoder.GetString(message, 0, bytesRead));
@@ -344,26 +345,11 @@ namespace GUI {
           string line = encoder.GetString(message, 0, bytesRead);
           if (InvokeRequired) {
             this.Invoke(new Action(() => LineReceived(line)));
-
           }
-          //if (textBox_socketRead.InvokeRequired)
-          //    textBox_socketRead.Invoke((MethodInvoker)delegate
-          //    {
-          //        textBox_socketRead.AppendText(encoder.GetString(message, 0, bytesRead));
-          //        textBox_socketRead.AppendText(Environment.NewLine);
-          //    });
-          //else
-          //{
-          //    textBox_socketRead.AppendText(encoder.GetString(message, 0, bytesRead));
-          //    textBox_socketRead.AppendText(Environment.NewLine);
-          //}
-          //LineReceived(line)
         } catch (Exception e) {
-
           MessageBox.Show("Socket line received:" + e.Message);
         }
       }
-
       tcpClient.Close();
     }
 
@@ -381,7 +367,6 @@ namespace GUI {
         else {
           lb_connectionStatus.Text = "Connected";
         }
-
         //create a thread to handle communication 
         //with connected client
         Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
@@ -391,7 +376,7 @@ namespace GUI {
           clientThread.Abort();
           client.Close();
           break;
-        }        
+        }
       }
     }
 
@@ -404,23 +389,18 @@ namespace GUI {
     }
 
     private void sendStringSerial(SerialPort serialPort, string str) {
-
       if (serialPort.IsOpen)
         serialPort.WriteLine(str.ToString());
-      textBox_sendingStream1.Text = str;
-      textBox_sendingStream2.Text = str;
     }
 
     private void sendStringSocket(String str) {
+      if (this.clientStream == null) return;
       try {
         if (listenThread.IsAlive) {
           byte[] msgBuffer = Encoding.ASCII.GetBytes(str);
           this.clientStream.Write(msgBuffer, 0, msgBuffer.Length);
         }
-        textBox_sendingStream1.Text = str;
-        textBox_sendingStream2.Text = str;
       } catch (Exception e) {
-
         MessageBox.Show("Socket sending message:" + e.Message);
       }
     }
@@ -434,6 +414,9 @@ namespace GUI {
         sendStringSocket(dataSend);
       if (checkBox_sendDataToArduino.Checked)
         sendStringSerial(serialPort1, dataSend);
+
+      textBox_sendingStream1.Text = dataSend;
+      textBox_sendingStream2.Text = dataSend;
     }
 
     private void sendOverStreamCommandControl(string str, string value1, string value2, string value3) {
@@ -567,7 +550,6 @@ namespace GUI {
         pitch = Decimal.ToInt16(Map(y_pos, 0, panel1.Size.Height, -numericUpDown_stearingLimits.Value, numericUpDown_stearingLimits.Value));
       }
       panel1.Invalidate();
-
       textBox_calcPitch.Text = pitch.ToString();
       textBox_calcRoll.Text = roll.ToString();
       sendOverStreamCommandControl("C", roll.ToString(), pitch.ToString(), trackBar_throttle.Value.ToString());

@@ -41,7 +41,7 @@ def socket_receive():
         try:
         	data = sock.recv(1024)
         	if not data:
-        		raise RuntimeError("socket connection broken")
+        		print "Socket connection broken"
         	else:
         		if data[0] == 'C':
         			print "Controll SEQUENZ:" + data
