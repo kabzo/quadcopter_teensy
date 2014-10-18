@@ -2,10 +2,15 @@ import socket
 import time
 import sys
 import threading
-#import serial
+import serial
 
-#ser = serial.Serial('/dev/ttyUSB0',115200)
-
+global ser
+try:
+#	global ser
+	ser = serial.Serial('/dev/ttyACM1',115200)
+	print "serial Connected"
+except:
+	print "serial ERROR"
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 IPADRESS = "192.168.1.4"
 PORT = 6000
@@ -33,9 +38,10 @@ def socket_connect(sockConnect):
 					
 def socket_send():
 	while True:
-		# time.sleep(0.04);
 		try:
-			sock.send("1234567890")
+			if ser:
+				data = ser.readline()
+				sock.send(data)
 		except socket.error as e:
 			connection = False
 			print "Connection broken while sending"
@@ -47,11 +53,11 @@ def socket_receive():
         	data = sock.recv(1024)
         	if not data:
         		print "Socket connection broken"
+			break
         	else:
-        		if data[0] == 'C':
-        			print "Controll SEQUENZ:" + data
-        		else:
-        			print data
+			if ser:
+				ser.write(data)
+      				print data
         except socket.error as e:
         	connection = False
         	print "Connection broken while receiving"
