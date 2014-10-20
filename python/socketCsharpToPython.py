@@ -8,9 +8,10 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 IPADRESS = "192.168.1.4"
 PORT = 6000
 connection = False
-def serial_connect(adress,ser):
+ser = None
+def serial_connect(adress):
 	try:
-		# global ser
+		global ser
 		ser = serial.Serial(adress,115200)
 		print "serial Connected"
 		return True
@@ -22,13 +23,11 @@ def socket_connect(sockConnect):
 	check = False
 	while not check:
 		try:
-			print "Connecting"
+			print "Connecting to IP {ipAdress}, {port}".format(ipAdress = IPADRESS,port = PORT)
 			sockConnect.connect((IPADRESS,PORT))
 			check = True
-			connection = True
 		except socket.error as e:
 			print "Connection error:" + "Could not connect to IP {ipAdress} and port {port}".format(ipAdress = IPADRESS,port = PORT)
-			connection = False
 			time.sleep(1)
 	
 	if check:
@@ -37,18 +36,19 @@ def socket_connect(sockConnect):
 	
 
 					
-def socket_send(ser):
+def socket_send():
 	while True:
 		try:
 			if ser:
 				data = ser.readline()
+				print data
 				sock.send(data)
 		except socket.error as e:
 			connection = False
 			print "Connection broken while sending"
 			break
 
-def socket_receive(ser):
+def socket_receive():
     while True:
         try:
         	data = sock.recv(1024)
@@ -65,16 +65,16 @@ def socket_receive(ser):
         	break
 
 if __name__ == '__main__':
-	ser = None
+	#ser = None
 	arduinoArdress = '/dev/ttyACM'
 	for count in range(0,20):
-		connection_ser = serial_connect(arduinoArdress+str(count),ser)
+		connection_ser = serial_connect(arduinoArdress+str(count))
 		if connection_ser:
-			print "Connecting to:"+arduinoArdress+str(count)
+			print "Connected to:"+arduinoArdress+str(count)
 			break
 	socket_connect(sock)	
-	threadSend = threading.Thread(target = socket_send,arg=(ser,))
-	threadReceive = threading.Thread(target = socket_receive,arg=(ser,))
+	threadSend = threading.Thread(target = socket_send)
+	threadReceive = threading.Thread(target = socket_receive)
 	threadSend.start()
 	print "threadSend STARTED" 
 	threadReceive.start()
