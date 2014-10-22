@@ -12,98 +12,120 @@ void ArduinoCommunication::sendSerialVal(String str, double val) {
 
 void ArduinoCommunication::serial_Communication_GUI_Csharp() {
 
-	String inputString = "";         // a string to hold incoming data
-	Serial.flush();
-	char controlChar = '0';
-	while (Serial.available()) {
-		// get the new byte:
-		char inChar = (char) Serial.read();
-		if (controlChar == '0')
-			controlChar = inChar;
-		else
-			inputString += inChar;
-	}
-	if (inputString != "" && controlChar != '0') {
-		float val = inputString.toFloat() / 100;
-		switch (controlChar) {
+	if (receivedControll) {
+		receivedControll = false;
+		char conChar = inputString[0];
+		inputString = inputString.substring(1);
+		switch (conChar) {
 			/********************************PID ROLL********************************/
 			case 'P': {		//konstant PID roll P
+				float val = inputString.toFloat() / 100;
 				this->rollControll_->pid.SetTunings(val, this->rollControll_->pid.GetKi(), this->rollControll_->pid.GetKd());
+#if defined(DEBUG_SERIAL)
 				sendSerialVal("pR", this->rollControll_->pid.GetKp());
+#endif
 				break;
 			}
 			case 'I': {		//konstant PID roll I
+				float val = inputString.toFloat() / 100;
 				this->rollControll_->pid.SetTunings(this->rollControll_->pid.GetKp(), val, this->rollControll_->pid.GetKd());
+#if defined(DEBUG_SERIAL)
 				sendSerialVal("iR", this->rollControll_->pid.GetKi());
+#endif
 				break;
 			}
-			case 'D': {		//konstant PID roll D
+			case 'D': {		//konstant PID roll
+				float val = inputString.toFloat() / 100;
 				this->rollControll_->pid.SetTunings(this->rollControll_->pid.GetKp(), this->rollControll_->pid.GetKi(), val);
+#if defined(DEBUG_SERIAL)
 				sendSerialVal("dR", this->rollControll_->pid.GetKd());
+#endif
 				break;
 			}
 			case 'X': {		//output limits PID roll
+				float val = inputString.toFloat() / 100;
 				this->rollControll_->pid.SetOutputLimits(-val, val);
+#if defined(DEBUG_SERIAL)
 				sendSerialVal("limR", this->rollControll_->pid.getOutMax());
+#endif
 				break;
 			}
 			case 'Y': {	//set sample time of PID roll
+				float val = inputString.toFloat() / 100;
 				this->rollControll_->pid.SetSampleTime(val);
+#if defined(DEBUG_SERIAL)
+
 				sendSerialVal("timeR", this->rollControll_->pid.getSampleTime());
+#endif
 				break;
 			}
 				/********************************PID ROLL********************************/
-
 				/********************************PID PITCH********************************/
 			case 'Q': {		//konstant PID pitch P
+				float val = inputString.toFloat() / 100;
 				this->pitchControll_->pid.SetTunings(val, this->pitchControll_->pid.GetKi(), this->pitchControll_->pid.GetKd());
+#if defined(DEBUG_SERIAL)
 				sendSerialVal("pP", this->pitchControll_->pid.GetKp());
+#endif
 				break;
 			}
 			case 'R': {		//konstant PID pitch I
+				float val = inputString.toFloat() / 100;
 				this->pitchControll_->pid.SetTunings(this->pitchControll_->pid.GetKp(), val, this->pitchControll_->pid.GetKd());
+#if defined(DEBUG_SERIAL)
 				sendSerialVal("iP", this->pitchControll_->pid.GetKi());
+#endif
 				break;
 			}
 			case 'W': {		//konstant PID pitch D
+				float val = inputString.toFloat() / 100;
 				this->pitchControll_->pid.SetTunings(this->pitchControll_->pid.GetKp(), this->pitchControll_->pid.GetKi(), val);
+#if defined(DEBUG_SERIAL)
 				sendSerialVal("dP", this->pitchControll_->pid.GetKd());
+#endif
+
 				break;
 			}
 			case 'B': {		//output limits PID roll
+				float val = inputString.toFloat() / 100;
 				this->pitchControll_->pid.SetOutputLimits(-val, val);
+#if defined(DEBUG_SERIAL)
 				sendSerialVal("limP", this->pitchControll_->pid.getOutMax());
+#endif
 				break;
 			}
 			case 'N': {	//set sample time of PID roll
+				float val = inputString.toFloat() / 100;
 				this->pitchControll_->pid.SetSampleTime(val);
+#if defined(DEBUG_SERIAL)
+
 				sendSerialVal("timeP", this->pitchControll_->pid.getSampleTime());
+#endif
 				break;
 			}
 				/********************************PID PITCH********************************/
-
 				/********************************FLIGHT CONTROLL********************************/
-
-			case 'E': {		//throttle power
-				*throttle_ = val;
-				sendSerialVal("e", *throttle_);
-				break;
-			}
-			case 'U': {		//angle roll
-				rollControll_->setpoint = val;
+				//String : K/throttle/roll/pitch/yaw/|
+			case 'K': {		//throttle power
+				int trpy[4];
+				for (int i = 0; i < 4; i++) {
+					String str;
+					str = inputString.substring(0, inputString.indexOf('/'));
+					trpy[i] = str.toInt();
+					inputString = inputString.substring(inputString.indexOf('/') + 1);
+				}
+				this->rollControll_->setpoint = trpy[1];
+				this->pitchControll_->setpoint = trpy[2];
+				*throttle_ = (float) trpy[0];
+#if defined(DEBUG_SERIAL)
 				sendSerialVal("setR", this->rollControll_->setpoint);
-
-				break;
-			}
-			case 'L': {		//angle pitch
-				pitchControll_->setpoint = val;
-				sendSerialVal("setP", pitchControll_->setpoint);
+				sendSerialVal("setP", this->pitchControll_->setpoint);
+				sendSerialVal("e", *throttle_);
+#endif
 				break;
 			}
 				/********************************FLIGHT CONTROLL********************************/
-
 		}
-		controlChar = '0';
 		inputString = "";
 	}
 
@@ -111,7 +133,7 @@ void ArduinoCommunication::serial_Communication_GUI_Csharp() {
 
 void ArduinoCommunication::setGuiValues() {
 	Serial.println("Setting GUI values for the first time...");
-
+	Serial.println("-");
 	sendSerialVal("pR", this->rollControll_->pid.GetKp());
 	sendSerialVal("iR", this->rollControll_->pid.GetKi());
 	sendSerialVal("dR", this->rollControll_->pid.GetKd());
@@ -123,23 +145,25 @@ void ArduinoCommunication::setGuiValues() {
 	sendSerialVal("dP", this->pitchControll_->pid.GetKd());
 	sendSerialVal("limP", this->pitchControll_->pid.getOutMax());
 	sendSerialVal("timeP", this->pitchControll_->pid.getSampleTime());
+	Serial.println("-");
+
 }
 
 void ArduinoCommunication::sendOverSerial() {
-	if ((millis() - lastTime_) >= timeSendData_) {
+	if ((millis() - lastTimeSlow_) >= timeSendDataSlow_) {
 		String send = "";
 		send += ",";
 		for (int i = 0; i < 10; i++) {
-			if (sendOverSerialArray[i] == 0) {
+			if (sendOverSerialArraySlow[i] == 0) {
 				break;
 			}
-			send += sendoverSerialName[i];
+			send += sendoverSerialNameSlow[i];
 			send += "/";
-			send += String(*sendOverSerialArray[i]);
+			send += String(*sendOverSerialArraySlow[i]);
 			send += ",";
 		}
 
-#ifdef DEBUG
+#if defined(DEBUG_ALL)
 		send += "pTr/";
 		send += this->rollControll_->pid.GetPterm();
 		send += ",";
@@ -161,24 +185,23 @@ void ArduinoCommunication::sendOverSerial() {
 #endif
 
 		Serial.println(send);
-		lastTime_ = millis();
-
+		lastTimeSlow_ = millis();
 	}
-}
 
-unsigned int ArduinoCommunication::getLastTime() const {
-	return lastTime_;
-}
-
-void ArduinoCommunication::setLastTime(unsigned int lastTime) {
-	lastTime_ = lastTime;
-}
-
-unsigned int ArduinoCommunication::getTimeSendData() const {
-	return timeSendData_;
-}
-
-void ArduinoCommunication::setTimeSendData(unsigned int timeSendData) {
-	timeSendData_ = timeSendData;
+	if ((millis() - lastTimeFast_) >= timeSendDataFast_) {
+		String send = "";
+		send += ",";
+		for (int i = 0; i < 10; i++) {
+			if (sendOverSerialArrayFast[i] == 0) {
+				break;
+			}
+			send += sendoverSerialNameFast[i];
+			send += "/";
+			send += String(*sendOverSerialArrayFast[i]);
+			send += ",";
+		}
+		Serial.println(send);
+		lastTimeFast_ = millis();
+	}
 }
 

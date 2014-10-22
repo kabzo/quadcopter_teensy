@@ -1,11 +1,7 @@
-ArduinoCommunication.cpp.d ArduinoCommunication.cpp.o: \
- ../ArduinoCommunication.cpp ../ArduinoCommunication.h \
- C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Arduino.h \
- C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/avr/pgmspace.h \
- C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/avr/interrupt.h \
- C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/binary.h \
- C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/itoa.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/chip.h \
+lib/IMU/Wire.cpp.d lib/IMU/Wire.cpp.o: ../lib/IMU/Wire.cpp \
+ ../lib/IMU/Wire.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/twi.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../chip.h \
  C:/Programs/Arduino/hardware/arduino/sam/system/CMSIS/Device/ATMEL/sam.h \
  C:/Programs/Arduino/hardware/arduino/sam/system/CMSIS/Device/ATMEL/sam3.h \
  C:/Programs/Arduino/hardware/arduino/sam/system/CMSIS/Device/ATMEL/sam3xa/include/sam3xa.h \
@@ -81,47 +77,50 @@ ArduinoCommunication.cpp.d ArduinoCommunication.cpp.o: \
  C:/Programs/Arduino/hardware/arduino/sam/system/CMSIS/Device/ATMEL/sam3xa/include/instance/instance_rtc.h \
  C:/Programs/Arduino/hardware/arduino/sam/system/CMSIS/Device/ATMEL/sam3xa/include/instance/instance_gpbr.h \
  C:/Programs/Arduino/hardware/arduino/sam/system/CMSIS/Device/ATMEL/sam3xa/include/pio/pio_sam3x8e.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/adc.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../chip.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/dacc.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/interrupt_sam_nvic.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/efc.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/gpbr.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/pio.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/pmc.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/pwmc.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/rstc.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/rtc.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/rtt.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/spi.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/ssc.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/tc.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/twi.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/usart.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/wdt.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/timetick.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/USB_device.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/USB_host.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/can.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/emac.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/trng.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/uotghs_device.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/uotghs_host.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/adc.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/../chip.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/dacc.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/interrupt_sam_nvic.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/efc.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/gpbr.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/pio.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/pmc.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/pwmc.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/rstc.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/rtc.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/rtt.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/spi.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/ssc.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/tc.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/twi.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/usart.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/wdt.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/timetick.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/USB_device.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/USB_host.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/can.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/emac.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/trng.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/uotghs_device.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/uotghs_host.h \
+ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Stream.h \
+ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Print.h \
+ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/WString.h \
+ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/avr/pgmspace.h \
+ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Printable.h \
+ C:\Programs\Arduino\hardware\arduino\sam\variants\arduino_due_x/variant.h \
+ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Arduino.h \
+ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/avr/interrupt.h \
+ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/binary.h \
+ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/itoa.h \
+ C:/Programs/Arduino/hardware/arduino/sam/system/libsam/chip.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/wiring_constants.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/WCharacter.h \
- C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/WString.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Tone.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/WMath.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/HardwareSerial.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Stream.h \
- C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Print.h \
- C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Printable.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/wiring_pulse.h \
- C:\Programs\Arduino\hardware\arduino\sam\variants\arduino_due_x/variant.h \
- C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/UARTClass.h \
- C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/RingBuffer.h \
- C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USARTClass.h \
- C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/syscalls.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/wiring.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/wiring_digital.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/wiring_analog.h \
@@ -132,24 +131,16 @@ ArduinoCommunication.cpp.d ArduinoCommunication.cpp.o: \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBCore.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBAPI.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/RingBuffer.h \
- ../PID.h ../IMU.h ../MPU6050_6Axis_MotionApps20.h ../I2Cdev.h ../Wire.h \
- C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/twi.h \
- C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Stream.h \
- ../Typedef.h ../MPU6050.h
+ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/UARTClass.h \
+ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/RingBuffer.h \
+ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USARTClass.h \
+ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/syscalls.h
 
-../ArduinoCommunication.h:
+../lib/IMU/Wire.h:
 
-C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Arduino.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/twi.h:
 
-C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/avr/pgmspace.h:
-
-C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/avr/interrupt.h:
-
-C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/binary.h:
-
-C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/itoa.h:
-
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/chip.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../chip.h:
 
 C:/Programs/Arduino/hardware/arduino/sam/system/CMSIS/Device/ATMEL/sam.h:
 
@@ -301,63 +292,83 @@ C:/Programs/Arduino/hardware/arduino/sam/system/CMSIS/Device/ATMEL/sam3xa/includ
 
 C:/Programs/Arduino/hardware/arduino/sam/system/CMSIS/Device/ATMEL/sam3xa/include/pio/pio_sam3x8e.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/adc.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/adc.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../chip.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/../chip.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/dacc.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/dacc.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/interrupt_sam_nvic.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/interrupt_sam_nvic.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/efc.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/efc.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/gpbr.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/gpbr.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/pio.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/pio.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/pmc.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/pmc.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/pwmc.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/pwmc.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/rstc.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/rstc.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/rtc.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/rtc.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/rtt.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/rtt.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/spi.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/spi.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/ssc.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/ssc.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/tc.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/tc.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/twi.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/twi.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/usart.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/usart.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/wdt.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/wdt.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/timetick.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/timetick.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/USB_device.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/USB_device.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/USB_host.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/USB_host.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/can.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/can.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/emac.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/emac.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/trng.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/trng.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/uotghs_device.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/uotghs_device.h:
 
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/uotghs_host.h:
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/../include/uotghs_host.h:
+
+C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Stream.h:
+
+C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Print.h:
+
+C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/WString.h:
+
+C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/avr/pgmspace.h:
+
+C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Printable.h:
+
+C:\Programs\Arduino\hardware\arduino\sam\variants\arduino_due_x/variant.h:
+
+C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Arduino.h:
+
+C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/avr/interrupt.h:
+
+C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/binary.h:
+
+C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/itoa.h:
+
+C:/Programs/Arduino/hardware/arduino/sam/system/libsam/chip.h:
 
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/wiring_constants.h:
 
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/WCharacter.h:
-
-C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/WString.h:
 
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Tone.h:
 
@@ -367,21 +378,7 @@ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/HardwareSerial.h:
 
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Stream.h:
 
-C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Print.h:
-
-C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Printable.h:
-
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/wiring_pulse.h:
-
-C:\Programs\Arduino\hardware\arduino\sam\variants\arduino_due_x/variant.h:
-
-C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/UARTClass.h:
-
-C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/RingBuffer.h:
-
-C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USARTClass.h:
-
-C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/syscalls.h:
 
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/wiring.h:
 
@@ -403,20 +400,10 @@ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBAPI.h:
 
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/RingBuffer.h:
 
-../PID.h:
+C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/UARTClass.h:
 
-../IMU.h:
+C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/RingBuffer.h:
 
-../MPU6050_6Axis_MotionApps20.h:
+C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USARTClass.h:
 
-../I2Cdev.h:
-
-../Wire.h:
-
-C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/twi.h:
-
-C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Stream.h:
-
-../Typedef.h:
-
-../MPU6050.h:
+C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/syscalls.h:

@@ -1,4 +1,4 @@
-IMU.cpp.d IMU.cpp.o: ../IMU.cpp ../IMU.h \
+lib/IMU/IMU.cpp.d lib/IMU/IMU.cpp.o: ../lib/IMU/IMU.cpp ../lib/IMU/IMU.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Arduino.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/avr/pgmspace.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/avr/interrupt.h \
@@ -131,12 +131,13 @@ IMU.cpp.d IMU.cpp.o: ../IMU.cpp ../IMU.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBCore.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBAPI.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/RingBuffer.h \
- ../MPU6050_6Axis_MotionApps20.h ../I2Cdev.h ../Wire.h \
+ ../lib/IMU/MPU6050_6Axis_MotionApps20.h ../lib/IMU/I2Cdev.h \
+ ../lib/IMU/Wire.h \
  C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/twi.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Stream.h \
- ../Typedef.h ../PID.h ../MPU6050.h
+ ../lib/IMU/Typedef.h ../lib/IMU/MPU6050.h
 
-../IMU.h:
+../lib/IMU/IMU.h:
 
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Arduino.h:
 
@@ -402,18 +403,16 @@ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBAPI.h:
 
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/RingBuffer.h:
 
-../MPU6050_6Axis_MotionApps20.h:
+../lib/IMU/MPU6050_6Axis_MotionApps20.h:
 
-../I2Cdev.h:
+../lib/IMU/I2Cdev.h:
 
-../Wire.h:
+../lib/IMU/Wire.h:
 
 C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/twi.h:
 
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Stream.h:
 
-../Typedef.h:
+../lib/IMU/Typedef.h:
 
-../PID.h:
-
-../MPU6050.h:
+../lib/IMU/MPU6050.h:

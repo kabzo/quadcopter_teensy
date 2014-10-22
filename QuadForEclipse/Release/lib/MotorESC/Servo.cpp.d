@@ -1,4 +1,5 @@
-Servo.cpp.d Servo.cpp.o: ../Servo.cpp \
+lib/MotorESC/Servo.cpp.d lib/MotorESC/Servo.cpp.o: \
+ ../lib/MotorESC/Servo.cpp \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Arduino.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/avr/pgmspace.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/avr/interrupt.h \
@@ -131,7 +132,7 @@ Servo.cpp.d Servo.cpp.o: ../Servo.cpp \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBCore.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBAPI.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/RingBuffer.h \
- ../Servo.h ../ServoTimers.h
+ ../lib/MotorESC/Servo.h ../lib/MotorESC/ServoTimers.h
 
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Arduino.h:
 
@@ -397,6 +398,6 @@ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBAPI.h:
 
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/RingBuffer.h:
 
-../Servo.h:
+../lib/MotorESC/Servo.h:
 
-../ServoTimers.h:
+../lib/MotorESC/ServoTimers.h:

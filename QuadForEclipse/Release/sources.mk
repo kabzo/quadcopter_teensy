@@ -2,41 +2,46 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
-INO_SRCS := 
-ASM_SRCS := 
 O_UPPER_SRCS := 
-CPP_SRCS := 
-S_UPPER_SRCS := 
 O_SRCS := 
-ELF_SRCS := 
+EEP_SRCS := 
 C_UPPER_SRCS := 
+CPP_SRCS := 
+INO_SRCS := 
+AR_SRCS := 
+PDE_SRCS := 
+ASM_SRCS := 
 CXX_SRCS := 
 C++_SRCS := 
-PDE_SRCS := 
-CC_SRCS := 
-AR_SRCS := 
-EEP_SRCS := 
+ELF_SRCS := 
 C_SRCS := 
-C_UPPER_DEPS := 
-PDE_DEPS := 
+S_UPPER_SRCS := 
+CC_SRCS := 
 C_DEPS := 
 AR := 
-EEP := 
 FLASH_IMAGE := 
-CC_DEPS := 
-AR_OBJ := 
-C++_DEPS := 
-LINK_OBJ := 
+EEP := 
 CXX_DEPS := 
-ASM_DEPS := 
-INO_DEPS := 
-SIZEDUMMY := 
 S_UPPER_DEPS := 
 ELF := 
+C++_DEPS := 
+ASM_DEPS := 
+CC_DEPS := 
+INO_DEPS := 
+AR_OBJ := 
 CPP_DEPS := 
+PDE_DEPS := 
+LINK_OBJ := 
+C_UPPER_DEPS := 
+SIZEDUMMY := 
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+lib/PID \
+lib/MotorESC \
+lib/IMU \
+lib/I2C \
+lib/ArduinoCommunication \
 arduino/variant \
 arduino/core \
 arduino/core/avr \

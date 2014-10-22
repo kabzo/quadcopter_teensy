@@ -5,10 +5,10 @@
  ******************************************/
 
 void setup() {
-	Serial.begin(115200); /**start communication*/
+	Serial.begin(115200); /*start communication*/
 	Serial.println("QUADCOPTER FIRMWARE");
 
-	imu.setDMP(); /**Initialize DMP */
+	imu.setDMP(); /*Initialize DMP */
 
 	Serial.println(F("Connect battery now you have 8 seconds"));
 
@@ -19,7 +19,7 @@ void setup() {
 	motorFL.setSwitch(CALIBRATEESC);
 #endif
 
-	delay(8000);
+//	delay(8000);
 
 	motorBR.initialize();
 	motorBL.initialize();
@@ -29,36 +29,32 @@ void setup() {
 #if CALIBRATEESC == 0
 	if (CALIBRATEESC == 0) {
 		Serial.println("Waiting 6 seconds for ESC");
-		delay(6000);
-		Serial.println("after");
+//		delay(6000);
 	}
 #endif
 
 	/**set GUI parameteras*/
-	Serial.println("Setting GUI:");
+	Serial.print("Setting GUI..");
 	arduinoCommunication.sendOverSerial();
-	Serial.print("..");
 	arduinoCommunication.setGuiValues();
-	Serial.println(F("DONE!"));
+	Serial.println(F("GUI SETED!"));
 	/**set GUI parameteras*/
 
 	Serial.println(F("Start DMP"));
 	imu.startDMP();
 
 	Serial.println(F("START"));
-
 }
 
 /******************************************
  ****************LOOP**********************
  ******************************************/
-
 void loop() {
 	imu.getYPRdmp();
 
 	rollControll.pid.Compute();
-//	pitchControll.pid.Compute();
-//	yawControll.pid.Compute();
+	pitchControll.pid.Compute();
+//yawControll.pid.Compute();
 
 	motorBL.setMotorSpeed(throttle + rollControll.output + pitchControll.output);
 	motorBR.setMotorSpeed(throttle - rollControll.output + pitchControll.output);
@@ -66,8 +62,9 @@ void loop() {
 	motorFR.setMotorSpeed(throttle - rollControll.output - pitchControll.output);
 
 	arduinoCommunication.sendOverSerial();
+	arduinoCommunication.serial_Communication_GUI_Csharp();
 }
 
 void serialEvent() {
-	arduinoCommunication.serial_Communication_GUI_Csharp();
+	arduinoCommunication.receiveStringSerial();
 }

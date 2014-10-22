@@ -1,4 +1,4 @@
-PID.cpp.d PID.cpp.o: ../PID.cpp \
+lib/PID/PID.cpp.d lib/PID/PID.cpp.o: ../lib/PID/PID.cpp \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Arduino.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/avr/pgmspace.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/avr/interrupt.h \
@@ -131,7 +131,7 @@ PID.cpp.d PID.cpp.o: ../PID.cpp \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBCore.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBAPI.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/RingBuffer.h \
- ../PID.h
+ ../lib/PID/PID.h
 
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Arduino.h:
 
@@ -397,4 +397,4 @@ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBAPI.h:
 
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/RingBuffer.h:
 
-../PID.h:
+../lib/PID/PID.h:

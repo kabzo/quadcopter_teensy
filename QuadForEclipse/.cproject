@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+<?fileVersion 4.0.0?>
+
+<cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
 		<cconfiguration id="it.baeyens.arduino.core.toolChain.release.549550839">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="it.baeyens.arduino.core.toolChain.release.549550839" moduleId="org.eclipse.cdt.core.settings" name="Release">
@@ -20,16 +22,26 @@
 							<tool id="it.baeyens.arduino.tool.sketch.compiler.cpp.1455150596" name="Arduino C++ Compiler" superClass="it.baeyens.arduino.tool.sketch.compiler.cpp">
 								<option id="it.baeyens.arduino.compiler.cpp.sketch.option.incpath.1651687757" name="Include Paths (-I)" superClass="it.baeyens.arduino.compiler.cpp.sketch.option.incpath" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Quadcopter/arduino/core}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Quadcopter/lib/I2C}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Quadcopter/lib/Config}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Quadcopter/lib/ArduinoCommunication}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Quadcopter/lib/MotorESC}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Quadcopter/lib/PID}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Quadcopter/lib/IMU}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Quadcopter/arduino/variant}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Quadcopter/lib}&quot;"/>
 								</option>
 								<inputType id="it.baeyens.arduino.compiler.cpp.sketch.input.889885252" name="CPP source files" superClass="it.baeyens.arduino.compiler.cpp.sketch.input"/>
 							</tool>
 							<tool id="it.baeyens.arduino.tool.compiler.c.1154300771" name="Arduino C Compiler" superClass="it.baeyens.arduino.tool.compiler.c">
 								<option id="it.baeyens.arduino.compiler.c.sketch.option.incpath.1287516357" name="Include Paths (-I)" superClass="it.baeyens.arduino.compiler.c.sketch.option.incpath" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Quadcopter/arduino/core}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Quadcopter/lib/Config}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Quadcopter/lib/I2C}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Quadcopter/lib/PID}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Quadcopter/lib/MotorESC}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Quadcopter/lib/ArduinoCommunication}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Quadcopter/lib/IMU}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Quadcopter/arduino/variant}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Quadcopter/lib}&quot;"/>
 								</option>
 								<inputType id="it.baeyens.arduino.compiler.c.sketch.input.1205125743" name="C Source Files" superClass="it.baeyens.arduino.compiler.c.sketch.input"/>
 							</tool>
@@ -56,5 +68,9 @@
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/Quadcopter"/>
+		</configuration>
+	</storageModule>
 </cproject>

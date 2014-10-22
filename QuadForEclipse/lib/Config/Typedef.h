@@ -1,16 +1,6 @@
 #ifndef TYPEDEF_H_
 #define TYPEDEF_H_
 
-#include "PID.h"
-
-struct controlAngle {
-		double angle;
-		double setpoint;
-		double output;
-		PID pid;
-
-};
-
 // I2C device class (I2Cdev) demonstration Arduino sketch for MPU6050 class, 3D math helper
 
 class Quaternion {

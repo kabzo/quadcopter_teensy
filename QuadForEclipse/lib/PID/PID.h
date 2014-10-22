@@ -1,10 +1,9 @@
 #ifndef PID_h
 #define PID_h
 
+
 class PID {
-
 	public:
-
 		//Constants used in some of the functions below
 #define AUTOMATIC	1
 #define MANUAL	0
@@ -46,7 +45,7 @@ class PID {
 		double GetDterm();
 		int GetMode();						  //  inside the PID.
 		int GetDirection();					  //
-		double getOutMax() const;
+		double getOutMax() ;
 		double getOutMin() const;
 		unsigned long getSampleTime() const;
 
@@ -76,6 +75,15 @@ class PID {
 		unsigned long SampleTime;
 		double outMin, outMax;
 		bool inAuto;
+};
+
+
+
+struct controlAngle {
+		double angle;
+		double setpoint;
+		double output;
+		PID pid;
 };
 #endif
 

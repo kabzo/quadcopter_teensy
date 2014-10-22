@@ -131,11 +131,20 @@ Quadcopter.cpp.d Quadcopter.cpp.o: ../Quadcopter.cpp ../Quadcopter.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBCore.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBAPI.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/RingBuffer.h \
- ../IMU.h ../MPU6050_6Axis_MotionApps20.h ../I2Cdev.h ../Wire.h \
+ C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\IMU/IMU.h \
+ C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\IMU/MPU6050_6Axis_MotionApps20.h \
+ C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\I2C/I2Cdev.h \
+ C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\I2C/Wire.h \
  C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/twi.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Stream.h \
- ../Typedef.h ../PID.h ../MPU6050.h ../ArduinoCommunication.h \
- ../MotorESC.h ../Servo.h ../ServoTimers.h ../Config.h
+ C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\Config/Typedef.h \
+ C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\IMU/MPU6050.h \
+ C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\PID/PID.h \
+ C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\ArduinoCommunication/ArduinoCommunication.h \
+ C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\MotorESC/MotorESC.h \
+ C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\MotorESC/Servo.h \
+ C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\MotorESC/ServoTimers.h \
+ C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\Config/Config.h
 
 ../Quadcopter.h:
 
@@ -403,30 +412,30 @@ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBAPI.h:
 
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/RingBuffer.h:
 
-../IMU.h:
+C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\IMU/IMU.h:
 
-../MPU6050_6Axis_MotionApps20.h:
+C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\IMU/MPU6050_6Axis_MotionApps20.h:
 
-../I2Cdev.h:
+C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\I2C/I2Cdev.h:
 
-../Wire.h:
+C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\I2C/Wire.h:
 
 C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/twi.h:
 
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Stream.h:
 
-../Typedef.h:
+C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\Config/Typedef.h:
 
-../PID.h:
+C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\IMU/MPU6050.h:
 
-../MPU6050.h:
+C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\PID/PID.h:
 
-../ArduinoCommunication.h:
+C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\ArduinoCommunication/ArduinoCommunication.h:
 
-../MotorESC.h:
+C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\MotorESC/MotorESC.h:
 
-../Servo.h:
+C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\MotorESC/Servo.h:
 
-../ServoTimers.h:
+C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\MotorESC/ServoTimers.h:
 
-../Config.h:
+C:\Users\Juraj\Workspace\Eclipse_C++_Arduino\Quadcopter\lib\Config/Config.h:

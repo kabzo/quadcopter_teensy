@@ -4,10 +4,6 @@ void IMU::setDMP() {
 	Wire.begin();
 	while (!Serial)
 		;
-	pinMode(RESETPIN, HIGH);
-	delay(400);
-	pinMode(RESETPIN, OUTPUT);
-	digitalWrite(RESETPIN, HIGH);
 
 	// initialize device
 	Serial.println(F("Initializing I2C devices..."));
@@ -29,6 +25,7 @@ void IMU::setDMP() {
 	// load and configure the DMP
 	Serial.println(F("Initializing DMP..."));
 	status_ = mpu_.dmpInitialize();
+
 	mpu_.setXGyroOffset(OFFSETGYROX);
 	mpu_.setYGyroOffset(OFFSETGYROY);
 	mpu_.setZGyroOffset(OFFSETGYROZ);
@@ -98,8 +95,8 @@ void IMU::getYPRdmp() {
 		mpu_.dmpGetGravity(&gravity_, &q_);
 		mpu_.dmpGetYawPitchRoll(ypr_, &q_, &gravity_);
 		*yaw_ = ypr_[0] * 180 / M_PI;
-		*pitch_ = ypr_[1] * 180 / M_PI;
-		*roll_ = ypr_[2] * 180 / M_PI;
+		*pitch_ = ypr_[2] * 180 / M_PI;
+		*roll_ = -ypr_[1] * 180 / M_PI;
 
 	}
 

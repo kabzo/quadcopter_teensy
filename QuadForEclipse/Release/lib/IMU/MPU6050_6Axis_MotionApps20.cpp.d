@@ -1,6 +1,7 @@
-MPU6050_6Axis_MotionApps20.cpp.d MPU6050_6Axis_MotionApps20.cpp.o: \
- ../MPU6050_6Axis_MotionApps20.cpp ../MPU6050_6Axis_MotionApps20.h \
- ../I2Cdev.h \
+lib/IMU/MPU6050_6Axis_MotionApps20.cpp.d \
+ lib/IMU/MPU6050_6Axis_MotionApps20.cpp.o: \
+ ../lib/IMU/MPU6050_6Axis_MotionApps20.cpp \
+ ../lib/IMU/MPU6050_6Axis_MotionApps20.h ../lib/IMU/I2Cdev.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Arduino.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/avr/pgmspace.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/avr/interrupt.h \
@@ -133,14 +134,14 @@ MPU6050_6Axis_MotionApps20.cpp.d MPU6050_6Axis_MotionApps20.cpp.o: \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBCore.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBAPI.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/RingBuffer.h \
- ../Wire.h \
+ ../lib/IMU/Wire.h \
  C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/twi.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Stream.h \
- ../Typedef.h ../PID.h ../MPU6050.h
+ ../lib/IMU/Typedef.h ../lib/IMU/MPU6050.h
 
-../MPU6050_6Axis_MotionApps20.h:
+../lib/IMU/MPU6050_6Axis_MotionApps20.h:
 
-../I2Cdev.h:
+../lib/IMU/I2Cdev.h:
 
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Arduino.h:
 
@@ -406,14 +407,12 @@ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBAPI.h:
 
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/RingBuffer.h:
 
-../Wire.h:
+../lib/IMU/Wire.h:
 
 C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/twi.h:
 
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Stream.h:
 
-../Typedef.h:
+../lib/IMU/Typedef.h:
 
-../PID.h:
-
-../MPU6050.h:
+../lib/IMU/MPU6050.h:

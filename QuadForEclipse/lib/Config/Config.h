@@ -14,8 +14,8 @@
 
 //***********************MotorESC.h***********************//
 
-#define MPINBL 5
-#define MPINBR 4
+#define MPINBL 8
+#define MPINBR 5
 #define MPINFR 6
 #define MPINFL 7
 

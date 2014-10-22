@@ -40,7 +40,7 @@ class MotorESC {
 			Serial.print(F("Sending:"));
 			Serial.println(max_signal_);
 			motor_.writeMicroseconds(max_signal_);
-			delay(5000);
+			delay(7000);
 			Serial.print(F("Sending:"));
 			Serial.println(min_signal_);
 			motor_.writeMicroseconds(min_signal_);
@@ -56,8 +56,10 @@ class MotorESC {
 
 		void initialize() {
 			motor_.attach(pin_);
+			delay(100);
 			if (_switch == 1) {
-				Serial.println(F("Calibrating ESCs"));
+				Serial.print(F("Calibrating ESC:"));
+				Serial.println(pin_);
 				calibrate();
 			} else if (_switch == 0) {
 				initializeMinSignal();

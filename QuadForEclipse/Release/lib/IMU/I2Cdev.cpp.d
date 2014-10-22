@@ -1,4 +1,5 @@
-MPU6050.cpp.d MPU6050.cpp.o: ../MPU6050.cpp ../MPU6050.h ../I2Cdev.h \
+lib/IMU/I2Cdev.cpp.d lib/IMU/I2Cdev.cpp.o: ../lib/IMU/I2Cdev.cpp \
+ ../lib/IMU/I2Cdev.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Arduino.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/avr/pgmspace.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/avr/interrupt.h \
@@ -131,13 +132,11 @@ MPU6050.cpp.d MPU6050.cpp.o: ../MPU6050.cpp ../MPU6050.h ../I2Cdev.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBCore.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBAPI.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/RingBuffer.h \
- ../Wire.h \
+ ../lib/IMU/Wire.h \
  C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/twi.h \
  C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Stream.h
 
-../MPU6050.h:
-
-../I2Cdev.h:
+../lib/IMU/I2Cdev.h:
 
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/Arduino.h:
 
@@ -403,7 +402,7 @@ C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/USB/USBAPI.h:
 
 C:\Programs\Arduino\hardware\arduino\sam\cores\arduino/RingBuffer.h:
 
-../Wire.h:
+../lib/IMU/Wire.h:
 
 C:/Programs/Arduino/hardware/arduino/sam/system/libsam/include/twi.h:
 
