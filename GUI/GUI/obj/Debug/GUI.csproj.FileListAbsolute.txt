@@ -85,3 +85,4 @@ C:\Users\Juraj\Workspace\VisualStudio_C#\Projects\GUI\GUI\obj\Debug\GUI.Properti
 C:\Users\Juraj\Workspace\VisualStudio_C#\Projects\GUI\GUI\obj\Debug\GUI.csproj.GenerateResource.Cache
 C:\Users\Juraj\Workspace\VisualStudio_C#\Projects\GUI\GUI\obj\Debug\GUI.pdb
 C:\Users\Juraj\Workspace\VisualStudio_C#\Projects\GUI\GUI\obj\Debug\GUI.GUI.resources
+C:\Users\Juraj\Workspace\VisualStudio_C#\Projects\GUI\GUI\bin\Debug\VerticalProgressBar.dll

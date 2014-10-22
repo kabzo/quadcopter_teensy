@@ -32,28 +32,23 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GUI));
       this.tabControlImageList = new System.Windows.Forms.ImageList(this.components);
       this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-      this.timer1 = new System.Windows.Forms.Timer(this.components);
+      this.joystickTimer = new System.Windows.Forms.Timer(this.components);
       this.lb_connectionStatus = new System.Windows.Forms.Label();
       this.comboBox_Comports = new System.Windows.Forms.ComboBox();
       this.btn_disconnect = new System.Windows.Forms.Button();
       this.btn_connect = new System.Windows.Forms.Button();
       this.Settings = new System.Windows.Forms.TabPage();
       this.checkBox_stearingOn = new System.Windows.Forms.CheckBox();
-      this.label20 = new System.Windows.Forms.Label();
-      this.numericUpDown_throttleRating = new System.Windows.Forms.NumericUpDown();
       this.label_ = new System.Windows.Forms.Label();
       this.label19 = new System.Windows.Forms.Label();
       this.textBox_calcRoll = new System.Windows.Forms.TextBox();
       this.textBox_calcPitch = new System.Windows.Forms.TextBox();
-      this.panel1 = new System.Windows.Forms.Panel();
       this.label18 = new System.Windows.Forms.Label();
       this.label17 = new System.Windows.Forms.Label();
       this.textBox_setpointPitch = new System.Windows.Forms.TextBox();
       this.textBox_setpointRoll = new System.Windows.Forms.TextBox();
-      this.label15 = new System.Windows.Forms.Label();
       this.textBox_sendingStream1 = new System.Windows.Forms.TextBox();
       this.label11 = new System.Windows.Forms.Label();
-      this.numericUpDown_stearingLimits = new System.Windows.Forms.NumericUpDown();
       this.headingIndicatorInstrumentControl2 = new AvionicsInstrumentControlDemo.HeadingIndicatorInstrumentControl();
       this.attitudeIndicatorInstrumentControl2 = new AvionicsInstrumentControlDemo.AttitudeIndicatorInstrumentControl();
       this.label7 = new System.Windows.Forms.Label();
@@ -62,7 +57,6 @@
       this.textBox_fl = new System.Windows.Forms.TextBox();
       this.textBox_fr = new System.Windows.Forms.TextBox();
       this.textBox_throttle = new System.Windows.Forms.TextBox();
-      this.trackBar_throttle = new System.Windows.Forms.TrackBar();
       this.label6 = new System.Windows.Forms.Label();
       this.label5 = new System.Windows.Forms.Label();
       this.label2 = new System.Windows.Forms.Label();
@@ -133,12 +127,26 @@
       this.tabPage5 = new System.Windows.Forms.TabPage();
       this.checkedListBox_graph2 = new System.Windows.Forms.CheckedListBox();
       this.tabControl_mainControl = new System.Windows.Forms.TabControl();
-      this.tabPage6 = new System.Windows.Forms.TabPage();
+      this.Joystick = new System.Windows.Forms.TabPage();
+      this.label15 = new System.Windows.Forms.Label();
+      this.textBox_joystick_yawVal = new System.Windows.Forms.TextBox();
+      this.progressBar_joystick_yaw = new System.Windows.Forms.ProgressBar();
+      this.button_joystick_connect = new System.Windows.Forms.Button();
+      this.textBox_joystick_rollVal = new System.Windows.Forms.TextBox();
+      this.textBox_joystick_pitchVal = new System.Windows.Forms.TextBox();
+      this.textBox_joystick_throttleVal = new System.Windows.Forms.TextBox();
+      this.btn_joystick_calibrate = new System.Windows.Forms.Button();
+      this.label26 = new System.Windows.Forms.Label();
+      this.label25 = new System.Windows.Forms.Label();
+      this.label24 = new System.Windows.Forms.Label();
+      this.progressBar_joystick_roll = new System.Windows.Forms.ProgressBar();
+      this.progressBar_joystick_pitch = new System.Windows.Forms.ProgressBar();
+      this.progressBar_joystick_throttle = new System.Windows.Forms.ProgressBar();
+      this.label21 = new System.Windows.Forms.Label();
+      this.label_joystick_connection = new System.Windows.Forms.Label();
       this.status = new System.Windows.Forms.Label();
+      this.timer_socketReceive = new System.Windows.Forms.Timer(this.components);
       this.Settings.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_throttleRating)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_stearingLimits)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.trackBar_throttle)).BeginInit();
       this.groupBox4.SuspendLayout();
       this.tabControl_pid.SuspendLayout();
       this.Roll.SuspendLayout();
@@ -166,6 +174,7 @@
       this.tabPage4.SuspendLayout();
       this.tabPage5.SuspendLayout();
       this.tabControl_mainControl.SuspendLayout();
+      this.Joystick.SuspendLayout();
       this.SuspendLayout();
       // 
       // tabControlImageList
@@ -181,11 +190,11 @@
       this.serialPort1.BaudRate = 115200;
       this.serialPort1.PortName = "COM3";
       // 
-      // timer1
+      // joystickTimer
       // 
-      this.timer1.Enabled = true;
-      this.timer1.Interval = 20;
-      this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+      this.joystickTimer.Enabled = true;
+      this.joystickTimer.Interval = 50;
+      this.joystickTimer.Tick += new System.EventHandler(this.joystickTimer_Tick);
       // 
       // lb_connectionStatus
       // 
@@ -239,21 +248,16 @@
       // 
       this.Settings.BackColor = System.Drawing.Color.DimGray;
       this.Settings.Controls.Add(this.checkBox_stearingOn);
-      this.Settings.Controls.Add(this.label20);
-      this.Settings.Controls.Add(this.numericUpDown_throttleRating);
       this.Settings.Controls.Add(this.label_);
       this.Settings.Controls.Add(this.label19);
       this.Settings.Controls.Add(this.textBox_calcRoll);
       this.Settings.Controls.Add(this.textBox_calcPitch);
-      this.Settings.Controls.Add(this.panel1);
       this.Settings.Controls.Add(this.label18);
       this.Settings.Controls.Add(this.label17);
       this.Settings.Controls.Add(this.textBox_setpointPitch);
       this.Settings.Controls.Add(this.textBox_setpointRoll);
-      this.Settings.Controls.Add(this.label15);
       this.Settings.Controls.Add(this.textBox_sendingStream1);
       this.Settings.Controls.Add(this.label11);
-      this.Settings.Controls.Add(this.numericUpDown_stearingLimits);
       this.Settings.Controls.Add(this.headingIndicatorInstrumentControl2);
       this.Settings.Controls.Add(this.attitudeIndicatorInstrumentControl2);
       this.Settings.Controls.Add(this.label7);
@@ -262,7 +266,6 @@
       this.Settings.Controls.Add(this.textBox_fl);
       this.Settings.Controls.Add(this.textBox_fr);
       this.Settings.Controls.Add(this.textBox_throttle);
-      this.Settings.Controls.Add(this.trackBar_throttle);
       this.Settings.Controls.Add(this.label6);
       this.Settings.Controls.Add(this.label5);
       this.Settings.Controls.Add(this.label2);
@@ -289,43 +292,11 @@
       this.checkBox_stearingOn.Text = "Stearing";
       this.checkBox_stearingOn.UseVisualStyleBackColor = true;
       // 
-      // label20
-      // 
-      this.label20.AutoSize = true;
-      this.label20.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-      this.label20.Location = new System.Drawing.Point(850, 582);
-      this.label20.Name = "label20";
-      this.label20.Size = new System.Drawing.Size(152, 17);
-      this.label20.TabIndex = 62;
-      this.label20.Text = "Throttle rating:";
-      // 
-      // numericUpDown_throttleRating
-      // 
-      this.numericUpDown_throttleRating.Increment = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-      this.numericUpDown_throttleRating.Location = new System.Drawing.Point(1008, 580);
-      this.numericUpDown_throttleRating.Maximum = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-      this.numericUpDown_throttleRating.Name = "numericUpDown_throttleRating";
-      this.numericUpDown_throttleRating.Size = new System.Drawing.Size(151, 25);
-      this.numericUpDown_throttleRating.TabIndex = 61;
-      this.numericUpDown_throttleRating.Value = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-      // 
       // label_
       // 
       this.label_.AutoSize = true;
       this.label_.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-      this.label_.Location = new System.Drawing.Point(979, 106);
+      this.label_.Location = new System.Drawing.Point(826, 330);
       this.label_.Name = "label_";
       this.label_.Size = new System.Drawing.Size(62, 17);
       this.label_.TabIndex = 60;
@@ -335,7 +306,7 @@
       // 
       this.label19.AutoSize = true;
       this.label19.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-      this.label19.Location = new System.Drawing.Point(756, 106);
+      this.label19.Location = new System.Drawing.Point(835, 362);
       this.label19.Name = "label19";
       this.label19.Size = new System.Drawing.Size(53, 17);
       this.label19.TabIndex = 59;
@@ -343,7 +314,7 @@
       // 
       // textBox_calcRoll
       // 
-      this.textBox_calcRoll.Location = new System.Drawing.Point(815, 103);
+      this.textBox_calcRoll.Location = new System.Drawing.Point(894, 359);
       this.textBox_calcRoll.Name = "textBox_calcRoll";
       this.textBox_calcRoll.ReadOnly = true;
       this.textBox_calcRoll.Size = new System.Drawing.Size(112, 25);
@@ -351,27 +322,17 @@
       // 
       // textBox_calcPitch
       // 
-      this.textBox_calcPitch.Location = new System.Drawing.Point(1047, 103);
+      this.textBox_calcPitch.Location = new System.Drawing.Point(894, 327);
       this.textBox_calcPitch.Name = "textBox_calcPitch";
       this.textBox_calcPitch.ReadOnly = true;
       this.textBox_calcPitch.Size = new System.Drawing.Size(112, 25);
       this.textBox_calcPitch.TabIndex = 57;
       // 
-      // panel1
-      // 
-      this.panel1.BackColor = System.Drawing.Color.White;
-      this.panel1.Location = new System.Drawing.Point(759, 134);
-      this.panel1.Name = "panel1";
-      this.panel1.Size = new System.Drawing.Size(400, 400);
-      this.panel1.TabIndex = 56;
-      this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-      this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
-      // 
       // label18
       // 
       this.label18.AutoSize = true;
       this.label18.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-      this.label18.Location = new System.Drawing.Point(868, 671);
+      this.label18.Location = new System.Drawing.Point(754, 425);
       this.label18.Name = "label18";
       this.label18.Size = new System.Drawing.Size(134, 17);
       this.label18.TabIndex = 55;
@@ -381,7 +342,7 @@
       // 
       this.label17.AutoSize = true;
       this.label17.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-      this.label17.Location = new System.Drawing.Point(859, 628);
+      this.label17.Location = new System.Drawing.Point(745, 394);
       this.label17.Name = "label17";
       this.label17.Size = new System.Drawing.Size(143, 17);
       this.label17.TabIndex = 54;
@@ -389,7 +350,7 @@
       // 
       // textBox_setpointPitch
       // 
-      this.textBox_setpointPitch.Location = new System.Drawing.Point(1008, 625);
+      this.textBox_setpointPitch.Location = new System.Drawing.Point(894, 391);
       this.textBox_setpointPitch.Name = "textBox_setpointPitch";
       this.textBox_setpointPitch.ReadOnly = true;
       this.textBox_setpointPitch.Size = new System.Drawing.Size(112, 25);
@@ -397,21 +358,11 @@
       // 
       // textBox_setpointRoll
       // 
-      this.textBox_setpointRoll.Location = new System.Drawing.Point(1008, 668);
+      this.textBox_setpointRoll.Location = new System.Drawing.Point(894, 422);
       this.textBox_setpointRoll.Name = "textBox_setpointRoll";
       this.textBox_setpointRoll.ReadOnly = true;
       this.textBox_setpointRoll.Size = new System.Drawing.Size(112, 25);
       this.textBox_setpointRoll.TabIndex = 52;
-      // 
-      // label15
-      // 
-      this.label15.AutoSize = true;
-      this.label15.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-      this.label15.Location = new System.Drawing.Point(850, 542);
-      this.label15.Name = "label15";
-      this.label15.Size = new System.Drawing.Size(152, 17);
-      this.label15.TabIndex = 51;
-      this.label15.Text = "Stearing limits:";
       // 
       // textBox_sendingStream1
       // 
@@ -430,18 +381,6 @@
       this.label11.Size = new System.Drawing.Size(80, 17);
       this.label11.TabIndex = 50;
       this.label11.Text = "Sending:";
-      // 
-      // numericUpDown_stearingLimits
-      // 
-      this.numericUpDown_stearingLimits.Location = new System.Drawing.Point(1008, 540);
-      this.numericUpDown_stearingLimits.Name = "numericUpDown_stearingLimits";
-      this.numericUpDown_stearingLimits.Size = new System.Drawing.Size(151, 25);
-      this.numericUpDown_stearingLimits.TabIndex = 49;
-      this.numericUpDown_stearingLimits.Value = new decimal(new int[] {
-            90,
-            0,
-            0,
-            0});
       // 
       // headingIndicatorInstrumentControl2
       // 
@@ -463,7 +402,7 @@
       // 
       this.label7.AutoSize = true;
       this.label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-      this.label7.Location = new System.Drawing.Point(913, 712);
+      this.label7.Location = new System.Drawing.Point(799, 456);
       this.label7.Name = "label7";
       this.label7.Size = new System.Drawing.Size(89, 17);
       this.label7.TabIndex = 42;
@@ -503,24 +442,11 @@
       // 
       // textBox_throttle
       // 
-      this.textBox_throttle.Location = new System.Drawing.Point(1008, 709);
+      this.textBox_throttle.Location = new System.Drawing.Point(894, 453);
       this.textBox_throttle.Name = "textBox_throttle";
       this.textBox_throttle.ReadOnly = true;
       this.textBox_throttle.Size = new System.Drawing.Size(112, 25);
       this.textBox_throttle.TabIndex = 37;
-      // 
-      // trackBar_throttle
-      // 
-      this.trackBar_throttle.Location = new System.Drawing.Point(1165, 91);
-      this.trackBar_throttle.Maximum = 1500;
-      this.trackBar_throttle.Minimum = 1000;
-      this.trackBar_throttle.Name = "trackBar_throttle";
-      this.trackBar_throttle.Orientation = System.Windows.Forms.Orientation.Vertical;
-      this.trackBar_throttle.Size = new System.Drawing.Size(45, 641);
-      this.trackBar_throttle.SmallChange = 5;
-      this.trackBar_throttle.TabIndex = 36;
-      this.trackBar_throttle.Value = 1100;
-      this.trackBar_throttle.Scroll += new System.EventHandler(this.trackBar_throttle_Scroll);
       // 
       // label6
       // 
@@ -1450,7 +1376,7 @@
       this.tabControl_mainControl.Controls.Add(this.Console);
       this.tabControl_mainControl.Controls.Add(this.IMU);
       this.tabControl_mainControl.Controls.Add(this.GPS);
-      this.tabControl_mainControl.Controls.Add(this.tabPage6);
+      this.tabControl_mainControl.Controls.Add(this.Joystick);
       this.tabControl_mainControl.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tabControl_mainControl.Font = new System.Drawing.Font("Lucida Sans Typewriter", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.tabControl_mainControl.ImageList = this.tabControlImageList;
@@ -1461,15 +1387,171 @@
       this.tabControl_mainControl.Size = new System.Drawing.Size(1221, 801);
       this.tabControl_mainControl.TabIndex = 2;
       // 
-      // tabPage6
+      // Joystick
       // 
-      this.tabPage6.BackColor = System.Drawing.Color.DimGray;
-      this.tabPage6.Location = new System.Drawing.Point(4, 57);
-      this.tabPage6.Name = "tabPage6";
-      this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage6.Size = new System.Drawing.Size(1213, 740);
-      this.tabPage6.TabIndex = 4;
-      this.tabPage6.Text = "Values";
+      this.Joystick.BackColor = System.Drawing.Color.DimGray;
+      this.Joystick.Controls.Add(this.label15);
+      this.Joystick.Controls.Add(this.textBox_joystick_yawVal);
+      this.Joystick.Controls.Add(this.progressBar_joystick_yaw);
+      this.Joystick.Controls.Add(this.button_joystick_connect);
+      this.Joystick.Controls.Add(this.textBox_joystick_rollVal);
+      this.Joystick.Controls.Add(this.textBox_joystick_pitchVal);
+      this.Joystick.Controls.Add(this.textBox_joystick_throttleVal);
+      this.Joystick.Controls.Add(this.btn_joystick_calibrate);
+      this.Joystick.Controls.Add(this.label26);
+      this.Joystick.Controls.Add(this.label25);
+      this.Joystick.Controls.Add(this.label24);
+      this.Joystick.Controls.Add(this.progressBar_joystick_roll);
+      this.Joystick.Controls.Add(this.progressBar_joystick_pitch);
+      this.Joystick.Controls.Add(this.progressBar_joystick_throttle);
+      this.Joystick.Controls.Add(this.label21);
+      this.Joystick.Controls.Add(this.label_joystick_connection);
+      this.Joystick.Location = new System.Drawing.Point(4, 57);
+      this.Joystick.Name = "Joystick";
+      this.Joystick.Padding = new System.Windows.Forms.Padding(3);
+      this.Joystick.Size = new System.Drawing.Size(1213, 740);
+      this.Joystick.TabIndex = 4;
+      this.Joystick.Text = "Joystick";
+      // 
+      // label15
+      // 
+      this.label15.AutoSize = true;
+      this.label15.Location = new System.Drawing.Point(84, 113);
+      this.label15.Name = "label15";
+      this.label15.Size = new System.Drawing.Size(44, 17);
+      this.label15.TabIndex = 33;
+      this.label15.Text = "Yaw:";
+      // 
+      // textBox_joystick_yawVal
+      // 
+      this.textBox_joystick_yawVal.Location = new System.Drawing.Point(560, 110);
+      this.textBox_joystick_yawVal.Name = "textBox_joystick_yawVal";
+      this.textBox_joystick_yawVal.ReadOnly = true;
+      this.textBox_joystick_yawVal.Size = new System.Drawing.Size(100, 25);
+      this.textBox_joystick_yawVal.TabIndex = 32;
+      // 
+      // progressBar_joystick_yaw
+      // 
+      this.progressBar_joystick_yaw.Location = new System.Drawing.Point(134, 112);
+      this.progressBar_joystick_yaw.Maximum = 410;
+      this.progressBar_joystick_yaw.Name = "progressBar_joystick_yaw";
+      this.progressBar_joystick_yaw.Size = new System.Drawing.Size(420, 23);
+      this.progressBar_joystick_yaw.TabIndex = 31;
+      // 
+      // button_joystick_connect
+      // 
+      this.button_joystick_connect.Location = new System.Drawing.Point(1058, 41);
+      this.button_joystick_connect.Name = "button_joystick_connect";
+      this.button_joystick_connect.Size = new System.Drawing.Size(113, 59);
+      this.button_joystick_connect.TabIndex = 30;
+      this.button_joystick_connect.Text = "Joystick Connect";
+      this.button_joystick_connect.UseVisualStyleBackColor = true;
+      this.button_joystick_connect.Click += new System.EventHandler(this.button_joystick_connect_Click);
+      // 
+      // textBox_joystick_rollVal
+      // 
+      this.textBox_joystick_rollVal.Location = new System.Drawing.Point(560, 50);
+      this.textBox_joystick_rollVal.Name = "textBox_joystick_rollVal";
+      this.textBox_joystick_rollVal.ReadOnly = true;
+      this.textBox_joystick_rollVal.Size = new System.Drawing.Size(100, 25);
+      this.textBox_joystick_rollVal.TabIndex = 29;
+      // 
+      // textBox_joystick_pitchVal
+      // 
+      this.textBox_joystick_pitchVal.Location = new System.Drawing.Point(560, 81);
+      this.textBox_joystick_pitchVal.Name = "textBox_joystick_pitchVal";
+      this.textBox_joystick_pitchVal.ReadOnly = true;
+      this.textBox_joystick_pitchVal.Size = new System.Drawing.Size(100, 25);
+      this.textBox_joystick_pitchVal.TabIndex = 28;
+      // 
+      // textBox_joystick_throttleVal
+      // 
+      this.textBox_joystick_throttleVal.Location = new System.Drawing.Point(560, 19);
+      this.textBox_joystick_throttleVal.Name = "textBox_joystick_throttleVal";
+      this.textBox_joystick_throttleVal.ReadOnly = true;
+      this.textBox_joystick_throttleVal.Size = new System.Drawing.Size(100, 25);
+      this.textBox_joystick_throttleVal.TabIndex = 27;
+      // 
+      // btn_joystick_calibrate
+      // 
+      this.btn_joystick_calibrate.Location = new System.Drawing.Point(1058, 106);
+      this.btn_joystick_calibrate.Name = "btn_joystick_calibrate";
+      this.btn_joystick_calibrate.Size = new System.Drawing.Size(113, 59);
+      this.btn_joystick_calibrate.TabIndex = 16;
+      this.btn_joystick_calibrate.Text = "Calibrate";
+      this.btn_joystick_calibrate.UseVisualStyleBackColor = true;
+      this.btn_joystick_calibrate.Click += new System.EventHandler(this.btn_joystick_calibrate_Click);
+      // 
+      // label26
+      // 
+      this.label26.AutoSize = true;
+      this.label26.Location = new System.Drawing.Point(39, 27);
+      this.label26.Name = "label26";
+      this.label26.Size = new System.Drawing.Size(89, 17);
+      this.label26.TabIndex = 15;
+      this.label26.Text = "Throttle:";
+      // 
+      // label25
+      // 
+      this.label25.AutoSize = true;
+      this.label25.Location = new System.Drawing.Point(75, 56);
+      this.label25.Name = "label25";
+      this.label25.Size = new System.Drawing.Size(53, 17);
+      this.label25.TabIndex = 14;
+      this.label25.Text = "Roll:";
+      // 
+      // label24
+      // 
+      this.label24.AutoSize = true;
+      this.label24.Location = new System.Drawing.Point(66, 85);
+      this.label24.Name = "label24";
+      this.label24.Size = new System.Drawing.Size(62, 17);
+      this.label24.TabIndex = 13;
+      this.label24.Text = "Pitch:";
+      // 
+      // progressBar_joystick_roll
+      // 
+      this.progressBar_joystick_roll.Location = new System.Drawing.Point(134, 50);
+      this.progressBar_joystick_roll.Maximum = 300;
+      this.progressBar_joystick_roll.Name = "progressBar_joystick_roll";
+      this.progressBar_joystick_roll.Size = new System.Drawing.Size(420, 23);
+      this.progressBar_joystick_roll.TabIndex = 12;
+      // 
+      // progressBar_joystick_pitch
+      // 
+      this.progressBar_joystick_pitch.Location = new System.Drawing.Point(134, 81);
+      this.progressBar_joystick_pitch.Maximum = 300;
+      this.progressBar_joystick_pitch.Name = "progressBar_joystick_pitch";
+      this.progressBar_joystick_pitch.Size = new System.Drawing.Size(420, 23);
+      this.progressBar_joystick_pitch.TabIndex = 11;
+      // 
+      // progressBar_joystick_throttle
+      // 
+      this.progressBar_joystick_throttle.Location = new System.Drawing.Point(134, 21);
+      this.progressBar_joystick_throttle.Maximum = 2200;
+      this.progressBar_joystick_throttle.Minimum = 1000;
+      this.progressBar_joystick_throttle.Name = "progressBar_joystick_throttle";
+      this.progressBar_joystick_throttle.Size = new System.Drawing.Size(420, 23);
+      this.progressBar_joystick_throttle.TabIndex = 9;
+      this.progressBar_joystick_throttle.Value = 1000;
+      // 
+      // label21
+      // 
+      this.label21.AutoSize = true;
+      this.label21.Location = new System.Drawing.Point(876, 21);
+      this.label21.Name = "label21";
+      this.label21.Size = new System.Drawing.Size(152, 17);
+      this.label21.TabIndex = 8;
+      this.label21.Text = "Joystick status:";
+      // 
+      // label_joystick_connection
+      // 
+      this.label_joystick_connection.AutoSize = true;
+      this.label_joystick_connection.Location = new System.Drawing.Point(1055, 21);
+      this.label_joystick_connection.Name = "label_joystick_connection";
+      this.label_joystick_connection.Size = new System.Drawing.Size(116, 17);
+      this.label_joystick_connection.TabIndex = 7;
+      this.label_joystick_connection.Text = "Disconnected";
       // 
       // status
       // 
@@ -1481,6 +1563,11 @@
       this.status.Size = new System.Drawing.Size(48, 16);
       this.status.TabIndex = 12;
       this.status.Text = "Status:";
+      // 
+      // timer_socketReceive
+      // 
+      this.timer_socketReceive.Interval = 20;
+      this.timer_socketReceive.Tick += new System.EventHandler(this.timer_socketReceive_Tick);
       // 
       // GUI
       // 
@@ -1499,13 +1586,9 @@
       this.Name = "GUI";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "ArduinoDebug";
-      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
       this.Load += new System.EventHandler(this.Form1_Load);
       this.Settings.ResumeLayout(false);
       this.Settings.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_throttleRating)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_stearingLimits)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.trackBar_throttle)).EndInit();
       this.groupBox4.ResumeLayout(false);
       this.groupBox4.PerformLayout();
       this.tabControl_pid.ResumeLayout(false);
@@ -1540,6 +1623,8 @@
       this.tabPage4.ResumeLayout(false);
       this.tabPage5.ResumeLayout(false);
       this.tabControl_mainControl.ResumeLayout(false);
+      this.Joystick.ResumeLayout(false);
+      this.Joystick.PerformLayout();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -1548,7 +1633,7 @@
         #endregion
 
         private System.IO.Ports.SerialPort serialPort1;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer joystickTimer;
         private System.Windows.Forms.Label lb_connectionStatus;
         private System.Windows.Forms.ComboBox comboBox_Comports;
         private System.Windows.Forms.ImageList tabControlImageList;
@@ -1586,7 +1671,7 @@
         private System.Windows.Forms.TabControl tabControl_mainControl;
         private System.Windows.Forms.Label status;
         public System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TabPage Joystick;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lb_d;
         private System.Windows.Forms.Label lb_i;
@@ -1607,7 +1692,6 @@
         private System.Windows.Forms.ProgressBar progressBar_fl;
         private System.Windows.Forms.ProgressBar progressBar_fr;
         private System.Windows.Forms.ProgressBar progressBar_bl;
-        private System.Windows.Forms.TrackBar trackBar_throttle;
         private System.Windows.Forms.TextBox textBox_throttle;
         private System.Windows.Forms.TextBox textBox_bl;
         private System.Windows.Forms.TextBox textBox_br;
@@ -1617,7 +1701,6 @@
         private System.Windows.Forms.Label label7;
         private AvionicsInstrumentControlDemo.AttitudeIndicatorInstrumentControl attitudeIndicatorInstrumentControl2;
         private AvionicsInstrumentControlDemo.HeadingIndicatorInstrumentControl headingIndicatorInstrumentControl2;
-        private System.Windows.Forms.NumericUpDown numericUpDown_stearingLimits;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.NumericUpDown numericUpDown_rollPid_time;
@@ -1639,19 +1722,32 @@
         private System.Windows.Forms.TextBox textBox_serialRead;
         private System.Windows.Forms.TextBox textBox_sendingStream2;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox textBox_setpointPitch;
         private System.Windows.Forms.TextBox textBox_setpointRoll;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label_;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox textBox_calcRoll;
         private System.Windows.Forms.TextBox textBox_calcPitch;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.NumericUpDown numericUpDown_throttleRating;
         private System.Windows.Forms.CheckBox checkBox_stearingOn;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label_joystick_connection;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.ProgressBar progressBar_joystick_roll;
+        private System.Windows.Forms.ProgressBar progressBar_joystick_pitch;
+        private System.Windows.Forms.ProgressBar progressBar_joystick_throttle;
+        private System.Windows.Forms.Button btn_joystick_calibrate;
+        private System.Windows.Forms.TextBox textBox_joystick_rollVal;
+        private System.Windows.Forms.TextBox textBox_joystick_pitchVal;
+        private System.Windows.Forms.TextBox textBox_joystick_throttleVal;
+        private System.Windows.Forms.Button button_joystick_connect;
+        private System.Windows.Forms.Timer timer_socketReceive;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox textBox_joystick_yawVal;
+        private System.Windows.Forms.ProgressBar progressBar_joystick_yaw;
     }
 }
 

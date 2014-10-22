@@ -16,7 +16,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.IO;
 using System.Windows.Input;
-
+using Microsoft.DirectX.DirectInput;
 
 
 namespace GUI {
@@ -25,25 +25,14 @@ namespace GUI {
 
     private Graph graph1, graph2;
 
-    /********************************SOCKET COMMUNICATION********************************/
-    private TcpListener tcpListener;
-    private Thread listenThread;
-    volatile NetworkStream clientStream;
-    volatile private Boolean isAbortThreadRequest = false;
-    /********************************SOCKET COMMUNICATION********************************/
+    private SocketGUI socketGui;
 
-    private const int faktor_serial = 100;
-    private int firstTimeSet = 0;
-    int x_pos;
-    int y_pos;
-    int roll; int pitch;
-
+    private bool firstTimeSet = false;
+    
+    private Joystick jst;
 
     public GUI() {
       InitializeComponent();
-
-      x_pos = panel1.Width / 2;
-      y_pos = panel1.Height / 2;
 
       string[] ports = SerialPort.GetPortNames();
       foreach (string s in ports) comboBox_Comports.Items.Add(s);
@@ -84,10 +73,10 @@ namespace GUI {
       hashtable.Add("pitch", 0);
       hashtable.Add("yaw", 0);
 
-      hashtable.Add("fl", 900); //motors names
-      hashtable.Add("fr", 900);
-      hashtable.Add("bl", 900);
-      hashtable.Add("br", 900);
+      hashtable.Add("fl", 1000); //motors names
+      hashtable.Add("fr", 1000);
+      hashtable.Add("bl", 1000);
+      hashtable.Add("br", 1000);
 
       hashtable.Add("setR", 0);
       hashtable.Add("setP", 0);
@@ -105,15 +94,20 @@ namespace GUI {
       GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
       gMap.Position = new GMap.NET.PointLatLng(48.209206, 16.372778);
 
-      timer1.Start();
+    }
+
+    private decimal Map(decimal value, decimal fromSource, decimal toSource, decimal fromTarget, decimal toTarget) {
+      return Math.Round((value - fromSource) / (toSource - fromSource) * (toTarget - fromTarget) + fromTarget);
     }
 
     private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e) {
       string line;
-      try {
-        line = serialPort1.ReadLine();
-        this.BeginInvoke(new LineReceivedEvent(LineReceived), line);
-      } catch (Exception ex) { MessageBox.Show("Serialport readline: " + ex.Message); }
+      if (serialPort1.IsOpen) {
+        try {
+          line = serialPort1.ReadLine();
+          this.BeginInvoke(new LineReceivedEvent(LineReceived), line);
+        } catch (Exception ex) { System.Console.WriteLine("Serialport readline: " + ex.Message); }
+      }
     }
 
     private delegate void LineReceivedEvent(string line);
@@ -151,7 +145,7 @@ namespace GUI {
       textBox_setpointPitch.Text = hashtable["setP"].ToString();
       textBox_setpointRoll.Text = hashtable["setR"].ToString();
 
-      if (firstTimeSet < 30) {
+      if (firstTimeSet ) {
         numericUpDown_pitchPid_kp.Value = Convert.ToDecimal(hashtable["pP"]);
         numericUpDown_pitchPid_ki.Value = Convert.ToDecimal(hashtable["iP"]);
         numericUpDown_pitchPid_kd.Value = Convert.ToDecimal(hashtable["dP"]);
@@ -162,30 +156,26 @@ namespace GUI {
         numericUpDown_rollPid_ki.Value = Convert.ToDecimal(hashtable["iR"]);
         numericUpDown_rollPid_kd.Value = Convert.ToDecimal(hashtable["dR"]);
         numericUpDown_rollPid_limits.Value = Convert.ToDecimal(hashtable["limR"]);
-        numericUpDown_rollPid_time.Value = Convert.ToDecimal(hashtable["timeR"]);
-        firstTimeSet++;
+        numericUpDown_rollPid_time.Value = Convert.ToDecimal(hashtable["timeR"]);   
       }
-
     }
 
-    private void LineReceived(string line) {
-
-      if (!line.Contains("?") && line != "\r" && line != "" && !line.Contains(",")) {
-        if (tabControl_mainControl.SelectedIndex == 1) {
-          if (serialPort1.IsOpen) {
-            textBox_serialRead.AppendText(line.ToString());
-            textBox_serialRead.AppendText(Environment.NewLine);
-          }
-          if (listenThread != null)
-            if (listenThread.IsAlive) {
-              textBox_socketRead.AppendText(line.ToString());
-              textBox_socketRead.AppendText(Environment.NewLine);
-            }
+    public void LineReceived(string line) {
+      if (!line.Contains("?") && line != "\r" && line != "" && !line.Contains(",") && !line.Equals("-\r")) {
+        if (serialPort1.IsOpen) {
+          textBox_serialRead.AppendText(line.ToString());
+          textBox_serialRead.AppendText(Environment.NewLine);
         }
-
       } else {
+        if (line.Equals("-\r")) {
+          System.Console.WriteLine("Settings parameters");
+          if (firstTimeSet)
+            firstTimeSet = false;
+          else
+            firstTimeSet = true;
+        }
         string[] dataSplitedGroups = null;
-        string[] dataSplitedValues;
+        string[] dataSplitedValues = null;
 
         dataSplitedGroups = line.Trim().Split(',');
 
@@ -197,36 +187,13 @@ namespace GUI {
               string number = dataSplitedValues[1];
               valDouble = double.Parse(number, System.Globalization.CultureInfo.InvariantCulture);
               hashtable[dataSplitedValues[0]] = valDouble;
-            } catch (Exception e) { MessageBox.Show("Splitter: " + e.Message); }
+            } catch (Exception e) {System.Console.WriteLine("Splitter: " + e.Message);}
 
           }
         }
       }
       addValuesTextBox();
       actualizate_Parameters();
-
-    }
-
-    private void timer1_Tick(object sender, EventArgs e) {
-      //Hashtable hashTableGraph1 = new Hashtable();
-      //Hashtable hashTableGraph2 = new Hashtable();
-
-      //foreach (object s in checkedListBox_graph1.CheckedItems)
-      //    hashTableGraph1.Add(s.ToString(), hashtable[s.ToString()]);
-      //foreach (object s in checkedListBox_graph2.CheckedItems)
-      //    hashTableGraph2.Add(s.ToString(), hashtable[s.ToString()]);
-
-      //graph1.drawGraph(hashTableGraph1);
-      //graph2.drawGraph(hashTableGraph2);
-
-
-
-      //// attitudeIndicatorInstrumentControl1.SetAttitudeIndicatorParameters(Convert.ToDouble(hashtable["pitch"]), Convert.ToDouble(hashtable["roll"]));
-      //attitudeIndicatorInstrumentControl2.SetAttitudeIndicatorParameters(Convert.ToDouble(hashtable["roll"]), Convert.ToDouble(hashtable["pitch"]));
-
-      //// headingIndicatorInstrumentControl1.SetHeadingIndicatorParameters(Convert.ToInt32(hashtable["yaw"]) + 180);
-      //headingIndicatorInstrumentControl2.SetHeadingIndicatorParameters(Convert.ToInt32(hashtable["yaw"]) + 180);
-
 
     }
 
@@ -245,7 +212,7 @@ namespace GUI {
         graph2.drawGraph(hashTableGraph2);
       }
       if (tabControl_mainControl.SelectedIndex == 0) {
-        attitudeIndicatorInstrumentControl2.SetAttitudeIndicatorParameters(Convert.ToDouble(hashtable["roll"]), Convert.ToDouble(hashtable["pitch"]));
+        attitudeIndicatorInstrumentControl2.SetAttitudeIndicatorParameters(Convert.ToDouble(hashtable["pitch"]), Convert.ToDouble(hashtable["roll"]));
         headingIndicatorInstrumentControl2.SetHeadingIndicatorParameters(Convert.ToInt32(hashtable["yaw"]) + 180);
       }
 
@@ -262,13 +229,9 @@ namespace GUI {
       String comPort = Convert.ToString(comboBox_Comports.SelectedItem);
       switch (comPort) {
         case "Socket": {
-          this.tcpListener = new TcpListener(IPAddress.Any, 6000);
-          this.listenThread = new Thread(new ThreadStart(ListenForClients));
-          this.listenThread.Start();
-          if (this.listenThread.IsAlive) {
-            btn_connect.Enabled = false;
-            btn_disconnect.Enabled = true;
-          }
+          socketGui = new SocketGUI();
+          System.Console.WriteLine(socketGui.connected);
+          timer_socketReceive.Start();
           break;
         }
         default: {
@@ -292,92 +255,16 @@ namespace GUI {
     }
 
     private void btn_disconnect_Click(object sender, EventArgs e) {
-      if (serialPort1.IsOpen) serialPort1.Close();
-      if (listenThread != null) {
-        if (listenThread.IsAlive) {
-          isAbortThreadRequest = true;
-          btn_connect.Enabled = true;
-          btn_disconnect.Enabled = false;
-          lb_connectionStatus.Text = "Disconnected";
-        }
-
-        if (!serialPort1.IsOpen && !listenThread.IsAlive) {
-          btn_connect.Enabled = true;
-          btn_disconnect.Enabled = false;
-          lb_connectionStatus.Text = "Disconnected";
-        }
-      } else {
-        if (!serialPort1.IsOpen) {
-          btn_connect.Enabled = true;
-          btn_disconnect.Enabled = false;
-          lb_connectionStatus.Text = "Disconnected";
-        }
+     
+      if (serialPort1.IsOpen) {
+        serialPort1.Close();
+        btn_connect.Enabled = true;
+        btn_disconnect.Enabled = false;
+        lb_connectionStatus.Text = "Disconnected";
       }
-    }
+      if (socketGui != null)
+        socketGui.stopSocket();
 
-    private void HandleClientComm(object client) {
-      TcpClient tcpClient = (TcpClient)client;
-      this.clientStream = tcpClient.GetStream();
-      byte[] message = new byte[4096];
-      int bytesRead;
-      while (true) {
-        if (isAbortThreadRequest) {
-          tcpClient.Close();
-          this.clientStream.Close();
-          break;
-        }
-        bytesRead = 0;
-        try {
-          //blocks until a client sends a message
-          bytesRead = clientStream.Read(message, 0, 4096);
-        } catch {
-          //a socket error has occured
-          break;
-        }
-        if (bytesRead == 0) {
-          //the client has disconnected from the server
-          break;
-        }
-        //message has successfully been received
-        ASCIIEncoding encoder = new ASCIIEncoding();
-        // Console.WriteLine(encoder.GetString(message, 0, bytesRead));
-        try {
-          string line = encoder.GetString(message, 0, bytesRead);
-          if (InvokeRequired) {
-            this.Invoke(new Action(() => LineReceived(line)));
-          }
-        } catch (Exception e) {
-          MessageBox.Show("Socket line received:" + e.Message);
-        }
-      }
-      tcpClient.Close();
-    }
-
-    private void ListenForClients() {
-      this.tcpListener.Start();
-      //  Console.WriteLine("tcplistener started");
-      while (true) {
-        //blocks until a client has connected to the server
-        TcpClient client = this.tcpListener.AcceptTcpClient();
-        // Console.WriteLine("tcplistener connected");
-        if (lb_connectionStatus.InvokeRequired) lb_connectionStatus.Invoke((MethodInvoker)delegate {
-            lb_connectionStatus.Text = "Connected";
-          }
-             );
-        else {
-          lb_connectionStatus.Text = "Connected";
-        }
-        //create a thread to handle communication 
-        //with connected client
-        Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
-        clientThread.Start(client);
-        if (isAbortThreadRequest) {
-          this.tcpListener.Stop();
-          clientThread.Abort();
-          client.Close();
-          break;
-        }
-      }
     }
 
     private void comboBoxComports_Click(object sender, EventArgs e) {
@@ -390,47 +277,43 @@ namespace GUI {
 
     private void sendStringSerial(SerialPort serialPort, string str) {
       if (serialPort.IsOpen)
-        serialPort.WriteLine(str.ToString());
+        serialPort.Write(str.ToString());
     }
 
     private void sendStringSocket(String str) {
-      if (this.clientStream == null) return;
-      try {
-        if (listenThread.IsAlive) {
-          byte[] msgBuffer = Encoding.ASCII.GetBytes(str);
-          this.clientStream.Write(msgBuffer, 0, msgBuffer.Length);
-        }
-      } catch (Exception e) {
-        MessageBox.Show("Socket sending message:" + e.Message);
-      }
+      socketGui.sendStringSocket(str);
     }
 
-    private void sendOverStreamCommand(string str, string value) {
+    private void sendOverStreamCommand(string str, string value, int faktor = 100) {
       string dataSend = "";
-      dataSend += str + (Convert.ToDouble(value) * faktor_serial).ToString();
-      // Console.WriteLine(dataSend);
-
+      dataSend += str + (Convert.ToDouble(value) * faktor).ToString() + "|";
+      // System.Console.WriteLine(dataSend);
       if (checkBox_sendSocket.Checked)
         sendStringSocket(dataSend);
       if (checkBox_sendDataToArduino.Checked)
         sendStringSerial(serialPort1, dataSend);
-
       textBox_sendingStream1.Text = dataSend;
       textBox_sendingStream2.Text = dataSend;
     }
 
-    private void sendOverStreamCommandControl(string str, string value1, string value2, string value3) {
+    private void sendOverStreamCommandControl(string str, string value1, string value2, string value3,string value4) {
       string dataSend = "";
-      dataSend += str + "/"
+      dataSend += str
           + (Convert.ToDouble(value1)).ToString() + "/"
           + (Convert.ToDouble(value2)).ToString() + "/"
-          + (Convert.ToDouble(value3)).ToString();
-      System.Console.WriteLine(dataSend);
+          + (Convert.ToDouble(value3)).ToString() + "/"
+          + (Convert.ToDouble(value4)).ToString() + "/|";
+      //System.Console.WriteLine(System.Text.ASCIIEncoding.ASCII.GetByteCount(dataSend));
+
+
       if (checkBox_sendSocket.Checked)
         sendStringSocket(dataSend);
       if (checkBox_sendDataToArduino.Checked)
         sendStringSerial(serialPort1, dataSend);
+      textBox_sendingStream1.Text = dataSend;
+      textBox_sendingStream2.Text = dataSend;
     }
+
     /********************************PID PARAMETERS********************************/
     /********************************PID ROLL********************************/
 
@@ -481,100 +364,122 @@ namespace GUI {
     /********************************PID PITCH********************************/
 
     /********************************FLIGHT CONTROLL********************************/
-    private void trackBar_throttle_Scroll(object sender, EventArgs e) {
-      sendOverStreamCommandControl("C", roll.ToString(), pitch.ToString(), trackBar_throttle.Value.ToString());
-
-    }
 
     private void button_clearSerial_Click(object sender, EventArgs e) {
       textBox_serialRead.Clear();
       textBox_socketRead.Clear();
     }
 
+    private void btn_joystick_calibrate_Click(object sender, EventArgs e) {
+      if (jst != null) {
+        joystickTimer.Stop();
 
-    private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
-      if (serialPort1.IsOpen) serialPort1.Close();
-      if (listenThread != null)
-        if (listenThread.IsAlive) {
-          this.tcpListener = null;
-          isAbortThreadRequest = true;
-        }
-    }
+        int repeat = 350000;
+        int[] valueX = new int[repeat];
+        int[] valueY = new int[repeat];
+        int[] valueZ = new int[repeat];
+        int[] valueRy = new int[repeat];
 
-    protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
-      if (keyData == Keys.Q) {
-        //Console.WriteLine("You pressed Q key");
-        if ((trackBar_throttle.Value + numericUpDown_throttleRating.Value) <= trackBar_throttle.Maximum) {
-          trackBar_throttle.Value += Convert.ToInt32(numericUpDown_throttleRating.Value);
-          sendOverStreamCommandControl("C", roll.ToString(), pitch.ToString(), trackBar_throttle.Value.ToString());
+
+        for (int i = 0; i < repeat; i++) {
+          jst.UpdateStatus();
+
+          valueX[i] = jst.AxisX;
+          valueY[i] = jst.AxisY;
+          valueZ[i] = jst.AxisZ;
+          valueRy[i] = jst.AxisRy;
         }
-        return true;
+        jst.rollMax = valueX.Max();
+        jst.rollMin = valueX.Min();
+
+        jst.pitchMax = valueY.Max();
+        jst.pitchMin = valueY.Min();
+
+        jst.throttleMax = valueZ.Max();
+        jst.throttleMin = valueZ.Min();
+
+        jst.yawMax = valueRy.Max();
+        jst.yawMin = valueRy.Min();
+
+        joystickTimer.Start();
       }
-      if (keyData == Keys.A) {
-        // Console.WriteLine("You pressed A key");
-        if ((trackBar_throttle.Value - Convert.ToInt32(numericUpDown_throttleRating.Value)) >= trackBar_throttle.Minimum) {
-          trackBar_throttle.Value -= Convert.ToInt32(numericUpDown_throttleRating.Value);
-          sendOverStreamCommandControl("C", roll.ToString(), pitch.ToString(), trackBar_throttle.Value.ToString());
-        }
-        return true;
-      }
-      return base.ProcessCmdKey(ref msg, keyData);
     }
 
-    private decimal Map(decimal value, decimal fromSource, decimal toSource, decimal fromTarget, decimal toTarget) {
-      return Math.Round((value - fromSource) / (toSource - fromSource) * (toTarget - fromTarget) + fromTarget);
-    }
-
-
-    private void panel1_MouseMove(object sender, MouseEventArgs e) {
-
-      if (!checkBox_stearingOn.Checked) return;
-
-      if (e.Button == MouseButtons.Left) {
-        if (e.X >= 0 && e.Y >= 0 && e.X <= panel1.Size.Width && e.Y <= panel1.Size.Height) {
-          roll = Decimal.ToInt16(Map(e.X, 0, panel1.Size.Width, -numericUpDown_stearingLimits.Value, numericUpDown_stearingLimits.Value));
-          pitch = Decimal.ToInt16(Map(e.Y, 0, panel1.Size.Height, -numericUpDown_stearingLimits.Value, numericUpDown_stearingLimits.Value));
-          x_pos = e.X;
-          y_pos = e.Y;
-        } else {
-          x_pos = panel1.Size.Width / 2;
-          y_pos = panel1.Size.Height / 2;
-          roll = Decimal.ToInt16(Map(x_pos, 0, panel1.Size.Width, -numericUpDown_stearingLimits.Value, numericUpDown_stearingLimits.Value));
-          pitch = Decimal.ToInt16(Map(y_pos, 0, panel1.Size.Height, -numericUpDown_stearingLimits.Value, numericUpDown_stearingLimits.Value));
+    private void button_joystick_connect_Click(object sender, EventArgs e) {
+      if (jst == null) {
+        jst = new Joystick(this.Handle);
+        string[] sticks = jst.FindJoysticks();
+        if (sticks != null) {
+          jst.AcquireJoystick(sticks[0]);
+          joystickTimer.Start();
+          button_joystick_connect.Text = "Disconnect";
+          if (jst != null) label_joystick_connection.Text = "Connected";
         }
-
       } else {
-        x_pos = panel1.Size.Width / 2;
-        y_pos = panel1.Size.Height / 2;
-        roll = Decimal.ToInt16(Map(x_pos, 0, panel1.Size.Width, -numericUpDown_stearingLimits.Value, numericUpDown_stearingLimits.Value));
-        pitch = Decimal.ToInt16(Map(y_pos, 0, panel1.Size.Height, -numericUpDown_stearingLimits.Value, numericUpDown_stearingLimits.Value));
+        joystickTimer.Stop();
+        jst = null;
+        button_joystick_connect.Text = "Connect";
+
       }
-      panel1.Invalidate();
-      textBox_calcPitch.Text = pitch.ToString();
-      textBox_calcRoll.Text = roll.ToString();
-      sendOverStreamCommandControl("C", roll.ToString(), pitch.ToString(), trackBar_throttle.Value.ToString());
-
     }
 
-    private void panel1_Paint(object sender, PaintEventArgs e) {
+    private void joystickTimer_Tick(object sender, EventArgs e) {
+      if (jst != null) {
+        jst.UpdateStatus();
+            
+        progressBar_joystick_throttle.Value = jst.throttle;
+        
+        progressBar_joystick_pitch.Value = jst.pitch + 100;
+        progressBar_joystick_roll.Value = jst.roll + 100;
+        progressBar_joystick_yaw.Value = jst.yaw + 180;
 
-      Graphics g = panel1.CreateGraphics();
-      g.DrawLine(new Pen(Color.Black, 1), panel1.Width / 2, 0, panel1.Width / 2, panel1.Height);
-      g.DrawLine(new Pen(Color.Black, 1), 0, panel1.Height / 2, panel1.Width, panel1.Height / 2);
-      System.Drawing.SolidBrush myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.DarkGray);
-      g.FillEllipse(myBrush, x_pos - 10, y_pos - 10, 20, 20);
+        textBox_joystick_throttleVal.Text = jst.throttle.ToString();
+        textBox_joystick_rollVal.Text = jst.roll.ToString();
+        textBox_joystick_pitchVal.Text = jst.pitch.ToString();
+        textBox_joystick_yawVal.Text = jst.yaw.ToString();
 
+        if (jst.oldZ != jst.AxisZ || jst.oldX != jst.AxisX || jst.oldY != jst.AxisY || jst.oldRy != jst.AxisRy) {
+          sendOverStreamCommandControl("K", jst.throttle.ToString(), jst.roll.ToString(), jst.pitch.ToString(),jst.yaw.ToString());
+          jst.oldZ = jst.AxisZ;
+          jst.oldX = jst.AxisX;
+          jst.oldY = jst.AxisY;
+          jst.oldRy = jst.AxisRy;
+        }
 
+        //if (jst.oldZ != jst.AxisZ) {
+        //  sendOverStreamCommand("T", jst.throttle.ToString(), 1);
+        //  jst.oldZ = jst.AxisZ;
+        //}
+        //if (jst.oldX != jst.AxisX) {
+        //  sendOverStreamCommand("L", jst.roll.ToString(), 1);
+        //  jst.oldX = jst.AxisX;
+        //}
+        //if (jst.oldY != jst.AxisY) {
+        //  sendOverStreamCommand("U", jst.pitch.ToString(), 1);
+        //  jst.oldY = jst.AxisY;
+        //}
 
+      }
     }
 
-
-
-
-
-
-    /********************************FLIGHT CONTROLL********************************/
-
+    private void timer_socketReceive_Tick(object sender, EventArgs e) {
+      if (socketGui.connected) {
+        btn_connect.Enabled = false;
+        btn_disconnect.Enabled = true;
+        lb_connectionStatus.Text = "Connected";
+      }
+      if (socketGui.dataReceived) {
+        string line = socketGui.socketStringReceiver;
+        socketGui.dataReceived = false;
+        if (!line.Contains("?") && line != "\r" && line != "" && !line.Contains(",")) {
+          textBox_socketRead.AppendText(line.ToString());
+          textBox_socketRead.AppendText(Environment.NewLine);
+        } else {
+          LineReceived(line);
+        }
+      }
+      /********************************FLIGHT CONTROLL********************************/
+    }
 
   }
 }
