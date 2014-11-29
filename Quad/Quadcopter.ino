@@ -1,3 +1,0 @@
-/**
- * Link on cpp project
- */
