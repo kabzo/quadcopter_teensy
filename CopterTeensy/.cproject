@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+	<storageModule moduleId="org.eclipse.cdt.core.settings">
+		<cconfiguration id="it.baeyens.arduino.core.toolChain.release.853318486">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="it.baeyens.arduino.core.toolChain.release.853318486" moduleId="org.eclipse.cdt.core.settings" name="Release">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactName="${ProjName}" buildProperties="" description="" id="it.baeyens.arduino.core.toolChain.release.853318486" name="Release" parent="org.eclipse.cdt.build.core.emptycfg">
+					<folderInfo id="it.baeyens.arduino.core.toolChain.release.853318486.552062851" name="/" resourcePath="">
+						<toolChain id="it.baeyens.arduino.core.toolChain.release.1973290850" name="Arduino Toolchain" superClass="it.baeyens.arduino.core.toolChain.release">
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="it.baeyens.arduino.targetplatform.155445310" name="Arduino Target" osList="all" superClass="it.baeyens.arduino.targetplatform"/>
+							<builder buildPath="${workspace_loc:/CopterTeensy}/Release" id="it.baeyens.arduino.sketch.builder.920391484" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Arduino sketch builder" superClass="it.baeyens.arduino.sketch.builder"/>
+							<tool id="it.baeyens.arduino.tool.sketch.compiler.cpp.694545634" name="Arduino C++ Compiler" superClass="it.baeyens.arduino.tool.sketch.compiler.cpp">
+								<option id="it.baeyens.arduino.compiler.cpp.sketch.option.incpath.1907390190" name="Include Paths (-I)" superClass="it.baeyens.arduino.compiler.cpp.sketch.option.incpath" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/arduino/core}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/Led}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries/IMU_MPU9150}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/Mavlink}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/MotorESC}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/Thread}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/Servo_Teensy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/i2c_t3}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/I2Cdev_Teensy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/PID_v2}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/RC_Channel}&quot;"/>
+								</option>
+								<inputType id="it.baeyens.arduino.compiler.cpp.sketch.input.382337074" name="CPP source files" superClass="it.baeyens.arduino.compiler.cpp.sketch.input"/>
+							</tool>
+							<tool id="it.baeyens.arduino.tool.compiler.c.1221226795" name="Arduino C Compiler" superClass="it.baeyens.arduino.tool.compiler.c">
+								<option id="it.baeyens.arduino.compiler.c.sketch.option.incpath.2134402563" name="Include Paths (-I)" superClass="it.baeyens.arduino.compiler.c.sketch.option.incpath" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/arduino/core}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/Led}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/Mavlink}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/MotorESC}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/Thread}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/Servo_Teensy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/i2c_t3}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/I2Cdev_Teensy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/PID_v2}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/RC_Channel}&quot;"/>
+								</option>
+								<inputType id="it.baeyens.arduino.compiler.c.sketch.input.1199808121" name="C Source Files" superClass="it.baeyens.arduino.compiler.c.sketch.input"/>
+							</tool>
+							<tool id="it.baeyens.arduino.tool.ar.1948559594" name="Arduino archiver" superClass="it.baeyens.arduino.tool.ar"/>
+							<tool id="it.baeyens.arduino.tool.combine.1707966705" name="Arduino combiner" superClass="it.baeyens.arduino.tool.combine"/>
+							<tool id="it.baeyens.arduino.tool.objcopy.eep.1436914275" name="Arduino tool Create eeprom" superClass="it.baeyens.arduino.tool.objcopy.eep"/>
+							<tool id="it.baeyens.arduino.tool.objcopy.flash.957942112" name="Arduino tool Create hex" superClass="it.baeyens.arduino.tool.objcopy.flash"/>
+							<tool id="it.baeyens.arduino.tool.size.427834298" name="Arduino tool Print Size" superClass="it.baeyens.arduino.tool.size"/>
+							<tool id="it.baeyens.arduino.tool.sketch.compiler.s.1271860908" name="Arduino Assembler" superClass="it.baeyens.arduino.tool.sketch.compiler.s"/>
+						</toolChain>
+					</folderInfo>
+					<sourceEntries>
+						<entry excluding="Libraries/*/?xamples|Libraries/*/?xtras" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
+					</sourceEntries>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+	</storageModule>
+	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+		<project id="CopterTeensy.null.1518213247" name="CopterTeensy"/>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/CopterTeensy"/>
+		</configuration>
+	</storageModule>
+</cproject>
