@@ -35,9 +35,10 @@ CPP_DEPS :=
 SUBDIRS := \
 arduino/core \
 Libraries/i2c_t3 \
-Libraries/Servo_Teensy \
 Libraries/Mavlink \
-Libraries/IMU_MPU9150 \
+Libraries/MPU9150Lib/MotionDriver_v5.1 \
+Libraries/MPU9150Lib \
 Libraries/I2Cdev_Teensy \
+Libraries/HIL \
 . \
 

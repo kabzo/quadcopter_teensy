@@ -147,20 +147,26 @@ CopterTeensy.cpp.d: ../CopterTeensy.cpp ../CopterTeensy.h \
  C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/./mavlink_msg_named_value_int.h \
  C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/./mavlink_msg_statustext.h \
  C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/./mavlink_msg_debug.h \
- C:\Programming\Arduino\libraries\IMU_MPU9150/Typedef.hpp \
- C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/WString.h \
- C:\Programming\Arduino\libraries\IMU_MPU9150/IMU.h \
- C:\Programming\Arduino\libraries\IMU_MPU9150/MPU6050_9Axis_MotionApps41.h \
+ C:\Programming\Arduino\libraries\HIL/Typedef.hpp \
+ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/arm_math.h \
+ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cmInstr.h \
+ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cm4_simd.h \
+ C:\Programming\Arduino\libraries\MPU9150Lib/MPU9150Lib.h \
+ C:\Programming\Arduino\libraries\MPU9150Lib/MPUQuaternion.h \
+ C:\Programming\Arduino\libraries\MPU9150Lib/MPUVector3.h \
+ C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/dmpKey.h \
+ C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/dmpmap.h \
+ C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/inv_mpu.h \
  C:\Programming\Arduino\libraries\I2Cdev_Teensy/I2Cdev.h \
  C:\Programming\Arduino\libraries\i2c_t3/i2c_t3.h \
- C:\Programming\Arduino\libraries\IMU_MPU9150/MPU6050.h \
+ C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/inv_mpu_dmp_motion_driver.h \
  C:\Programming\Arduino\libraries\RC_Channel/RC_Channel.h \
  C:\Programming\Arduino\libraries\Thread/Thread.h \
  C:\Programming\Arduino\libraries\MotorESC/MotorESC.h \
- C:\Programming\Arduino\libraries\Servo_Teensy/Servo.h \
+ C:\Programming\Arduino\libraries\HIL/HIL.hpp \
  C:\Programming\Arduino\libraries\Mavlink/GCS_Mavlink.hpp \
  C:\Programming\Arduino\libraries\Led/Led.hpp ../Parameters_Init.hpp \
- ../AttitudeControl.hpp ../Radio.hpp ../GCS.hpp
+ ../Sensors.hpp ../AttitudeControl.hpp ../Radio.hpp ../GCS.hpp
 
 ../CopterTeensy.h:
 
@@ -460,19 +466,31 @@ C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/./mavlink_msg_stat
 
 C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/./mavlink_msg_debug.h:
 
-C:\Programming\Arduino\libraries\IMU_MPU9150/Typedef.hpp:
+C:\Programming\Arduino\libraries\HIL/Typedef.hpp:
 
-C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/WString.h:
+C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/arm_math.h:
 
-C:\Programming\Arduino\libraries\IMU_MPU9150/IMU.h:
+C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cmInstr.h:
 
-C:\Programming\Arduino\libraries\IMU_MPU9150/MPU6050_9Axis_MotionApps41.h:
+C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cm4_simd.h:
+
+C:\Programming\Arduino\libraries\MPU9150Lib/MPU9150Lib.h:
+
+C:\Programming\Arduino\libraries\MPU9150Lib/MPUQuaternion.h:
+
+C:\Programming\Arduino\libraries\MPU9150Lib/MPUVector3.h:
+
+C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/dmpKey.h:
+
+C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/dmpmap.h:
+
+C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/inv_mpu.h:
 
 C:\Programming\Arduino\libraries\I2Cdev_Teensy/I2Cdev.h:
 
 C:\Programming\Arduino\libraries\i2c_t3/i2c_t3.h:
 
-C:\Programming\Arduino\libraries\IMU_MPU9150/MPU6050.h:
+C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/inv_mpu_dmp_motion_driver.h:
 
 C:\Programming\Arduino\libraries\RC_Channel/RC_Channel.h:
 
@@ -480,13 +498,15 @@ C:\Programming\Arduino\libraries\Thread/Thread.h:
 
 C:\Programming\Arduino\libraries\MotorESC/MotorESC.h:
 
-C:\Programming\Arduino\libraries\Servo_Teensy/Servo.h:
+C:\Programming\Arduino\libraries\HIL/HIL.hpp:
 
 C:\Programming\Arduino\libraries\Mavlink/GCS_Mavlink.hpp:
 
 C:\Programming\Arduino\libraries\Led/Led.hpp:
 
 ../Parameters_Init.hpp:
+
+../Sensors.hpp:
 
 ../AttitudeControl.hpp:
 

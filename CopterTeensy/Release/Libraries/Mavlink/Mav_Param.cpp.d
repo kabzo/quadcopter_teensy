@@ -147,8 +147,10 @@ Libraries/Mavlink/Mav_Param.cpp.d: \
  C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/./mavlink_msg_named_value_int.h \
  C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/./mavlink_msg_statustext.h \
  C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/./mavlink_msg_debug.h \
- C:\Programming\Arduino\libraries\IMU_MPU9150/Typedef.hpp \
- C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/WString.h
+ C:\Programming\Arduino\libraries\HIL/Typedef.hpp \
+ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/arm_math.h \
+ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cmInstr.h \
+ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cm4_simd.h
 
 C:\Programming\Arduino\libraries\Mavlink/Mav_Param.hpp:
 
@@ -444,6 +446,10 @@ C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/./mavlink_msg_stat
 
 C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/./mavlink_msg_debug.h:
 
-C:\Programming\Arduino\libraries\IMU_MPU9150/Typedef.hpp:
+C:\Programming\Arduino\libraries\HIL/Typedef.hpp:
 
-C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/WString.h:
+C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/arm_math.h:
+
+C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cmInstr.h:
+
+C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cm4_simd.h:

@@ -1,5 +1,8 @@
-Libraries/Servo_Teensy/Servo.cpp.d: \
- C:/Programming/Arduino/libraries/Servo_Teensy/Servo.cpp \
+Libraries/MPU9150Lib/MotionDriver_v5.1/inv_mpu.cpp.d: \
+ C:/Programming/Arduino/libraries/MPU9150Lib/MotionDriver_v5.1/inv_mpu.cpp \
+ C:/Programming/Arduino/libraries/MPU9150Lib/MotionDriver_v5.1/inv_mpu.h \
+ C:\Programming\Arduino\libraries\I2Cdev_Teensy/I2Cdev.h \
+ C:\Programming\Arduino\libraries\i2c_t3/i2c_t3.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/Arduino.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/WProgram.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/avr/pgmspace.h \
@@ -29,8 +32,13 @@ Libraries/Servo_Teensy/Servo.cpp.d: \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/usb_flightsim.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/elapsedMillis.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/Arduino.h \
- C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/IntervalTimer.h \
- C:/Programming/Arduino/libraries/Servo_Teensy/Servo.h
+ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/IntervalTimer.h
+
+C:/Programming/Arduino/libraries/MPU9150Lib/MotionDriver_v5.1/inv_mpu.h:
+
+C:\Programming\Arduino\libraries\I2Cdev_Teensy/I2Cdev.h:
+
+C:\Programming\Arduino\libraries\i2c_t3/i2c_t3.h:
 
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/Arduino.h:
 
@@ -91,5 +99,3 @@ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/elapsedMillis.h:
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/Arduino.h:
 
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/IntervalTimer.h:
-
-C:/Programming/Arduino/libraries/Servo_Teensy/Servo.h:

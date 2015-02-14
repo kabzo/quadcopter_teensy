@@ -27,19 +27,24 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>Libraries/HIL</name>
+			<type>2</type>
+			<locationURI>ArduinoPivateLibPath/HIL</locationURI>
+		</link>
+		<link>
 			<name>Libraries/I2Cdev_Teensy</name>
 			<type>2</type>
 			<locationURI>ArduinoPivateLibPath/I2Cdev_Teensy</locationURI>
 		</link>
 		<link>
-			<name>Libraries/IMU_MPU9150</name>
-			<type>2</type>
-			<locationURI>ArduinoPivateLibPath/IMU_MPU9150</locationURI>
-		</link>
-		<link>
 			<name>Libraries/Led</name>
 			<type>2</type>
 			<locationURI>ArduinoPivateLibPath/Led</locationURI>
+		</link>
+		<link>
+			<name>Libraries/MPU9150Lib</name>
+			<type>2</type>
+			<locationURI>ArduinoPivateLibPath/MPU9150Lib</locationURI>
 		</link>
 		<link>
 			<name>Libraries/Mavlink</name>
@@ -60,11 +65,6 @@
 			<name>Libraries/RC_Channel</name>
 			<type>2</type>
 			<locationURI>ArduinoPivateLibPath/RC_Channel</locationURI>
-		</link>
-		<link>
-			<name>Libraries/Servo_Teensy</name>
-			<type>2</type>
-			<locationURI>ArduinoPivateLibPath/Servo_Teensy</locationURI>
 		</link>
 		<link>
 			<name>Libraries/Thread</name>

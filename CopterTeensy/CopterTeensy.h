@@ -2,13 +2,12 @@
 #define _CopterTeensy_H_
 
 #define TEENSY
-#define DEBUG(X,Y) Serial.print(X); Serial.print(Y)
-#define DEBUGLN(X,Y) Serial.print(X); Serial.println(Y)
+
 
 #include <Arduino.h>
 
 #include <PID.hpp>
-#include <IMU.h>
+#include <MPU9150Lib.h>
 #include <RC_Channel.h>
 #include <Thread.h>
 #include <MotorESC.h>
@@ -26,8 +25,8 @@ extern "C"
 }  // extern "C"
 #endif
 
-IMU imu;
-MotorsQuad motorsQuad;
+MPU9150Lib imu;
+MotorsQuad motorsQuad(&con.rc1,&con.rc2,&con.rc3,&con.rc4);
 Mav_Param param_loader(var_info);
 GCS_Mavlink GCS;
 

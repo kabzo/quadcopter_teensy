@@ -1,15 +1,11 @@
-Libraries/IMU_MPU9150/MPU6050.cpp.d: \
- C:/Programming/Arduino/libraries/IMU_MPU9150/MPU6050.cpp \
- C:/Programming/Arduino/libraries/IMU_MPU9150/MPU6050.h \
- C:\Programming\Arduino\libraries\IMU_MPU9150/Typedef.hpp \
- C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/WString.h \
- C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/avr_functions.h \
- C:\Programming\Arduino\libraries\I2Cdev_Teensy/I2Cdev.h \
- C:\Programming\Arduino\libraries\i2c_t3/i2c_t3.h \
+Libraries/MPU9150Lib/MPU9150Lib.cpp.d: \
+ C:/Programming/Arduino/libraries/MPU9150Lib/MPU9150Lib.cpp \
+ C:\Programming\Arduino\libraries\MPU9150Lib/MPU9150Lib.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/Arduino.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/WProgram.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/avr/pgmspace.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/avr/interrupt.h \
+ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/avr_functions.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/wiring.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/binary.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_id.h \
@@ -34,19 +30,21 @@ Libraries/IMU_MPU9150/MPU6050.cpp.d: \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/usb_flightsim.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/elapsedMillis.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/Arduino.h \
- C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/IntervalTimer.h
+ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/IntervalTimer.h \
+ C:\Programming\Arduino\libraries\MPU9150Lib/MPUQuaternion.h \
+ C:\Programming\Arduino\libraries\MPU9150Lib/MPUVector3.h \
+ C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/dmpKey.h \
+ C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/dmpmap.h \
+ C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/inv_mpu.h \
+ C:\Programming\Arduino\libraries\I2Cdev_Teensy/I2Cdev.h \
+ C:\Programming\Arduino\libraries\i2c_t3/i2c_t3.h \
+ C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/inv_mpu_dmp_motion_driver.h \
+ C:\Programming\Arduino\libraries\HIL/Typedef.hpp \
+ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/arm_math.h \
+ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cmInstr.h \
+ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cm4_simd.h
 
-C:/Programming/Arduino/libraries/IMU_MPU9150/MPU6050.h:
-
-C:\Programming\Arduino\libraries\IMU_MPU9150/Typedef.hpp:
-
-C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/WString.h:
-
-C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/avr_functions.h:
-
-C:\Programming\Arduino\libraries\I2Cdev_Teensy/I2Cdev.h:
-
-C:\Programming\Arduino\libraries\i2c_t3/i2c_t3.h:
+C:\Programming\Arduino\libraries\MPU9150Lib/MPU9150Lib.h:
 
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/Arduino.h:
 
@@ -55,6 +53,8 @@ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/WProgram.h:
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/avr/pgmspace.h:
 
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/avr/interrupt.h:
+
+C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/avr_functions.h:
 
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/wiring.h:
 
@@ -105,3 +105,27 @@ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/elapsedMillis.h:
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/Arduino.h:
 
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/IntervalTimer.h:
+
+C:\Programming\Arduino\libraries\MPU9150Lib/MPUQuaternion.h:
+
+C:\Programming\Arduino\libraries\MPU9150Lib/MPUVector3.h:
+
+C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/dmpKey.h:
+
+C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/dmpmap.h:
+
+C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/inv_mpu.h:
+
+C:\Programming\Arduino\libraries\I2Cdev_Teensy/I2Cdev.h:
+
+C:\Programming\Arduino\libraries\i2c_t3/i2c_t3.h:
+
+C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/inv_mpu_dmp_motion_driver.h:
+
+C:\Programming\Arduino\libraries\HIL/Typedef.hpp:
+
+C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/arm_math.h:
+
+C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cmInstr.h:
+
+C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cm4_simd.h:

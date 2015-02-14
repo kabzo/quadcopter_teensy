@@ -1,8 +1,7 @@
-Libraries/IMU_MPU9150/MPU6050_9Axis_MotionApps41.cpp.d: \
- C:/Programming/Arduino/libraries/IMU_MPU9150/MPU6050_9Axis_MotionApps41.cpp \
- C:\Programming\Arduino\libraries\IMU_MPU9150/MPU6050_9Axis_MotionApps41.h \
- C:\Programming\Arduino\libraries\I2Cdev_Teensy/I2Cdev.h \
- C:\Programming\Arduino\libraries\i2c_t3/i2c_t3.h \
+Libraries/MPU9150Lib/MPUQuaternion.cpp.d: \
+ C:/Programming/Arduino/libraries/MPU9150Lib/MPUQuaternion.cpp \
+ C:/Programming/Arduino/libraries/MPU9150Lib/MPUQuaternion.h \
+ C:/Programming/Arduino/libraries/MPU9150Lib/MPUVector3.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/Arduino.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/WProgram.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/avr/pgmspace.h \
@@ -32,16 +31,11 @@ Libraries/IMU_MPU9150/MPU6050_9Axis_MotionApps41.cpp.d: \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/usb_flightsim.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/elapsedMillis.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/Arduino.h \
- C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/IntervalTimer.h \
- C:\Programming\Arduino\libraries\IMU_MPU9150/MPU6050.h \
- C:\Programming\Arduino\libraries\IMU_MPU9150/Typedef.hpp \
- C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/WString.h
+ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/IntervalTimer.h
 
-C:\Programming\Arduino\libraries\IMU_MPU9150/MPU6050_9Axis_MotionApps41.h:
+C:/Programming/Arduino/libraries/MPU9150Lib/MPUQuaternion.h:
 
-C:\Programming\Arduino\libraries\I2Cdev_Teensy/I2Cdev.h:
-
-C:\Programming\Arduino\libraries\i2c_t3/i2c_t3.h:
+C:/Programming/Arduino/libraries/MPU9150Lib/MPUVector3.h:
 
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/Arduino.h:
 
@@ -102,9 +96,3 @@ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/elapsedMillis.h:
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/Arduino.h:
 
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/IntervalTimer.h:
-
-C:\Programming\Arduino\libraries\IMU_MPU9150/MPU6050.h:
-
-C:\Programming\Arduino\libraries\IMU_MPU9150/Typedef.hpp:
-
-C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/WString.h:
