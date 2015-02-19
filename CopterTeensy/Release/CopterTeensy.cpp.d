@@ -1,4 +1,5 @@
 CopterTeensy.cpp.d: ../CopterTeensy.cpp ../CopterTeensy.h \
+ C:\Programming\Arduino\libraries\HIL/HIL.hpp \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/Arduino.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/WProgram.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/avr/pgmspace.h \
@@ -29,7 +30,7 @@ CopterTeensy.cpp.d: ../CopterTeensy.cpp ../CopterTeensy.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/elapsedMillis.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/Arduino.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/IntervalTimer.h \
- C:\Programming\Arduino\libraries\PID_v2/PID.hpp \
+ C:\Programming\Arduino\libraries\Mavlink/GCS_Mavlink.hpp \
  C:\Programming\Arduino\libraries\Mavlink/Mav_Param.hpp \
  C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/mavlink.h \
  C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/version.h \
@@ -148,27 +149,32 @@ CopterTeensy.cpp.d: ../CopterTeensy.cpp ../CopterTeensy.h \
  C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/./mavlink_msg_statustext.h \
  C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/./mavlink_msg_debug.h \
  C:\Programming\Arduino\libraries\HIL/Typedef.hpp \
+ C:\Programming\Arduino\libraries\Math/Math.hpp \
+ C:\Programming\Arduino\libraries\Math/Matrix3.hpp \
+ C:\Programming\Arduino\libraries\Math/Vector3.hpp \
+ C:\Programming\Arduino\libraries\Math/Quaternion.hpp \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/arm_math.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cmInstr.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cm4_simd.h \
+ C:\Programming\Arduino\libraries\Thread/Thread.hpp \
+ C:\Programming\Arduino\libraries\Led/LedPanel.hpp \
+ C:\Programming\Arduino\libraries\AttitudeControl/AttitudeControl.hpp \
+ C:\Programming\Arduino\libraries\PID_v2/PID.hpp \
+ C:\Programming\Arduino\libraries\MotorsQuadX/MotorsQuadX.hpp \
+ C:\Programming\Arduino\libraries\RC_Channel/RC_Channel.hpp \
  C:\Programming\Arduino\libraries\MPU9150Lib/MPU9150Lib.h \
- C:\Programming\Arduino\libraries\MPU9150Lib/MPUQuaternion.h \
- C:\Programming\Arduino\libraries\MPU9150Lib/MPUVector3.h \
  C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/dmpKey.h \
  C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/dmpmap.h \
  C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/inv_mpu.h \
  C:\Programming\Arduino\libraries\I2Cdev_Teensy/I2Cdev.h \
  C:\Programming\Arduino\libraries\i2c_t3/i2c_t3.h \
  C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/inv_mpu_dmp_motion_driver.h \
- C:\Programming\Arduino\libraries\RC_Channel/RC_Channel.h \
- C:\Programming\Arduino\libraries\Thread/Thread.h \
- C:\Programming\Arduino\libraries\MotorESC/MotorESC.h \
- C:\Programming\Arduino\libraries\HIL/HIL.hpp \
- C:\Programming\Arduino\libraries\Mavlink/GCS_Mavlink.hpp \
- C:\Programming\Arduino\libraries\Led/Led.hpp ../Parameters_Init.hpp \
- ../Sensors.hpp ../AttitudeControl.hpp ../Radio.hpp ../GCS.hpp
+ ../Parameters_Init.hpp ../Sensors.hpp ../Radio.hpp ../GCS.hpp \
+ ../Stabilize.hpp
 
 ../CopterTeensy.h:
+
+C:\Programming\Arduino\libraries\HIL/HIL.hpp:
 
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/Arduino.h:
 
@@ -230,7 +236,7 @@ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/Arduino.h:
 
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/IntervalTimer.h:
 
-C:\Programming\Arduino\libraries\PID_v2/PID.hpp:
+C:\Programming\Arduino\libraries\Mavlink/GCS_Mavlink.hpp:
 
 C:\Programming\Arduino\libraries\Mavlink/Mav_Param.hpp:
 
@@ -468,17 +474,33 @@ C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/./mavlink_msg_debu
 
 C:\Programming\Arduino\libraries\HIL/Typedef.hpp:
 
+C:\Programming\Arduino\libraries\Math/Math.hpp:
+
+C:\Programming\Arduino\libraries\Math/Matrix3.hpp:
+
+C:\Programming\Arduino\libraries\Math/Vector3.hpp:
+
+C:\Programming\Arduino\libraries\Math/Quaternion.hpp:
+
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/arm_math.h:
 
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cmInstr.h:
 
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cm4_simd.h:
 
+C:\Programming\Arduino\libraries\Thread/Thread.hpp:
+
+C:\Programming\Arduino\libraries\Led/LedPanel.hpp:
+
+C:\Programming\Arduino\libraries\AttitudeControl/AttitudeControl.hpp:
+
+C:\Programming\Arduino\libraries\PID_v2/PID.hpp:
+
+C:\Programming\Arduino\libraries\MotorsQuadX/MotorsQuadX.hpp:
+
+C:\Programming\Arduino\libraries\RC_Channel/RC_Channel.hpp:
+
 C:\Programming\Arduino\libraries\MPU9150Lib/MPU9150Lib.h:
-
-C:\Programming\Arduino\libraries\MPU9150Lib/MPUQuaternion.h:
-
-C:\Programming\Arduino\libraries\MPU9150Lib/MPUVector3.h:
 
 C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/dmpKey.h:
 
@@ -492,24 +514,12 @@ C:\Programming\Arduino\libraries\i2c_t3/i2c_t3.h:
 
 C:\Programming\Arduino\libraries\MPU9150Lib/MotionDriver_v5.1/inv_mpu_dmp_motion_driver.h:
 
-C:\Programming\Arduino\libraries\RC_Channel/RC_Channel.h:
-
-C:\Programming\Arduino\libraries\Thread/Thread.h:
-
-C:\Programming\Arduino\libraries\MotorESC/MotorESC.h:
-
-C:\Programming\Arduino\libraries\HIL/HIL.hpp:
-
-C:\Programming\Arduino\libraries\Mavlink/GCS_Mavlink.hpp:
-
-C:\Programming\Arduino\libraries\Led/Led.hpp:
-
 ../Parameters_Init.hpp:
 
 ../Sensors.hpp:
 
-../AttitudeControl.hpp:
-
 ../Radio.hpp:
 
 ../GCS.hpp:
+
+../Stabilize.hpp:

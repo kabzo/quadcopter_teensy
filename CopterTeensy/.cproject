@@ -20,34 +20,36 @@
 							<tool id="it.baeyens.arduino.tool.sketch.compiler.cpp.694545634" name="Arduino C++ Compiler" superClass="it.baeyens.arduino.tool.sketch.compiler.cpp">
 								<option id="it.baeyens.arduino.compiler.cpp.sketch.option.incpath.1907390190" name="Include Paths (-I)" superClass="it.baeyens.arduino.compiler.cpp.sketch.option.incpath" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/arduino/core}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries/Math}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/Led}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/Mavlink}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/MotorESC}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/MotorsQuadX}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/Thread}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/Servo_Teensy}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/i2c_t3}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/I2Cdev_Teensy}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/PID_v2}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/RC_Channel}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/MPU9150Lib}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/HIL}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/AttitudeControl}&quot;"/>
 								</option>
 								<inputType id="it.baeyens.arduino.compiler.cpp.sketch.input.382337074" name="CPP source files" superClass="it.baeyens.arduino.compiler.cpp.sketch.input"/>
 							</tool>
 							<tool id="it.baeyens.arduino.tool.compiler.c.1221226795" name="Arduino C Compiler" superClass="it.baeyens.arduino.tool.compiler.c">
 								<option id="it.baeyens.arduino.compiler.c.sketch.option.incpath.2134402563" name="Include Paths (-I)" superClass="it.baeyens.arduino.compiler.c.sketch.option.incpath" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/arduino/core}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries/Math}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/Led}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/Mavlink}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/MotorESC}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/MotorsQuadX}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/Thread}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/Servo_Teensy}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/i2c_t3}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/I2Cdev_Teensy}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/PID_v2}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/RC_Channel}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/MPU9150Lib}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/HIL}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/AttitudeControl}&quot;"/>
 								</option>
 								<inputType id="it.baeyens.arduino.compiler.c.sketch.input.1199808121" name="C Source Files" superClass="it.baeyens.arduino.compiler.c.sketch.input"/>
 							</tool>

@@ -1,8 +1,9 @@
 #ifndef RADIO_HPP_
 #define RADIO_HPP_
-#include "Parameters_Init.hpp"
 
-#define ROLL_PITCH_INPUT_MAX 4500
+#define ROLL_PITCH_OUTPUT_MAX 4500
+#define YAW_OUTPUT_MAX 18000
+
 
 void handleInterrupt(RC_Channel *rc)
 {
@@ -15,44 +16,31 @@ void handleInterrupt(RC_Channel *rc)
 		// else it must be a falling edge, so lets get the time and subtract the time of the rising edge
 		// this gives use the time between the rising and falling edges i.e. the pulse duration.
 		rc->pwm_in = (uint16_t) (micros() - rc->pwmStart);
-		// use set the flag to indicate that a new throttle signal has been received
+		// use set the flag to indicate that a signal has been received
 		RC_Channel::newPwm = true;
 	}
 }
 
 // simple interrupt service routine
-void PWM_ISR_1()
-{
-	handleInterrupt(&con.rc1);
-}
-// simple interrupt service routine
-void PWM_ISR_2()
-{
-	handleInterrupt(&con.rc2);
-}		// simple interrupt service routine
-void PWM_ISR_3()
-{
-	handleInterrupt(&con.rc3);
-}		// simple interrupt service routine
-void PWM_ISR_4()
-{
-	handleInterrupt(&con.rc4);
-}
+void PWM_ISR_1(){	handleInterrupt(&con.rc1);}
+void PWM_ISR_2(){	handleInterrupt(&con.rc2);}		// simple interrupt service routine
+void PWM_ISR_3(){	handleInterrupt(&con.rc3);}		// simple interrupt service routine
+void PWM_ISR_4(){	handleInterrupt(&con.rc4);}
 
-void initRadio()
+void init_radio()
 {
 	attachInterrupt(con.rc1.pin, PWM_ISR_1, CHANGE);
 	attachInterrupt(con.rc2.pin, PWM_ISR_2, CHANGE);
 	attachInterrupt(con.rc3.pin, PWM_ISR_3, CHANGE);
 	attachInterrupt(con.rc4.pin, PWM_ISR_4, CHANGE);
 
-	con.rc1.set_angle(ROLL_PITCH_INPUT_MAX);
-	con.rc2.set_angle(ROLL_PITCH_INPUT_MAX);
+	con.rc1.set_angle(ROLL_PITCH_OUTPUT_MAX);
+	con.rc2.set_angle(ROLL_PITCH_OUTPUT_MAX);
 	con.rc3.set_range(con.throttle_min, con.throttle_max);
-	con.rc4.set_angle(180 * 100);
+	con.rc4.set_angle(YAW_OUTPUT_MAX);
 }
 
-void updateRadio() //max 22ms
+void update_radio() //max 22ms
 {
 	if (!RC_Channel::newPwm)
 		return;
@@ -72,15 +60,16 @@ void updateRadio() //max 22ms
 	// shared copies may contain junk. Luckily we have our local copies to work with :-)
 	RC_Channel::newPwm = false;
 
-	if (motorsQuad.isReadyToFly())
+	if (motorsQuad.is_ready_fly())
 	{
-		con.targetHeading += con.rc4.getScaled() / 100;
+//		con.targetHeading += con.rc4.getScaled() / 100;
+		attitudeControl.get_target_angles().YAW += con.rc4.getScaled() / 100;
 	}
 
 	if (motorsQuad.check_radio_arm_pos())
 	{
 		ledRight.negateState();
-		GCS.changeArmGCS(motorsQuad.isArmed());
+		GCS.change_arm_GCS(motorsQuad.is_armed());
 	}
 }
 
@@ -124,13 +113,12 @@ void send_GCS_radio_scaled()
 
 }
 
-
-
-void GCS_Mavlink::handle_manual_control(mavlink_message_t *msg)
+template<class T>
+void GCS_Mavlink<T>::handle_manual_control(mavlink_message_t *msg)
 {
 		mavlink_manual_control_t manual_control_t;
 		mavlink_msg_manual_control_decode(msg, &manual_control_t);
-		if (manual_control_t.target == systemId)
+		if (manual_control_t.target == _systemId)
 		{
 			con.rc1.overwritePwm(manual_control_t.x);
 			con.rc2.overwritePwm(manual_control_t.y);
@@ -139,4 +127,8 @@ void GCS_Mavlink::handle_manual_control(mavlink_message_t *msg)
 		}
 
 }
+
+template void GCS_Mavlink<HardwareSerial>::handle_manual_control(mavlink_message_t *msg);
+template void GCS_Mavlink<usb_serial_class>::handle_manual_control(mavlink_message_t *msg);
+
 #endif /* RADIO_HPP_ */

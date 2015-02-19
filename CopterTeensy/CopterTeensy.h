@@ -4,14 +4,10 @@
 #define TEENSY
 
 
-#include <Arduino.h>
+#include <HIL.hpp>
+#include <LedPanel.hpp>
 
-#include <PID.hpp>
-#include <MPU9150Lib.h>
-#include <RC_Channel.h>
-#include <Thread.h>
-#include <MotorESC.h>
-#include <GCS_Mavlink.hpp>
+#include <AttitudeControl.hpp>
 
 #include "Parameters_Init.hpp"
 
@@ -25,9 +21,21 @@ extern "C"
 }  // extern "C"
 #endif
 
-MPU9150Lib imu;
-MotorsQuad motorsQuad(&con.rc1,&con.rc2,&con.rc3,&con.rc4);
-Mav_Param param_loader(var_info);
-GCS_Mavlink GCS;
+
+MPU9150lib imu;
+MotorsQuadX motorsQuad(&con.rc1,&con.rc2,&con.rc3,&con.rc4);
+
+//AttitudeControl attitudeControl(imu,motorsQuad,
+//																&con.rate_pid_yaw,&con.rate_pid_pitch,&con.rate_pid_roll,
+//																&con.stab_pid_yaw,&con.stab_pid_pitch,&con.stab_pid_roll);
+
+AttitudeControl attitudeControl(imu,motorsQuad,
+																&con.stab_pid,&con.rate_pid);
+
+LedPanel ledMiddle(LED3);
+LedPanel ledLeft(LED2);
+LedPanel ledRight(LED1);
+
+
 
 #endif /* _CopterTeensy_H_ */

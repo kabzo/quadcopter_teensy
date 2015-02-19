@@ -8,8 +8,11 @@
 #ifndef COPTERTEENSY_PARAMETERS_INIT_HPP_
 #define COPTERTEENSY_PARAMETERS_INIT_HPP_
 
-#include <Mav_Param.hpp>
-#include <mavlinkCommon/common/mavlink.h>
+#define YAW_PID PID
+#define PITCH_PID PID
+#define ROLL_PID PID
+
+
 
 class Parameters
 {
@@ -17,17 +20,25 @@ public:
 
 	Parameters() :
 
-					rc1(3, 1052, 1910), //roll
-					rc2(4, 1173, 1867, true),	//pitch
-					rc3(5, 1068, 1936), //throttle
-					rc4(6, 1073, 1936),	//yaw
-					stab_pid_roll(3.8, 0, 0,4500, 1500, DIRECT),
-					stab_pid_pitch(3.8, 0, 0, 4500, 1500, DIRECT),
-					stab_pid_yaw(3.8, 0, 0, 18000, 1500, DIRECT),
+					rc1(3, 	1068, 	1924), //roll
+					rc2(4, 	1143, 	1841, 	true),	//pitch
+					rc3(5, 	1073, 	1938), //throttle
+					rc4(6, 	1086, 	1951),	//yaw
+											//		 P,	I,	D,	IMAX
+					stab_pid_roll(	0, 0, 	0, 	1500),
+					stab_pid_pitch(	0, 0, 	0,  1500),
+					stab_pid_yaw(		0, 0, 	0,  1500),
 
-					rate_pid_pitch(0.15, 0.1, 0.004, 4500, 5, DIRECT),
-					rate_pid_roll(0.15, 0.1, 0.004,4500, 5, DIRECT),
-					rate_pid_yaw(0.2, 0.02, 0.0, 10000, 8, DIRECT)
+											//		P,	I,	D,	IMAX
+					rate_pid_pitch(	0.165, 0.6, 	0.0045,  5),
+					rate_pid_roll(	0.0, 0.0, 	0.0045,  5),
+					rate_pid_yaw(		0.0, 	0.0, 0.0,  	8),
+
+							//		YAW		 (P			, I			,D  		,iMax),		PITCH    (P			, I			,D  		,iMax),		ROLL    (P			, I			,D  		,iMax),
+					rate_pid(	YAW_PID(0.000f, 0.000f, 0.000f, 8), 		PITCH_PID(0.165f, 0.600f, 0.0045f, 5), 		ROLL_PID(0.165f, 0.600f, 0.0045f, 5)),
+
+					stab_pid(	YAW_PID(0.000f, 0.000f, 0.000f, 1500),	PITCH_PID(0.000f, 0.000f, 0.0000f, 1500),	ROLL_PID(0.000f, 0.000f, 0.0000f, 1500))
+
 
 	{
 
@@ -52,6 +63,9 @@ public:
 	PID rate_pid_pitch;
 	PID rate_pid_roll;
 	PID rate_pid_yaw;
+
+	Vector3<PID> rate_pid;
+	Vector3<PID> stab_pid;
 
 	Mav_Float targetHeading;
 
@@ -82,19 +96,24 @@ GGROUP(rc3, "RC3_", RC_Channel)
 GGROUP(rc4, "RC4_", RC_Channel)
 ,
 
-GGROUP(stab_pid_roll, "roll_stab_", PID)
-,
-GGROUP(stab_pid_pitch, "pitch_stab_", PID)
-,
-GGROUP(stab_pid_yaw, "yaw_stab_", PID)
-,
+//GGROUP(stab_pid_roll, "roll_stab_", PID)
+//,
+//GGROUP(stab_pid_pitch, "pitch_stab_", PID)
+//,
+//GGROUP(stab_pid_yaw, "yaw_stab_", PID)
+//,
+//
+//GGROUP(rate_pid_pitch, "pitch_rate_", PID)
+//,
+//GGROUP(rate_pid_roll, "roll_rate_", PID)
+//,
+//GGROUP(rate_pid_yaw, "yaw_rate_", PID)
+//,
+GGROUP(rate_pid.ROLL, "roll_rate_", PID),GGROUP(rate_pid.PITCH, "pitch_rate_", PID),GGROUP(rate_pid.YAW, "yaw_rate_", PID),
+GGROUP(stab_pid.ROLL, "roll_stab_", PID),GGROUP(stab_pid.PITCH, "pitch_stab_", PID),GGROUP(stab_pid.YAW, "yaw_stab_", PID),
 
-GGROUP(rate_pid_pitch, "pitch_rate_", PID)
-,
-GGROUP(rate_pid_roll, "roll_rate_", PID)
-,
-GGROUP(rate_pid_yaw, "yaw_rate_", PID)
-,
+
+
 
 VAREND
 };

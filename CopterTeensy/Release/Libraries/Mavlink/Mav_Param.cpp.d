@@ -148,6 +148,10 @@ Libraries/Mavlink/Mav_Param.cpp.d: \
  C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/./mavlink_msg_statustext.h \
  C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/./mavlink_msg_debug.h \
  C:\Programming\Arduino\libraries\HIL/Typedef.hpp \
+ C:\Programming\Arduino\libraries\Math/Math.hpp \
+ C:\Programming\Arduino\libraries\Math/Matrix3.hpp \
+ C:\Programming\Arduino\libraries\Math/Vector3.hpp \
+ C:\Programming\Arduino\libraries\Math/Quaternion.hpp \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/arm_math.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cmInstr.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cm4_simd.h
@@ -447,6 +451,14 @@ C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/./mavlink_msg_stat
 C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/./mavlink_msg_debug.h:
 
 C:\Programming\Arduino\libraries\HIL/Typedef.hpp:
+
+C:\Programming\Arduino\libraries\Math/Math.hpp:
+
+C:\Programming\Arduino\libraries\Math/Matrix3.hpp:
+
+C:\Programming\Arduino\libraries\Math/Vector3.hpp:
+
+C:\Programming\Arduino\libraries\Math/Quaternion.hpp:
 
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/arm_math.h:
 

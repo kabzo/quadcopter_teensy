@@ -4,17 +4,17 @@
 void sendToGCS_1HZ() // takes around 12 us
 {
 	if (!GCS.send_hearthbeat())
-		ledLeft.changeState(Led::off);
+		ledLeft.changeState(LedPanel::off);
 	else
-		ledLeft.changeState(Led::on);
+		ledLeft.changeState(LedPanel::on);
 }
 
 void send_GCS_attitude()
 {
 	mavlink_attitude_t mav_attitude;
-	mav_attitude.yaw = imu.dmpEuler.yaw;
-	mav_attitude.pitch = imu.dmpEuler.pitch;
-	mav_attitude.roll = imu.dmpEuler.roll;
+	mav_attitude.yaw = imu.dmpEuler.YAW;
+	mav_attitude.pitch = imu.dmpEuler.PITCH;
+	mav_attitude.roll = imu.dmpEuler.ROLL;
 	mav_attitude.pitchspeed = imu.calGyro.y;
 	mav_attitude.rollspeed = imu.calGyro.x;
 	mav_attitude.yawspeed = imu.calGyro.z;
@@ -22,6 +22,7 @@ void send_GCS_attitude()
 
 	GCS.send_attitude(mav_attitude);
 }
+
 void send_GCS_attitude_scaled()
 {
 	mavlink_scaled_imu_t mav_scaled_imu;
@@ -40,7 +41,7 @@ void send_GCS_attitude_scaled()
 
 void sendToGCS_40HZ() //max 0.1ms
 {
-	if (!GCS.isGcsConnection())
+	if (!GCS.is_gcs_connected())
 		return;
 
 	send_GCS_attitude();
@@ -50,48 +51,49 @@ void sendToGCS_40HZ() //max 0.1ms
 	send_GCS_radio_scaled();
 }
 
-void GCS_Mavlink::handle_set_mode(mavlink_message_t *msg)
+template<class T>
+void GCS_Mavlink<T>::handle_set_mode(mavlink_message_t *msg)
 {
 	mavlink_set_mode_t set_mode_t;
 	mavlink_msg_set_mode_decode(msg, &set_mode_t);
-	if (set_mode_t.target_system == systemId)
+	if (set_mode_t.target_system == _systemId)
 	{
 		switch (set_mode_t.base_mode) {
 			case MAV_MODE_STABILIZE_ARMED: {
-				mav_state = MAV_STATE_ACTIVE;
-				mav_mode_flag |= MAV_MODE_FLAG_SAFETY_ARMED;
-				mav_mode = (MAV_MODE) set_mode_t.base_mode;
-				motorsQuad.setArmed(ARM);
-				ledRight.changeState(Led::on);
+				_mav_state = MAV_STATE_ACTIVE;
+				_mav_mode_flag |= MAV_MODE_FLAG_SAFETY_ARMED;
+				_mav_mode = (MAV_MODE) set_mode_t.base_mode;
+				motorsQuad.set_armed(ARM);
+				ledRight.changeState(LedPanel::on);
 				break;
 			}
 			case MAV_MODE_STABILIZE_DISARMED: {
-				mav_state = MAV_STATE_STANDBY;
-				mav_mode_flag &= ~MAV_MODE_FLAG_SAFETY_ARMED;
-				mav_mode = (MAV_MODE) set_mode_t.base_mode;
-				motorsQuad.setArmed(DISARM);
-				ledRight.changeState(Led::off);
+				_mav_state = MAV_STATE_STANDBY;
+				_mav_mode_flag &= ~MAV_MODE_FLAG_SAFETY_ARMED;
+				_mav_mode = (MAV_MODE) set_mode_t.base_mode;
+				motorsQuad.set_armed(DISARM);
+				ledRight.changeState(LedPanel::off);
 
 				break;
 			}
 			case MAV_MODE_MANUAL_DISARMED: {
-				mav_state = MAV_STATE_STANDBY;
-				mav_mode_flag &= ~MAV_MODE_FLAG_SAFETY_ARMED;
-				mav_mode = (MAV_MODE) set_mode_t.base_mode;
-				motorsQuad.setArmed(DISARM);
-				ledRight.changeState(Led::off);
+				_mav_state = MAV_STATE_STANDBY;
+				_mav_mode_flag &= ~MAV_MODE_FLAG_SAFETY_ARMED;
+				_mav_mode = (MAV_MODE) set_mode_t.base_mode;
+				motorsQuad.set_armed(DISARM);
+				ledRight.changeState(LedPanel::off);
 				break;
 			}
 			case MAV_MODE_MANUAL_ARMED: {
-				mav_state = MAV_STATE_ACTIVE;
-				mav_mode_flag |= MAV_MODE_FLAG_SAFETY_ARMED;
-				mav_mode = (MAV_MODE) set_mode_t.base_mode;
-				motorsQuad.setArmed(ARM);
-				ledRight.changeState(Led::on);
+				_mav_state = MAV_STATE_ACTIVE;
+				_mav_mode_flag |= MAV_MODE_FLAG_SAFETY_ARMED;
+				_mav_mode = (MAV_MODE) set_mode_t.base_mode;
+				motorsQuad.set_armed(ARM);
+				ledRight.changeState(LedPanel::on);
 				break;
 			}
 			default: {
-				mav_mode = (MAV_MODE) set_mode_t.base_mode;
+				_mav_mode = (MAV_MODE) set_mode_t.base_mode;
 				break;
 			}
 		}
@@ -100,5 +102,8 @@ void GCS_Mavlink::handle_set_mode(mavlink_message_t *msg)
 		send_hearthbeat();
 	}
 }
+
+template void GCS_Mavlink<HardwareSerial>::handle_set_mode(mavlink_message_t *msg);
+template void GCS_Mavlink<usb_serial_class>::handle_set_mode(mavlink_message_t *msg);
 
 #endif /* COPTERARDUINODUE_GCS_HPP_ */

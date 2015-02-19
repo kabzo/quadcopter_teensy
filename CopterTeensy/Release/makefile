@@ -11,11 +11,18 @@ RM := rm -rf
 -include subdir.mk
 -include arduino/core/subdir.mk
 -include Libraries/i2c_t3/subdir.mk
+-include Libraries/Thread/subdir.mk
+-include Libraries/RC_Channel/subdir.mk
+-include Libraries/PID_v2/subdir.mk
+-include Libraries/MotorsQuadX/subdir.mk
 -include Libraries/Mavlink/subdir.mk
+-include Libraries/Math/subdir.mk
 -include Libraries/MPU9150Lib/MotionDriver_v5.1/subdir.mk
 -include Libraries/MPU9150Lib/subdir.mk
+-include Libraries/Led/subdir.mk
 -include Libraries/I2Cdev_Teensy/subdir.mk
 -include Libraries/HIL/subdir.mk
+-include Libraries/AttitudeControl/subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)

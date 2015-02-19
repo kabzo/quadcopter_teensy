@@ -27,6 +27,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>Libraries/AttitudeControl</name>
+			<type>2</type>
+			<locationURI>ArduinoPivateLibPath/AttitudeControl</locationURI>
+		</link>
+		<link>
 			<name>Libraries/HIL</name>
 			<type>2</type>
 			<locationURI>ArduinoPivateLibPath/HIL</locationURI>
@@ -47,14 +52,19 @@
 			<locationURI>ArduinoPivateLibPath/MPU9150Lib</locationURI>
 		</link>
 		<link>
+			<name>Libraries/Math</name>
+			<type>2</type>
+			<locationURI>ArduinoPivateLibPath/Math</locationURI>
+		</link>
+		<link>
 			<name>Libraries/Mavlink</name>
 			<type>2</type>
 			<locationURI>ArduinoPivateLibPath/Mavlink</locationURI>
 		</link>
 		<link>
-			<name>Libraries/MotorESC</name>
+			<name>Libraries/MotorsQuadX</name>
 			<type>2</type>
-			<locationURI>ArduinoPivateLibPath/MotorESC</locationURI>
+			<locationURI>ArduinoPivateLibPath/MotorsQuadX</locationURI>
 		</link>
 		<link>
 			<name>Libraries/PID_v2</name>

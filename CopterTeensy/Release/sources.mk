@@ -35,10 +35,17 @@ CPP_DEPS :=
 SUBDIRS := \
 arduino/core \
 Libraries/i2c_t3 \
+Libraries/Thread \
+Libraries/RC_Channel \
+Libraries/PID_v2 \
+Libraries/MotorsQuadX \
 Libraries/Mavlink \
+Libraries/Math \
 Libraries/MPU9150Lib/MotionDriver_v5.1 \
 Libraries/MPU9150Lib \
+Libraries/Led \
 Libraries/I2Cdev_Teensy \
 Libraries/HIL \
+Libraries/AttitudeControl \
 . \
 
