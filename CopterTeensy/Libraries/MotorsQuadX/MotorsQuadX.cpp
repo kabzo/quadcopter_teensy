@@ -34,6 +34,7 @@ void MotorsQuadX::motor_bounds()
 		motorFix = _max_signal - motorMax;
 
 	// Refresh motors
+	DEBUGLN1(motorFix);
 	for (int i = 0; i < 4; i++)
 		motors_output[i] = motors_output[i] + motorFix;
 }
@@ -45,15 +46,16 @@ void MotorsQuadX::stop_motors()
 
 void MotorsQuadX::mix_motors_out()
 {
-	motors_output[FL] = _rc[rcThrottle]->getScaled() + _rc[rcPitch]->get_pwm_out() - _rc[rcRoll]->get_pwm_out() + _rc[rcYaw]->get_pwm_out();
-	motors_output[FR] = _rc[rcThrottle]->getScaled() + _rc[rcPitch]->get_pwm_out() + _rc[rcRoll]->get_pwm_out() - _rc[rcYaw]->get_pwm_out();
-	motors_output[BL] = _rc[rcThrottle]->getScaled() - _rc[rcPitch]->get_pwm_out() - _rc[rcRoll]->get_pwm_out() - _rc[rcYaw]->get_pwm_out();
-	motors_output[BR] = _rc[rcThrottle]->getScaled() - _rc[rcPitch]->get_pwm_out() + _rc[rcRoll]->get_pwm_out() + _rc[rcYaw]->get_pwm_out();
+	float output[4];
+	output[FL] = _rc[rcThrottle]->getScaled() + _rc[rcPitch]->get_pwm_out() - _rc[rcRoll]->get_pwm_out() + _rc[rcYaw]->get_pwm_out();
+	output[FR] = _rc[rcThrottle]->getScaled() + _rc[rcPitch]->get_pwm_out() + _rc[rcRoll]->get_pwm_out() - _rc[rcYaw]->get_pwm_out();
+	output[BL] = _rc[rcThrottle]->getScaled() - _rc[rcPitch]->get_pwm_out() - _rc[rcRoll]->get_pwm_out() - _rc[rcYaw]->get_pwm_out();
+	output[BR] = _rc[rcThrottle]->getScaled() - _rc[rcPitch]->get_pwm_out() + _rc[rcRoll]->get_pwm_out() + _rc[rcYaw]->get_pwm_out();
 
 	for (int i = 0; i < NUMBER_OF_MOTORS; i++)
-		motors_output[i] = round(motors_output[i]);
+		motors_output[i] = round(output[i]);
 
-	motor_bounds();
+//	motor_bounds();
 	write_motors_out(motors_output);
 }
 

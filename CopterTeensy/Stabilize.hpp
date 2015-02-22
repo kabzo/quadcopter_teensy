@@ -25,8 +25,10 @@ void resetPid()
 	con.yaw_pidOutput = 0;
 }
 
+
 void stabilize()
 {
+
 	if (!attitudeControl.is_ready())
 		return;
 

@@ -57,7 +57,7 @@ extern GCS_BLUETOOTH GCS;
 
  == PIN Configuration ==
 
- Channel - PIN name - Teensy 3.0 PIN numbering
+ Channel - PIN name - Teensy 3.1 PIN numbering
 
  FTM0_CH0 - PTC1 - 22:1
  FTM0_CH1 - PTC2 - 23:2

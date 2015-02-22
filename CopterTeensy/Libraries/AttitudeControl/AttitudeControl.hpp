@@ -43,8 +43,11 @@ public:
 	}
 
 	void stab_roll_pitch_yaw(uint32_t dt);
-	float pid_stab(PID* pid, float target, float input, uint32_t dt);
 	void rate_roll_pitch_yaw(uint32_t dt);
+
+	float pid_stab(PID* pid, float target, float input, uint32_t dt,bool return_target = true);
+	float pid_rate(PID* pid, float target, float input, uint32_t dt);
+
 	void reset_pid();
 	bool is_ready();
 

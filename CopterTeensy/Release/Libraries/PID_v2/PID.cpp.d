@@ -1,7 +1,7 @@
 Libraries/PID_v2/PID.cpp.d: \
  C:/Programming/Arduino/libraries/PID_v2/PID.cpp \
  C:\Programming\Arduino\libraries\PID_v2/PID.hpp \
- C:\Programming\Arduino\libraries\Mavlink/Mav_Param.hpp \
+ C:\Programming\Arduino\libraries\HIL/HIL.hpp \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/Arduino.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/WProgram.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/avr/pgmspace.h \
@@ -32,6 +32,8 @@ Libraries/PID_v2/PID.cpp.d: \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/elapsedMillis.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/Arduino.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/IntervalTimer.h \
+ C:\Programming\Arduino\libraries\Mavlink/GCS_Mavlink.hpp \
+ C:\Programming\Arduino\libraries\Mavlink/Mav_Param.hpp \
  C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/mavlink.h \
  C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/version.h \
  C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/common.h \
@@ -155,11 +157,12 @@ Libraries/PID_v2/PID.cpp.d: \
  C:\Programming\Arduino\libraries\Math/Quaternion.hpp \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/arm_math.h \
  C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cmInstr.h \
- C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cm4_simd.h
+ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cm4_simd.h \
+ C:\Programming\Arduino\libraries\Thread/Thread.hpp
 
 C:\Programming\Arduino\libraries\PID_v2/PID.hpp:
 
-C:\Programming\Arduino\libraries\Mavlink/Mav_Param.hpp:
+C:\Programming\Arduino\libraries\HIL/HIL.hpp:
 
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/Arduino.h:
 
@@ -220,6 +223,10 @@ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/elapsedMillis.h:
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/Arduino.h:
 
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/IntervalTimer.h:
+
+C:\Programming\Arduino\libraries\Mavlink/GCS_Mavlink.hpp:
+
+C:\Programming\Arduino\libraries\Mavlink/Mav_Param.hpp:
 
 C:\Programming\Arduino\libraries\Mavlink/mavlinkCommon/common/mavlink.h:
 
@@ -468,3 +475,5 @@ C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/arm_math.h:
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cmInstr.h:
 
 C:\Programs\Arduino-1.5.6r2\hardware\teensy\all\cores\teensy3/core_cm4_simd.h:
+
+C:\Programming\Arduino\libraries\Thread/Thread.hpp:

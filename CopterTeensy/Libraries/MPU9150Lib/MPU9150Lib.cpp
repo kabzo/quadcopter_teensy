@@ -205,7 +205,7 @@ int MPU9150lib::read()
 
 	dmpQuaternion.setQuaternion(m_rawQuaternion);   // get float version of quaternion
 	dmpQuaternion.normalize();
-	dmpEuler.quaternion_to_ypr(dmpQuaternion);
+	dmpEuler.quaternion_to_euler(dmpQuaternion);
 
 	//  got the fifo data so now get the mag data if it's time
 	if ((millis() - m_lastMagSample) >= m_magInterval)

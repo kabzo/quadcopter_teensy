@@ -30,14 +30,14 @@ public:
 					stab_pid_yaw(		0, 0, 	0,  1500),
 
 											//		P,	I,	D,	IMAX
-					rate_pid_pitch(	0.165, 0.6, 	0.0045,  5),
-					rate_pid_roll(	0.0, 0.0, 	0.0045,  5),
+					rate_pid_pitch(	0.165, 0.6, 	0.0045,  500),
+					rate_pid_roll(	0.0, 0.0, 	0.0045,  500),
 					rate_pid_yaw(		0.0, 	0.0, 0.0,  	8),
 
 							//		YAW		 (P			, I			,D  		,iMax),		PITCH    (P			, I			,D  		,iMax),		ROLL    (P			, I			,D  		,iMax),
-					rate_pid(	YAW_PID(0.000f, 0.000f, 0.000f, 8), 		PITCH_PID(0.165f, 0.600f, 0.0045f, 5), 		ROLL_PID(0.165f, 0.600f, 0.0045f, 5)),
+					rate_pid(	YAW_PID(0.200f, 0.020f, 0.000f, 8), 		PITCH_PID(0.075f, 0.01f, 0.003f, 500), 		ROLL_PID(0.075f, 0.01f, 0.003f, 500)),
 
-					stab_pid(	YAW_PID(0.000f, 0.000f, 0.000f, 1500),	PITCH_PID(0.000f, 0.000f, 0.0000f, 1500),	ROLL_PID(0.000f, 0.000f, 0.0000f, 1500))
+					stab_pid(	YAW_PID(3.000f, 0.000f, 0.000f, 1500),	PITCH_PID(3.000f, 0.000f, 0.0000f, 1500),	ROLL_PID(3.000f, 0.000f, 0.0000f, 1500))
 
 
 	{
@@ -75,16 +75,16 @@ static Parameters con;
 
 const Mav_Param::Info var_info[] = {
 
-GSCALAR(roll_pidOutput, "roll_pidOutput", 0)
-,
-GSCALAR(pitch_pidOutput, "pitch_pidOutput", 0)
-,
-GSCALAR(yaw_pidOutput, "yaw_pidOutput", 0)
-,
+//GSCALAR(roll_pidOutput, "roll_pidOutput", 0)
+//,
+//GSCALAR(pitch_pidOutput, "pitch_pidOutput", 0)
+//,
+//GSCALAR(yaw_pidOutput, "yaw_pidOutput", 0)
+//,
 
 GSCALAR(throttle_min, "throttle_min", 1000)
 ,
-GSCALAR(throttle_max, "throttle_max", 2000)
+GSCALAR(throttle_max, "throttle_max", 1500)
 ,
 
 GGROUP(rc1, "RC1_", RC_Channel)
