@@ -1,10 +1,11 @@
 #ifndef PID_h
 #define PID_h
 
-#include <Mav_Param.hpp>
+#include <HIL.hpp>
 
 #define PID_D_TERM_FILTER 0.556864f    // Default 100Hz Filter Rate with 20Hz Cutoff Frequency
 //Constants used in some of the functions below
+#define P_MAX 4500
 
 #define ENABLED	true
 #define DISABLED	false
@@ -44,7 +45,7 @@ public:
 		_kP = kp;
 		_kI = ki;
 		_kD = kd;
-		_imax = imax;
+		_iMax = imax;
 	}
 
 	float get_pid(float targetInput, float actualInput, float dt);
@@ -52,6 +53,8 @@ public:
 	float get_p(float error);
 	float get_i(float error, float dt);
 	float get_d(float error, float dt);
+	float get_error();
+	float get_p_error_lim(float targetInput, float actualInput);
 
 	void reset_I();
 	float get_integrator();
@@ -60,6 +63,7 @@ public:
 	void set_active(bool activate);
 	bool get_active();
 
+	float get_pMax();
 	bool is_k_zero();
 	float get_kp();
 	float get_ki();
@@ -68,8 +72,12 @@ public:
 	Mav_Float get_mav_ki();
 	Mav_Float get_mav_kd();
 	bool is_k_changed();
-	void erase_k_change();
 	void set_k_pid(PID* pid);
+	void set_d_lpf_alpha(int16_t cutoff_frequency, float time_step);
+
+	float get_p_term();
+	float get_i_term();
+	float get_d_term();
 
 	static const struct Mav_Param::GroupInfo var_info[];
 private:
@@ -78,7 +86,8 @@ private:
 	Mav_Float _kP;
 	Mav_Float _kI;
 	Mav_Float _kD;
-	Mav_Float _imax;
+	Mav_Float _iMax;
+	Mav_Float _pMax;
 
 	float _p, _i, _d;
 

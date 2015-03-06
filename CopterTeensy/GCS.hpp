@@ -4,9 +4,10 @@
 void sendToGCS_1HZ() // takes around 12 us
 {
 	if (!GCS.send_hearthbeat())
-		ledLeft.changeState(LedPanel::off);
+		leds.set_state(G, OFF);
 	else
-		ledLeft.changeState(LedPanel::on);
+		leds.set_state(G, ON);
+
 }
 
 void send_GCS_attitude()
@@ -45,8 +46,8 @@ void sendToGCS_40HZ() //max 0.1ms
 		return;
 
 	send_GCS_attitude();
-//	send_GCS_attitude_scaled();
-
+	send_GCS_attitude_scaled();
+//
 	send_GCS_radio_raw();
 	send_GCS_radio_scaled();
 }
@@ -64,7 +65,7 @@ void GCS_Mavlink<T>::handle_set_mode(mavlink_message_t *msg)
 				_mav_mode_flag |= MAV_MODE_FLAG_SAFETY_ARMED;
 				_mav_mode = (MAV_MODE) set_mode_t.base_mode;
 				motorsQuad.set_armed(ARM);
-				ledRight.changeState(LedPanel::on);
+				leds.set_state(R, ON);
 				break;
 			}
 			case MAV_MODE_STABILIZE_DISARMED: {
@@ -72,7 +73,7 @@ void GCS_Mavlink<T>::handle_set_mode(mavlink_message_t *msg)
 				_mav_mode_flag &= ~MAV_MODE_FLAG_SAFETY_ARMED;
 				_mav_mode = (MAV_MODE) set_mode_t.base_mode;
 				motorsQuad.set_armed(DISARM);
-				ledRight.changeState(LedPanel::off);
+				leds.set_state(R, OFF);
 
 				break;
 			}
@@ -81,7 +82,7 @@ void GCS_Mavlink<T>::handle_set_mode(mavlink_message_t *msg)
 				_mav_mode_flag &= ~MAV_MODE_FLAG_SAFETY_ARMED;
 				_mav_mode = (MAV_MODE) set_mode_t.base_mode;
 				motorsQuad.set_armed(DISARM);
-				ledRight.changeState(LedPanel::off);
+				leds.set_state(R, OFF);
 				break;
 			}
 			case MAV_MODE_MANUAL_ARMED: {
@@ -89,7 +90,7 @@ void GCS_Mavlink<T>::handle_set_mode(mavlink_message_t *msg)
 				_mav_mode_flag |= MAV_MODE_FLAG_SAFETY_ARMED;
 				_mav_mode = (MAV_MODE) set_mode_t.base_mode;
 				motorsQuad.set_armed(ARM);
-				ledRight.changeState(LedPanel::on);
+				leds.set_state(R, ON);
 				break;
 			}
 			default: {
@@ -103,7 +104,44 @@ void GCS_Mavlink<T>::handle_set_mode(mavlink_message_t *msg)
 	}
 }
 
+template<class T>
+void GCS_Mavlink<T>::handle_command_long(mavlink_message_t *msg)
+{
+	mavlink_command_long_t packet;
+	mavlink_msg_command_long_decode(msg, &packet);
+
+	Serial.print("command:");Serial.println(packet.command);
+	Serial.print("target_system:");Serial.println(packet.target_system);
+	Serial.print("target_component:");Serial.println(packet.target_component);
+	Serial.print("param1:");Serial.println(packet.param1);
+	Serial.print("param2:");Serial.println(packet.param2);
+	Serial.print("param3:");Serial.println(packet.param3);
+	Serial.print("param4:");Serial.println(packet.param4);
+	Serial.print("param5:");Serial.println(packet.param5);
+	Serial.print("param6:");Serial.println(packet.param6);
+	Serial.print("param7:");Serial.println(packet.param7);
+
+	switch(packet.command) {
+		 case MAV_CMD_NAV_TAKEOFF:{
+			 break;
+		 }
+		 case MAV_CMD_COMPONENT_ARM_DISARM:{
+			 if(packet.param1==1){
+				 motorsQuad.set_armed(ARM);
+				 leds.set_state(R, ON);
+				 arm_mav_mode();
+			 }else{
+				 motorsQuad.set_armed(DISARM);
+					leds.set_state(R, OFF);
+				 disarm_mav_mode();
+			 }
+		 }
+	}
+}
+
 template void GCS_Mavlink<HardwareSerial>::handle_set_mode(mavlink_message_t *msg);
 template void GCS_Mavlink<usb_serial_class>::handle_set_mode(mavlink_message_t *msg);
+template void GCS_Mavlink<HardwareSerial>::handle_command_long(mavlink_message_t *msg);
+template void GCS_Mavlink<usb_serial_class>::handle_command_long(mavlink_message_t *msg);
 
 #endif /* COPTERARDUINODUE_GCS_HPP_ */

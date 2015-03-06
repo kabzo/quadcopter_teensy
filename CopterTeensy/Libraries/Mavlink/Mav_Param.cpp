@@ -131,22 +131,22 @@ void Mav_Param::set_value(float val, enum var_type & vtype) {
 	switch (vtype) {
 		case PARAM_INT8:{
 			((Mav_Int8 *) this)->set(val);
-			((Mav_Int8 *) this)->_changed = true;
+			((Mav_Int8 *) this)->set_changed(true);
 			break;
 		}
 		case PARAM_INT16:{
 			((Mav_Int16 *) this)->set(val);
-			((Mav_Int16 *) this)->_changed = true;
+			((Mav_Int16 *) this)->set_changed(true);
 			break;
 		}
 		case PARAM_INT32:{
 			((Mav_Int32 *) this)->set(val);
-			((Mav_Int32 *) this)->_changed = true;
+			((Mav_Int32 *) this)->set_changed(true);
 			break;
 		}
 		case PARAM_FLOAT:{
 			((Mav_Float *) this)->set(val);
-			((Mav_Float *) this)->_changed = true;
+			((Mav_Float *) this)->set_changed(true);
 			break;
 		}
 		default:

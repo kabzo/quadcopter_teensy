@@ -34,16 +34,16 @@ CPP_DEPS :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 arduino/core \
-Libraries/i2c_t3 \
 Libraries/Thread \
 Libraries/RC_Channel \
 Libraries/PID_v2 \
 Libraries/MotorsQuadX \
 Libraries/Mavlink \
 Libraries/Math \
-Libraries/MPU9150Lib/MotionDriver_v5.1 \
-Libraries/MPU9150Lib \
 Libraries/Led \
+Libraries/IMU_MPU9150v6.1/MotionDriver_v6.1 \
+Libraries/IMU_MPU9150v6.1 \
+Libraries/I2Cdev_Teensy/i2c_t3 \
 Libraries/I2Cdev_Teensy \
 Libraries/HIL \
 Libraries/AttitudeControl \

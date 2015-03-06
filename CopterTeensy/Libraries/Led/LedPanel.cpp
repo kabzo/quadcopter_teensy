@@ -1,73 +1,74 @@
 /*
  * LedPanel.cpp
  *
- *  Created on: 17.2.2015
+ *  Created ON: 17.2.2015
  *      Author: Juraj
  */
 
 #include <LedPanel.hpp>
 
-void LedPanel::setLedHigh()
-{
-	if (_actualState != HIGH)
-	{
-		digitalWrite(_pin, HIGH);
-		_actualState = HIGH;
+
+	void LedPanel::actualize_leds(){
+		for(int i = 0 ; i< led_number;i++){
+			start_led((enum led)i);
+		}
 	}
+
+void LedPanel::set_state(led led_id, ledState state)
+{
+
+	if (led_con[led_id]._state != state)
+		{
+		led_con[led_id]._state = state;
+		led_con[led_id]._lastUpdate = 0;
+			start_led(led_id);
+		}
 }
 
-void LedPanel::changeBlink(blinkState state)
+void LedPanel::negate_state(led led_id)
 {
-	_blinkState = state;
+	if (led_con[led_id]._state == ON)
+		led_con[led_id]._state = OFF;
+	else
+		led_con[led_id]._state = ON;
+
+	start_led(led_id);
+
 }
 
-void LedPanel::changeState(ledState state)
+void LedPanel::set_blink(led led_id, blinkState state)
 {
-	if (_state != state)
-	{
-		_state = state;
-		_lastUpdate = 0;
-		startLed();
-	}
+	led_con[led_id]._blinkState= state;
 }
 
-void LedPanel::startLed()
+void LedPanel::start_led(led led_id)
 {
-	switch (_state) {
-		case on:
-			setLedHigh();
+	switch (led_con[led_id]._state) {
+		case ON:
+			set_led_on_off(led_id, (bool) ON);
 			break;
-		case blink:
-			if (millis() - _lastUpdate > _blinkState)
+		case BLINK:
+			if (millis() - led_con[led_id]._lastUpdate > led_con[led_id]._blinkState)
 			{
-				if (_actualState)
-					setLedLow();
+				if (led_con[led_id]._actualState)
+					set_led_on_off(led_id, (bool) OFF);
 				else
-					setLedHigh();
-				_lastUpdate = millis();
+					set_led_on_off(led_id, (bool) ON);
+				led_con[led_id]._lastUpdate = millis();
 			}
 			break;
 		default:
-			setLedLow();
+			set_led_on_off(led_id, (bool) OFF);
 			break;
 	}
 }
 
-void LedPanel::setLedLow()
+void LedPanel::set_led_on_off(led led_id, bool on_off)
 {
-	if (_actualState != LOW)
+	if (led_con[led_id]._actualState != on_off)
 	{
-		digitalWrite(_pin, LOW);
-		_actualState = LOW;
+		digitalWrite(led_con[led_id]._pin, on_off);
+		led_con[led_id]._actualState = on_off;
 	}
 }
 
-void LedPanel::negateState()
-{
-	if (_state == LedPanel::on)
-		_state = LedPanel::off;
-	else
-		_state = LedPanel::on;
-
-	startLed();
-}

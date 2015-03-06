@@ -41,6 +41,10 @@ public:
 	void handle_param_set(mavlink_message_t *msg);
 	void handle_manual_control(mavlink_message_t *msg);
 	void handle_set_mode(mavlink_message_t *msg);
+	void handle_mission_request_list(mavlink_message_t *msg);
+	void handle_mission_count(mavlink_message_t *msg);
+	void handle_request_data_stream(mavlink_message_t *msg);
+	void handle_command_long(mavlink_message_t *msg);
 
 	void send_param_list_next();
 	void send_hearthbeat(	MAV_STATE mav_state_define,
@@ -65,7 +69,7 @@ public:
 	void change_arm_GCS(bool arm);
 
 	void debug_parameter(const char* str);
-	void debug_parameter(float val, uint8_t& id);
+	void debug_parameter(float val, uint8_t id);
 
 	MAV_STATE get_mav_state();
 	MAV_MODE get_mav_mode();

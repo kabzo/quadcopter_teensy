@@ -42,14 +42,14 @@
 			<locationURI>ArduinoPivateLibPath/I2Cdev_Teensy</locationURI>
 		</link>
 		<link>
+			<name>Libraries/IMU_MPU9150v6.1</name>
+			<type>2</type>
+			<locationURI>ArduinoPivateLibPath/IMU_MPU9150v6.1</locationURI>
+		</link>
+		<link>
 			<name>Libraries/Led</name>
 			<type>2</type>
 			<locationURI>ArduinoPivateLibPath/Led</locationURI>
-		</link>
-		<link>
-			<name>Libraries/MPU9150Lib</name>
-			<type>2</type>
-			<locationURI>ArduinoPivateLibPath/MPU9150Lib</locationURI>
 		</link>
 		<link>
 			<name>Libraries/Math</name>
@@ -80,11 +80,6 @@
 			<name>Libraries/Thread</name>
 			<type>2</type>
 			<locationURI>ArduinoPivateLibPath/Thread</locationURI>
-		</link>
-		<link>
-			<name>Libraries/i2c_t3</name>
-			<type>2</type>
-			<locationURI>ArduinoPivateLibPath/i2c_t3</locationURI>
 		</link>
 		<link>
 			<name>arduino/core</name>

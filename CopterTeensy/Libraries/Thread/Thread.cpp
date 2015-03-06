@@ -7,8 +7,17 @@
 
 #include <Thread.hpp>
 
+uint8_t Thread::_num_tasks = 0;
+struct Thread::Task *Thread::_tasks = 0;
 
-uint16_t Thread::getPeriodThread(task_fn_t func) {
+void Thread::load_tasks(Task *tasks)
+{
+	Thread::_tasks = tasks;
+	_num_tasks = countTasks();
+}
+
+uint16_t Thread::getPeriodThread(task_fn_t func)
+{
 	for (uint8_t i = 0; i < _num_tasks; i++)
 	{
 		if (_tasks[i].funct == func)
@@ -19,7 +28,8 @@ uint16_t Thread::getPeriodThread(task_fn_t func) {
 	return 0;
 }
 
-bool Thread::setEnableThread(task_fn_t func, bool enable) {
+bool Thread::setEnableThread(task_fn_t func, bool enable)
+{
 
 	for (uint8_t i = 0; i < _num_tasks; i++)
 	{
@@ -33,18 +43,21 @@ bool Thread::setEnableThread(task_fn_t func, bool enable) {
 
 }
 
-void Thread::runned(Task *task, float time) {
+void Thread::runned(Task *task, float time)
+{
 	// Saves last_run
 	task->last_run = time;
 	// Cache next run
 	task->_cached_next_run = task->last_run + task->period;
 }
 
-bool Thread::shouldRun(Task &task, float time) {
+bool Thread::shouldRun(Task &task, float time)
+{
 	return ((time >= task._cached_next_run) && task.enable);
 }
 
-void Thread::run(uint32_t time) {
+void Thread::run(uint32_t time)
+{
 	float timeMilis = time / 1000;
 	for (int i = 0; i < _num_tasks; i++)
 	{
@@ -56,7 +69,8 @@ void Thread::run(uint32_t time) {
 	}
 }
 
-uint8_t Thread::countTasks() {
+uint8_t Thread::countTasks()
+{
 	uint8_t i = 0;
 	for (; _tasks[i].funct != NULL; i++)
 	{
@@ -64,7 +78,8 @@ uint8_t Thread::countTasks() {
 	return i;
 }
 
-bool Thread::getEnableThread(task_fn_t func) {
+bool Thread::getEnableThread(task_fn_t func)
+{
 	for (uint8_t i = 0; i < _num_tasks; i++)
 	{
 		if (_tasks[i].funct == func)

@@ -148,8 +148,25 @@ void Matrix3<T>::zero(void)
     c.x = c.y = c.z = 0;
 }
 
+template <typename T>
+void Matrix3<T>::get_array(T* array){
+	array[0] = a.x;
+	array[1] = a.y;
+	array[2] = a.z;
+
+	array[3] = b.x;
+	array[4] = b.y;
+	array[5] = b.z;
+
+	array[6] = c.x;
+	array[7] = c.y;
+	array[8] = c.z;
+
+
+}
 
 // only define for float
+template void Matrix3<float>::get_array(float* array);
 template void Matrix3<float>::zero(void);
 template void Matrix3<float>::rotate(const Vector3<float> &g);
 template void Matrix3<float>::rotateXY(const Vector3<float> &g);
@@ -160,4 +177,14 @@ template Vector3<float> Matrix3<float>::operator *(const Vector3<float> &v) cons
 template Vector3<float> Matrix3<float>::mul_transpose(const Vector3<float> &v) const;
 template Matrix3<float> Matrix3<float>::operator *(const Matrix3<float> &m) const;
 template Matrix3<float> Matrix3<float>::transposed(void) const;
+
+template void Matrix3<int16_t>::get_array(int16_t* array);
+template void Matrix3<int16_t>::zero(void);
+template void Matrix3<int16_t>::rotate(const Vector3<int16_t> &g);
+template void Matrix3<int16_t>::rotateXY(const Vector3<int16_t> &g);
+template void Matrix3<int16_t>::rotateXYinv(const Vector3<int16_t> &g);
+template Vector3<int16_t> Matrix3<int16_t>::operator *(const Vector3<int16_t> &v) const;
+template Vector3<int16_t> Matrix3<int16_t>::mul_transpose(const Vector3<int16_t> &v) const;
+template Matrix3<int16_t> Matrix3<int16_t>::operator *(const Matrix3<int16_t> &m) const;
+template Matrix3<int16_t> Matrix3<int16_t>::transposed(void) const;
 

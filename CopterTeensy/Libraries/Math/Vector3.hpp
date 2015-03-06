@@ -9,8 +9,7 @@
 #define VECTOR3_HPP_
 
 #include <Arduino.h>
-#include <Quaternion.hpp>
-//#include <Math.hpp>
+//#include <Quaternion.hpp>
 
 #define toRad(deg) ((deg)*DEG_TO_RAD)
 #define toDeg(rad) ((rad)*RAD_TO_DEG)
@@ -24,6 +23,8 @@
 #define VEC3_X 0
 #define VEC3_Y 1
 #define VEC3_Z 2
+
+class Quaternion;
 
 template<typename T>
 class Vector3
@@ -50,73 +51,83 @@ public:
 	Vector3<T> rad_to_centi_deg();
 	Vector3<T> to_centi_deg();
 	void reset();
-	float dot_product(Vector3<T> vec1, Vector3<T> vec2);
+	float dot_product(Vector3<T> vec1);
 	String to_string();
 	String to_string_degrees();
 	void rotate(Quaternion *q);
 	Vector3<T> get_rotated(Quaternion *q);
 	void quaternion_to_euler(Quaternion &q);
+	Quaternion euler_to_quaternion();
 	void quaternion_to_ypr(Quaternion &q);
-	void get_array(T* array);
+	void quaternion_to_gravity(Quaternion &q);
 
-  Vector3<T> operator %(const Vector3<T> &v) const;
+	template<typename U>
+	void get_array(U* array);
+
+	Vector3<T> operator %(const Vector3<T> &v) const;
 
 	T& operator[](uint8_t id);
 
-  // function call operator
-   void operator ()(const T x0, const T y0, const T z0);
+	// function call operator
+	void operator ()(const T x0, const T y0, const T z0);
 
-   // test for equality
-   bool operator ==(const Vector3<T> &v) const;
+	// test for equality
+	bool operator ==(const Vector3<T> &v) const;
 
-   // test for inequality
-   bool operator !=(const Vector3<T> &v) const;
+	// test for inequality
+	bool operator !=(const Vector3<T> &v) const;
 
-   // negation
-   Vector3<T> operator -(void) const;
+	// negation
+	Vector3<T> operator -(void) const;
 
-   // addition
-   Vector3<T> operator +(const Vector3<T> &v) const;
+	template<typename U>
+	Vector3<T> &operator =( Vector3<U> v);
 
-   // subtraction
-   Vector3<T> operator -(const Vector3<T> &v) const;
 
-   // uniform scaling
-   Vector3<T> operator *(const T num) const;
+	// addition
+	Vector3<T> operator +(const Vector3<T> &v) const;
 
-   Vector3<T> operator *(Vector3<T> vec) const;
+	// subtraction
+	template<typename U>
+	Vector3<U> operator -(const Vector3<U> &v) const;
 
-   // uniform scaling
-   Vector3<T> operator  /(const T num) const;
+	template<typename U>
+	void operator ()(const U* value);
 
-   // addition
-   Vector3<T> &operator +=(const Vector3<T> &v);
+	// uniform scaling
+	Vector3<T> operator *(const T num) const;
 
-   // subtraction
-   Vector3<T> &operator -=(const Vector3<T> &v);
+	Vector3<T> operator *(Vector3<T> vec) const;
 
-   // uniform scaling
-   Vector3<T> &operator *=(const T num);
+	// uniform scaling
+	Vector3<T> operator /(const T num) const;
 
-   Vector3<T> &operator *=(const Vector3<T> vec);
+	// addition
+	Vector3<T> &operator +=(const Vector3<T> &v);
+
+	// subtraction
+	Vector3<T> &operator -=(const Vector3<T> &v);
+
+	// uniform scaling
+	Vector3<T> &operator *=(const T num);
+
+	Vector3<T> &operator *=(const Vector3<T> vec);
 
 
 //   Vector3<T> &operator *=(Matrix3<T> mat);
 
-   // uniform scaling
-   Vector3<T> &operator /=(const T num);
+// uniform scaling
+	Vector3<T> &operator /=(const T num);
 
-   // check if any elements are NAN
-    bool is_nan(void) const;
+	template<typename U>
+	Vector3<T> &operator /=(const Vector3<U> &v);
 
-    // check if any elements are infinity
-    bool is_inf(void) const;
+	// check if any elements are NAN
+	bool is_nan(void) const;
 
-    template<typename U>
-	void setVector(U* value);
-
+	// check if any elements are infinity
+	bool is_inf(void) const;
 };
-
 
 typedef Vector3<int16_t> Vector3Int16;
 typedef Vector3<int32_t> Vector3Int32;

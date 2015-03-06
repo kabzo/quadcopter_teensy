@@ -14,7 +14,6 @@
 //template<>
 //HardwareSerial& GCS_Mavlink<HardwareSerial>::_serial = Serial1;
 
-
 template<class T>
 void GCS_Mavlink<T>::init(const Mav_Param::Info *info)
 {
@@ -63,6 +62,9 @@ void GCS_Mavlink<T>::arm_mav_mode()
 			_mav_mode = MAV_MODE_STABILIZE_ARMED;
 			break;
 	}
+
+	_mav_state = MAV_STATE_ACTIVE;
+	_mav_mode_flag |= MAV_MODE_FLAG_SAFETY_ARMED;
 	send_hearthbeat();
 }
 
@@ -89,7 +91,8 @@ void GCS_Mavlink<T>::disarm_mav_mode()
 			_mav_mode = MAV_MODE_STABILIZE_DISARMED;
 			break;
 	}
-
+	_mav_state = MAV_STATE_STANDBY;
+	_mav_mode_flag &= ~MAV_MODE_FLAG_SAFETY_ARMED;
 	send_hearthbeat();
 }
 
@@ -111,7 +114,7 @@ void GCS_Mavlink<T>::debug_parameter(const char* str)
 }
 
 template<class T>
-void GCS_Mavlink<T>::debug_parameter(float val, uint8_t& id)
+void GCS_Mavlink<T>::debug_parameter(float val, uint8_t id)
 {
 	mavlink_debug_t debug;
 	debug.time_boot_ms = millis();
@@ -162,15 +165,111 @@ void GCS_Mavlink<T>::mavlink_receive()
 					handle_manual_control(&msg);
 					break;
 				}
+				case MAVLINK_MSG_ID_MISSION_REQUEST_LIST: {
+					Serial.println("MAVLINK_MSG_ID_MISSION_REQUEST_LIST");
+					handle_mission_request_list(&msg);
+					break;
+				}
+				case MAVLINK_MSG_ID_MISSION_COUNT: {
+					Serial.println("MAVLINK_MSG_ID_MISSION_COUNT");
+					handle_mission_count(&msg);
+					break;
+				}
+				case MAVLINK_MSG_ID_REQUEST_DATA_STREAM: {
+					Serial.println("MAVLINK_MSG_ID_REQUEST_DATA_STREAM");
+					handle_request_data_stream(&msg);
+					break;
+				}
+				case MAVLINK_MSG_ID_COMMAND_LONG: {
+					Serial.println("MAVLINK_MSG_ID_COMMAND_LONG");
+					handle_command_long(&msg);
+					break;
+				}
 				default:
-					_serial.print("msgid:");
-					_serial.println((uint8_t) msg.msgid);
+//					_serial.print("msgid:");
+//					_serial.println((uint8_t) msg.msgid);
+
+					Serial.print("msgid:");
+					Serial.println(msg.msgid);
 					break;
 			}
 		}
 	}
 	if (_GCS_connection)
 		send_param_list_next();
+}
+
+template<class T>
+void GCS_Mavlink<T>::handle_command_long(mavlink_message_t *msg)
+{
+	mavlink_command_long_t packet;
+	mavlink_msg_command_long_decode(msg, &packet);
+
+	Serial.print("command:");
+	Serial.println(packet.command);
+	Serial.print("target_system:");
+	Serial.println(packet.target_system);
+	Serial.print("target_component:");
+	Serial.println(packet.target_component);
+	Serial.print("param1:");
+	Serial.println(packet.param1);
+	Serial.print("param2:");
+	Serial.println(packet.param2);
+	Serial.print("param3:");
+	Serial.println(packet.param3);
+	Serial.print("param4:");
+	Serial.println(packet.param4);
+	Serial.print("param5:");
+	Serial.println(packet.param5);
+	Serial.print("param6:");
+	Serial.println(packet.param6);
+	Serial.print("param7:");
+	Serial.println(packet.param7);
+
+	switch (packet.command) {
+		case MAV_CMD_NAV_TAKEOFF: {
+			break;
+		}
+	}
+}
+
+template<class T>
+void GCS_Mavlink<T>::handle_request_data_stream(mavlink_message_t *msg)
+{
+	mavlink_request_data_stream_t packet;
+	mavlink_msg_request_data_stream_decode(msg, &packet);
+	Serial.print("req_message_rate:");
+	Serial.print(packet.req_message_rate);
+	Serial.print(",");
+	Serial.print("req_stream_id:");
+	Serial.print(packet.req_stream_id);
+	Serial.print(",");
+	Serial.print("start_stop:");
+	Serial.print(packet.start_stop);
+	Serial.print(",");
+
+}
+
+template<class T>
+void GCS_Mavlink<T>::handle_mission_request_list(mavlink_message_t *msg)
+{
+	uint8_t buf[MAVLINK_MAX_PACKET_LEN];			// Pack the message
+	uint16_t len = mavlink_msg_mission_request_list_pack(	_systemId,
+																												MAV_COMP_ID_ALL,
+																												msg,
+																												_systemId,
+																												0);
+	len = mavlink_msg_to_send_buffer(buf, msg);
+	_serial.write(buf, len);
+}
+
+template<class T>
+void GCS_Mavlink<T>::handle_mission_count(mavlink_message_t *msg)
+{
+	uint8_t buf[MAVLINK_MAX_PACKET_LEN];			// Pack the message
+	uint16_t len = mavlink_msg_mission_count_pack(_systemId, 0, msg, _systemId, 0, 0);
+	len = mavlink_msg_to_send_buffer(buf, msg);
+	_serial.write(buf, len);
 }
 
 template<class T>
@@ -209,24 +308,26 @@ void GCS_Mavlink<T>::send_rc_channels_scaled(mavlink_rc_channels_scaled_t &rc_ch
 template<class T>
 void GCS_Mavlink<T>::send_param_list_next()
 {
-	if (_next_id <= _param_count)
+	if (_next_id < _param_count)
 	{
 		var_type vtype;
 		char name[MAVLINK_MSG_PARAM_SET_FIELD_PARAM_ID_LEN + 1];
 		float value = Mav_Param::get_value_name_by_id(vtype, name, _next_id);
 		mavlink_message_t msg;
 		uint8_t buf[MAVLINK_MAX_PACKET_LEN];
+#ifdef DEBUG_ALL
+		Serial.print("param_next:");
+		Serial.print(name);
+		Serial.print(",");
+		Serial.print(value);
+		Serial.print(",");
+		Serial.print(vtype);
+		Serial.print(",");
+		Serial.print(_param_count);
+		Serial.print(",");
+		Serial.println(_next_id);
+#endif
 		_next_id++;
-
-//		serial.print(name);
-//		serial.print(",");
-//		serial.print(value);
-//		serial.print(",");
-//		serial.print(vtype);
-//		serial.print(",");
-//		serial.print(param_count);
-//		serial.print(",");
-//		serial.println(next_id);
 
 		mavlink_msg_param_value_pack(	_systemId,
 																	MAV_COMP_ID_ALL,
@@ -283,6 +384,12 @@ void GCS_Mavlink<T>::handle_param_set(mavlink_message_t *msg)
 	if (param != NULL)
 	{
 		param->set_value(packet.param_value, vtype);
+
+#ifdef DEBUG_ALL
+		Serial.print(packet.param_id);Serial.print(",");
+		Serial.print(param->cast_to_float_mav(vtype));Serial.print(",");
+		Serial.println(vtype);
+#endif
 
 		mavlink_msg_param_value_pack(	_systemId,
 																	MAV_COMP_ID_ALL,
@@ -452,7 +559,7 @@ template void GCS_Mavlink<HardwareSerial>::disarm_mav_mode();
 template void GCS_Mavlink<HardwareSerial>::arm_mav_mode();
 template void GCS_Mavlink<HardwareSerial>::change_arm_GCS(bool arm);
 template void GCS_Mavlink<HardwareSerial>::debug_parameter(const char* str);
-template void GCS_Mavlink<HardwareSerial>::debug_parameter(float val, uint8_t& id);
+template void GCS_Mavlink<HardwareSerial>::debug_parameter(float val, uint8_t id);
 template MAV_STATE GCS_Mavlink<HardwareSerial>::get_mav_state();
 template MAV_MODE GCS_Mavlink<HardwareSerial>::get_mav_mode();
 template void GCS_Mavlink<HardwareSerial>::set_mav_state(enum MAV_STATE mavState);
@@ -483,7 +590,7 @@ template void GCS_Mavlink<usb_serial_class>::disarm_mav_mode();
 template void GCS_Mavlink<usb_serial_class>::arm_mav_mode();
 template void GCS_Mavlink<usb_serial_class>::change_arm_GCS(bool arm);
 template void GCS_Mavlink<usb_serial_class>::debug_parameter(const char* str);
-template void GCS_Mavlink<usb_serial_class>::debug_parameter(float val, uint8_t& id);
+template void GCS_Mavlink<usb_serial_class>::debug_parameter(float val, uint8_t id);
 template MAV_STATE GCS_Mavlink<usb_serial_class>::get_mav_state();
 template MAV_MODE GCS_Mavlink<usb_serial_class>::get_mav_mode();
 template void GCS_Mavlink<usb_serial_class>::set_mav_state(enum MAV_STATE mavState);

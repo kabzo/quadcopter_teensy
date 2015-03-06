@@ -6,14 +6,6 @@
  */
 #include <HIL.hpp>
 
-
-#ifdef USB
-GCS_USB GCS(Serial);
-#elif defined BLUETOOTH
-GCS_BLUETOOTH GCS(Serial1);
-#endif
-
-
 void port_pcr(uint32_t pin, uint32_t val)
 {
 	switch (pin) {

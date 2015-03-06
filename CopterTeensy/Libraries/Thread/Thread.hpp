@@ -26,7 +26,9 @@ class Thread
 				bool enable;
 		};
 
-		static struct Task _tasks[];
+		static void load_tasks(Task *tasks);
+
+		static struct Task *_tasks;
 
 		static uint8_t _num_tasks;
 

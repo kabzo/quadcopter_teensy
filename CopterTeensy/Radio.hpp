@@ -4,7 +4,6 @@
 #define ROLL_PITCH_OUTPUT_MAX 4500
 #define YAW_OUTPUT_MAX 18000
 
-
 void handleInterrupt(RC_Channel *rc)
 {
 	// if the pin is high, its a rising edge of the signal pulse, so lets record its value
@@ -22,10 +21,22 @@ void handleInterrupt(RC_Channel *rc)
 }
 
 // simple interrupt service routine
-void PWM_ISR_1(){	handleInterrupt(&con.rc1);}
-void PWM_ISR_2(){	handleInterrupt(&con.rc2);}		// simple interrupt service routine
-void PWM_ISR_3(){	handleInterrupt(&con.rc3);}		// simple interrupt service routine
-void PWM_ISR_4(){	handleInterrupt(&con.rc4);}
+void PWM_ISR_1()
+{
+	handleInterrupt(&con.rc1);
+}
+void PWM_ISR_2()
+{
+	handleInterrupt(&con.rc2);
+}		// simple interrupt service routine
+void PWM_ISR_3()
+{
+	handleInterrupt(&con.rc3);
+}		// simple interrupt service routine
+void PWM_ISR_4()
+{
+	handleInterrupt(&con.rc4);
+}
 
 void init_radio()
 {
@@ -45,30 +56,26 @@ void update_radio() //max 22ms
 	if (!RC_Channel::newPwm)
 		return;
 
-	noInterrupts()
-	; // turn interrupts off quickly while we take local copies of the shared variables
+	noInterrupts(); // turn interrupts off quickly while we take local copies of the shared variables
 
 	con.rc1.localCopy();
 	con.rc2.localCopy();
 	con.rc3.localCopy();
 	con.rc4.localCopy();
 
-	interrupts()
-	; // we have local copies of the inputs, so now we can turn interrupts back on
+	interrupts(); // we have local copies of the inputs, so now we can turn interrupts back on
 	// as soon as interrupts are back on, we can no longer use the shared copies, the interrupt
 	// service routines own these and could update them at any time. During the update, the
 	// shared copies may contain junk. Luckily we have our local copies to work with :-)
 	RC_Channel::newPwm = false;
 
-	if (motorsQuad.is_ready_fly())
-	{
-//		con.targetHeading += con.rc4.getScaled() / 100;
-		attitudeControl.get_target_angles().YAW += con.rc4.getScaled() / 100;
-	}
-
 	if (motorsQuad.check_radio_arm_pos())
 	{
-		ledRight.negateState();
+		if (motorsQuad.is_armed())
+			leds.set_state(B, ON);
+		else
+			leds.set_state(B, OFF);
+
 		GCS.change_arm_GCS(motorsQuad.is_armed());
 	}
 }
@@ -116,15 +123,15 @@ void send_GCS_radio_scaled()
 template<class T>
 void GCS_Mavlink<T>::handle_manual_control(mavlink_message_t *msg)
 {
-		mavlink_manual_control_t manual_control_t;
-		mavlink_msg_manual_control_decode(msg, &manual_control_t);
-		if (manual_control_t.target == _systemId)
-		{
-			con.rc1.overwritePwm(manual_control_t.x);
-			con.rc2.overwritePwm(manual_control_t.y);
-			con.rc3.overwritePwm(manual_control_t.z);
-			con.rc4.overwritePwm(manual_control_t.r);
-		}
+	mavlink_manual_control_t manual_control_t;
+	mavlink_msg_manual_control_decode(msg, &manual_control_t);
+	if (manual_control_t.target == _systemId)
+	{
+		con.rc1.overwritePwm(manual_control_t.x);
+		con.rc2.overwritePwm(manual_control_t.y);
+		con.rc3.overwritePwm(manual_control_t.z);
+		con.rc4.overwritePwm(manual_control_t.r);
+	}
 
 }
 

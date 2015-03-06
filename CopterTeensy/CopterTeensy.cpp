@@ -8,56 +8,61 @@
 void debug()
 {
 
-	GCS.debug_parameter(attitudeControl.get_rate_output().ROLL,1);
-	GCS.debug_parameter(attitudeControl.get_rate_output().PITCH,2);
-	GCS.debug_parameter(attitudeControl.get_rate_output().YAW*0.1,3);
-
-	GCS.debug_parameter(attitudeControl.get_stab_output().ROLL/100,4);
-	GCS.debug_parameter(attitudeControl.get_stab_output().PITCH/100,5);
-	GCS.debug_parameter(attitudeControl.get_stab_output().YAW/100,6);
-
-	GCS.debug_parameter(attitudeControl.get_actual_angles().ROLL/100,7);
-	GCS.debug_parameter(attitudeControl.get_actual_angles().PITCH/100,8);
-	GCS.debug_parameter(attitudeControl.get_actual_angles().YAW/100,9);
-
-	GCS.debug_parameter(attitudeControl.get_target_angles().ROLL/100,10);
-	GCS.debug_parameter(attitudeControl.get_target_angles().PITCH/100,11);
-	GCS.debug_parameter(attitudeControl.get_target_angles().YAW/100,12);
-
-	GCS.debug_parameter(attitudeControl.get_actual_rates().z/100,13);
-	GCS.debug_parameter(attitudeControl.get_actual_rates().y/100,14);
-	GCS.debug_parameter(attitudeControl.get_actual_rates().x/100,15);
+//	GCS.debug_parameter(attitudeControl.get_rate_pid().ROLL->get_d_term(), 0);
 
 
 
+//	GCS.debug_parameter(attitudeControl.get_rate_pid().YAW->get_error() / 100, 0);
+
+//	GCS.debug_parameter(attitudeControl.get_rate_output().ROLL / 10, 1);
+//	GCS.debug_parameter(attitudeControl.get_rate_output().PITCH / 10, 2);
+//	GCS.debug_parameter(attitudeControl.get_rate_output().YAW / 10, 3);
+//
+//	GCS.debug_parameter(attitudeControl.get_stab_output().ROLL / 10, 4);
+//	GCS.debug_parameter(attitudeControl.get_stab_output().PITCH / 10, 5);
+	GCS.debug_parameter(attitudeControl.get_stab_output().YAW, 6);
+
+
+
+//	GCS.debug_parameter(attitudeControl.get_actual_angles().ROLL / 100, 7);
+//	GCS.debug_parameter(attitudeControl.get_actual_angles().PITCH / 100, 8);
+//	GCS.debug_parameter(attitudeControl.get_actual_angles().YAW / 100, 9);
+
+//	GCS.debug_parameter(attitudeControl.get_target_angles().ROLL / 100, 10);
+//	GCS.debug_parameter(attitudeControl.get_target_angles().PITCH / 100, 11);
+//	GCS.debug_parameter(attitudeControl.get_target_angles().YAW / 100, 12);
+
+//	GCS.debug_parameter(attitudeControl.get_actual_rates().z / 100, 13);
+//	GCS.debug_parameter(attitudeControl.get_actual_rates().y / 100, 14);
+//	GCS.debug_parameter(attitudeControl.get_actual_rates().x / 100, 15);
+
+//	GCS.debug_parameter(imu.calAccel.x, 16);
+//	GCS.debug_parameter(imu.calAccel.y, 17);
+//	GCS.debug_parameter(imu.calAccel.z, 18);
 
 }
 
-void ledStart()
-{
-	ledMiddle.startLed();
-	ledLeft.startLed();
-	ledRight.startLed();
-}
-
-Thread::Task Thread::_tasks[] = {
-THREADTASK(stabilize,5,true),
+Thread::Task tasks[] = {
+THREADTASK(stabilize,AttitudeControl::_pid_frequency,true),
 THREADTASK(sendToGCS_1HZ,1000,true),
-THREADTASK(sendToGCS_40HZ,100,true),
+THREADTASK(sendToGCS_40HZ,200,true),
 THREADTASK(update_radio,100,true),
 THREADTASK(debug,100,true),
-THREADTASK(ledStart,500,true),
-THREADEND };
+THREADEND
+};
 
-uint8_t Thread::_num_tasks = Thread::countTasks();
 
 /******************************************
- ****************SETUP*********************
+ ***************SETUP*********************
  ******************************************/
-
 void setup()
 {
+
+	Serial.begin(115200);
+
 	GCS.init(var_info);
+
+	Thread::load_tasks(tasks);
 
 //	GCS.wait_gcs_connect();
 
@@ -67,25 +72,32 @@ void setup()
 
 	motorsQuad.init();
 
-	ledMiddle.negateState();
+	leds.negate_state(R);
 
-//	attitudeControl.get_stab_pid().ROLL->set_active(false);
-//	attitudeControl.get_stab_pid().PITCH->set_active(false);
-//	attitudeControl.get_stab_pid().YAW->set_active(false);
-//
-//	attitudeControl.get_rate_pid().ROLL->set_active(false);
-//	attitudeControl.get_rate_pid().PITCH->set_active(false);
-//	attitudeControl.get_rate_pid().YAW->set_active(false);
 }
 
+uint32_t last;
 /******************************************
  ****************LOOP**********************
  ******************************************/
 void loop() // takes around 112 us
 {
-	imu.read();
+	uint32_t now = micros();
 
-	Thread::run(micros());
+	if(imu.read_raw() == 0){
+//				Serial.println((now - last)/1000);
+//				last = now;
+	}
+
+//	if (imu.read_dmp() == SUCCESFULL)
+//	{
+////		Serial.println((now - last)/1000);
+////		last = now;
+//	}
+
+	Thread::run(now);
+
+	leds.actualize_leds();
 
 	GCS.mavlink_receive();
 

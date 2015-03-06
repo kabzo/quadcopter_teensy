@@ -20,6 +20,7 @@
 							<tool id="it.baeyens.arduino.tool.sketch.compiler.cpp.694545634" name="Arduino C++ Compiler" superClass="it.baeyens.arduino.tool.sketch.compiler.cpp">
 								<option id="it.baeyens.arduino.compiler.cpp.sketch.option.incpath.1907390190" name="Include Paths (-I)" superClass="it.baeyens.arduino.compiler.cpp.sketch.option.incpath" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/arduino/core}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries/IMU_MPU9150v6.1}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries/Math}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/Led}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/Mavlink}&quot;"/>
@@ -29,7 +30,6 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/I2Cdev_Teensy}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/PID_v2}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/RC_Channel}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/MPU9150Lib}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/HIL}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/AttitudeControl}&quot;"/>
 								</option>
@@ -47,7 +47,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/I2Cdev_Teensy}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/PID_v2}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/RC_Channel}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/MPU9150Lib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/IMU_MPU9150v5.1}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/HIL}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CopterTeensy/Libraries/AttitudeControl}&quot;"/>
 								</option>

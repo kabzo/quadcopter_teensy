@@ -12,24 +12,17 @@
 #include <GCS_Mavlink.hpp>
 #include <Thread.hpp>
 
-#define BLUETOOTH
-
-#ifdef USB
-extern GCS_USB GCS;
-#elif defined BLUETOOTH
-extern GCS_BLUETOOTH GCS;
-#endif
+//#define DEBUG_ALL
 
 //  Define this symbol to get debug messages
-#define DEBUG
 
-#ifdef DEBUG
+#ifdef DEBUG_ALL
 
-#define DEBUG2(X,Y) GCS._serial.print(X);GCS._serial.print(":"); GCS._serial.print(Y);GCS._serial.print(",")
-#define DEBUGLN2(X,Y) GCS._serial.print(X);GCS._serial.print(":"); GCS._serial.println(Y)
-#define DEBUGLN3(X,Y,Z) GCS._serial.print(X);GCS._serial.print(","); GCS._serial.print(Y);GCS._serial.print(",");GCS._serial.println(Z)
-#define DEBUGLN1(X) GCS._serial.println(X)
-#define DEBUG1(X) GCS._serial.print(X);GCS._serial.print(",")
+#define DEBUG2(X,Y) Serial.print(X);Serial.print(":"); Serial.print(Y);Serial.print(",")
+#define DEBUGLN2(X,Y) Serial.print(X);Serial.print(":"); Serial.println(Y)
+#define DEBUGLN3(X,Y,Z) Serial.print(X);Serial.print(","); Serial.print(Y);Serial.print(",");Serial.println(Z)
+#define DEBUGLN1(X) Serial.println(X)
+#define DEBUG1(X) Serial.print(X);Serial.print(",")
 
 #else
 
@@ -40,6 +33,18 @@ extern GCS_BLUETOOTH GCS;
 #define DEBUG1(X)
 
 #endif
+
+
+#define SUCCESFULL 0
+
+
+#define HZ_200_MS	5
+#define HZ_100_MS	10
+#define HZ_50_MS	20
+
+#define HZ_20 20
+#define HZ_40 40
+
 
 
 
