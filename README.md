@@ -30,7 +30,7 @@ This is very effective and lightweight protocol which covers transfer of the mos
     <li>Controlling: Either through classic RC controller or pc joystick</li>
 </ul>
 
-<h3>Files<h3>
+<h3>Files</h3>
 <ul>
     <li>CopterTeensy: software running on Teensy 3.1</li>
     <li>Python: few libraries which runns on RaspberryPi just for trials (GPS, Teensy usb communication) etc.)</li>
